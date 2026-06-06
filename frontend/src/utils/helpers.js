@@ -88,12 +88,12 @@ export function getTeamConfed(teamName) {
       return confed;
     }
   }
-  return 'UEFA'; // Fallback
+  return null;
 }
 
 export function getConfedColor(teamName) {
   const confed = getTeamConfed(teamName);
-  return CONFED_COLORS[confed] || '#6B7280';
+  return (confed && CONFED_COLORS[confed]) || '`#6B7280`';
 }
 
 export function formatPercent(val) {

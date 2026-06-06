@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #0F172A;
+  --color-dark-card: #1E293B;
+  --color-dark-border: #334155;
+  --color-confed-uefa: #3B82F6;
+  --color-confed-conmebol: #10B981;
+  --color-confed-concacaf: #F59E0B;
+  --color-confed-caf: #EF4444;
+  --color-confed-afc: #8B5CF6;
+  --color-confed-ofc: #6B7280;
+}
+
+@utility bracket-connector {
+  position: absolute;
+  border-color: #334155;
+  border-style: solid;
+}
+
+@utility fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-[#0F172A] text-slate-100 antialiased selection:bg-indigo-500 selection:text-white;
+    background-color: #0F172A;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom scrollbar for premium aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F172A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border: 2px solid #0F172A;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}

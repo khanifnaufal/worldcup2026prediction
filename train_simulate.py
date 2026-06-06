@@ -4,6 +4,7 @@ import joblib
 import datetime
 import numpy as np
 import pandas as pd
+from collections import Counter
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
@@ -95,11 +96,6 @@ def main():
     # 4. Pilih model terbaik dan simpan
     print(f"\nBest model selected: {best_model_name} with F1 Weighted CV score of {best_model_score:.4f}")
     
-    baseline_f1 = 0.5234
-    improvement = best_model_score - baseline_f1
-    print(f"Before: {baseline_f1:.2f} | After: {best_model_score:.2f} | Improvement: {improvement:+.2f}")
-    print(f"Before (exact): {baseline_f1:.4f} | After: {best_model_score:.4f} | Improvement: {improvement:+.4f}")
-    
     # Retrain on the entire dataset
     print(f"Retraining {best_model_name} on the entire dataset...")
     best_model_instance.fit(X, best_y_train)
@@ -137,6 +133,245 @@ def main():
     
     # Run the simulation
     run_simulation(team_features_df, best_model_instance, feature_cols, best_model_name, best_model_score, n_simulations=10000)
+
+def get_deterministic_goals(t1, t2, outcome, team_features_df):
+    home_row = team_features_df[team_features_df['team'] == t1]
+    away_row = team_features_df[team_features_df['team'] == t2]
+    avg_gf_home = float(home_row['avg_gf'].values[0]) if len(home_row) > 0 else 1.2
+    avg_gf_away = float(away_row['avg_gf'].values[0]) if len(away_row) > 0 else 1.2
+    avg_gf_home = max(0.1, avg_gf_home) if not np.isnan(avg_gf_home) else 1.2
+    avg_gf_away = max(0.1, avg_gf_away) if not np.isnan(avg_gf_away) else 1.2
+    
+    g_home = int(np.round(avg_gf_home))
+    g_away = int(np.round(avg_gf_away))
+    
+    if outcome == 'home_win':
+        if g_home <= g_away:
+            g_home = g_away + 1
+    elif outcome == 'away_win':
+        if g_away <= g_home:
+            g_away = g_home + 1
+    else:  # draw
+        avg_draw = int(np.round((avg_gf_home + avg_gf_away) / 2))
+        g_home = avg_draw
+        g_away = avg_draw
+        
+    return g_home, g_away
+
+def generate_most_likely_bracket(groups, team_features_df, model, feature_names):
+    # Step 1: Group stage deterministik
+    standings = {}
+    for group_letter, teams in groups.items():
+        for team in teams:
+            standings[team] = {
+                'points': 0,
+                'gf': 0,
+                'ga': 0,
+                'gd': 0,
+                'rank_in_group': 0,
+                'group': group_letter
+            }
+            
+    group_stage_matches = {}
+    import itertools
+    for group_letter, teams in groups.items():
+        group_stage_matches[group_letter] = []
+        for t1, t2 in itertools.combinations(teams, 2):
+            preds = predict_match(t1, t2, team_features_df, model, feature_names)
+            p_home = preds['home_win']
+            p_draw = preds['draw']
+            p_away = preds['away_win']
+            
+            # Find max prob
+            max_prob = max(p_home, p_draw, p_away)
+            if max_prob == p_home:
+                outcome = 'home_win'
+                predicted_winner = t1
+            elif max_prob == p_away:
+                outcome = 'away_win'
+                predicted_winner = t2
+            else:
+                outcome = 'draw'
+                predicted_winner = 'Draw'
+                
+            # Deterministic goals
+            goals_t1, goals_t2 = get_deterministic_goals(t1, t2, outcome, team_features_df)
+            
+            # Update GF, GA and GD
+            standings[t1]['gf'] += goals_t1
+            standings[t1]['ga'] += goals_t2
+            standings[t1]['gd'] = standings[t1]['gf'] - standings[t1]['ga']
+            
+            standings[t2]['gf'] += goals_t2
+            standings[t2]['ga'] += goals_t1
+            standings[t2]['gd'] = standings[t2]['gf'] - standings[t2]['ga']
+            
+            # Update Points
+            if outcome == 'home_win':
+                standings[t1]['points'] += 3
+            elif outcome == 'draw':
+                standings[t1]['points'] += 1
+                standings[t2]['points'] += 1
+            else:
+                standings[t2]['points'] += 3
+                
+            group_stage_matches[group_letter].append({
+                "home": t1,
+                "away": t2,
+                "home_win_prob": p_home,
+                "draw_prob": p_draw,
+                "away_win_prob": p_away,
+                "predicted_winner": predicted_winner
+            })
+            
+        # Rank teams in this group
+        group_standings = []
+        for t in teams:
+            group_standings.append({
+                'team': t,
+                'points': standings[t]['points'],
+                'gd': standings[t]['gd'],
+                'gf': standings[t]['gf']
+            })
+        group_standings.sort(key=lambda x: (x['points'], x['gd'], x['gf']), reverse=True)
+        for rank_idx, team_data in enumerate(group_standings):
+            standings[team_data['team']]['rank_in_group'] = rank_idx + 1
+
+    # Get qualified teams
+    qualified_32_info = []
+    for team, info in standings.items():
+        if info['rank_in_group'] <= 2:
+            qualified_32_info.append({
+                'team': team,
+                'group': info['group'],
+                'rank': info['rank_in_group']
+            })
+    best_3rd = get_best_third_place(standings)
+    qualified_32_info.extend(best_3rd)
+
+    # Extract winners and runners-up
+    winners = {}
+    runners_up = {}
+    for team, stats in standings.items():
+        if stats['rank_in_group'] == 1:
+            winners[stats['group']] = team
+        elif stats['rank_in_group'] == 2:
+            runners_up[stats['group']] = team
+            
+    qualified_3rd_info = [(t['team'], t['group']) for t in qualified_32_info if standings[t['team']]['rank_in_group'] == 3]
+    third_place_assignments = match_third_places(qualified_3rd_info)
+
+    # Knockout stage pairings
+    r32_pairings = [
+        (runners_up['A'], runners_up['B']),
+        (winners['C'], runners_up['F']),
+        (winners['E'], third_place_assignments['E']),
+        (winners['F'], runners_up['C']),
+        (runners_up['E'], runners_up['I']),
+        (winners['I'], third_place_assignments['I']),
+        (winners['A'], third_place_assignments['A']),
+        (winners['L'], third_place_assignments['L']),
+        (winners['G'], third_place_assignments['G']),
+        (winners['D'], third_place_assignments['D']),
+        (winners['H'], runners_up['J']),
+        (runners_up['K'], runners_up['L']),
+        (winners['B'], third_place_assignments['B']),
+        (runners_up['D'], runners_up['G']),
+        (winners['J'], runners_up['H']),
+        (winners['K'], third_place_assignments['K'])
+    ]
+
+    def simulate_deterministic_knockout_match(t1, t2, match_id):
+        preds = predict_match(t1, t2, team_features_df, model, feature_names)
+        p_home = preds['home_win']
+        p_draw = preds['draw']
+        p_away = preds['away_win']
+        
+        max_prob = max(p_home, p_draw, p_away)
+        if max_prob == p_home:
+            winner = t1
+        elif max_prob == p_away:
+            winner = t2
+        else:
+            winner = t1  # Tiebreak: home team wins
+            
+        return {
+            "match_id": match_id,
+            "home": t1,
+            "away": t2,
+            "home_win_prob": p_home,
+            "draw_prob": p_draw,
+            "away_win_prob": p_away,
+            "predicted_winner": winner
+        }
+
+    # Simulate R32 (Match 73 to 88)
+    r32_results = []
+    r32_winners = []
+    for idx, (t1, t2) in enumerate(r32_pairings):
+        match_id = 73 + idx
+        res = simulate_deterministic_knockout_match(t1, t2, match_id)
+        r32_results.append(res)
+        r32_winners.append(res['predicted_winner'])
+
+    # R16 (Match 89 to 96)
+    r16_pairings = [
+        (r32_winners[0], r32_winners[2]),
+        (r32_winners[1], r32_winners[4]),
+        (r32_winners[3], r32_winners[5]),
+        (r32_winners[6], r32_winners[7]),
+        (r32_winners[10], r32_winners[11]),
+        (r32_winners[8], r32_winners[9]),
+        (r32_winners[13], r32_winners[15]),
+        (r32_winners[12], r32_winners[14])
+    ]
+    r16_results = []
+    r16_winners = []
+    for idx, (t1, t2) in enumerate(r16_pairings):
+        match_id = 89 + idx
+        res = simulate_deterministic_knockout_match(t1, t2, match_id)
+        r16_results.append(res)
+        r16_winners.append(res['predicted_winner'])
+
+    # QF (Match 97 to 100)
+    qf_pairings = [
+        (r16_winners[0], r16_winners[1]),
+        (r16_winners[2], r16_winners[3]),
+        (r16_winners[4], r16_winners[5]),
+        (r16_winners[6], r16_winners[7])
+    ]
+    qf_results = []
+    qf_winners = []
+    for idx, (t1, t2) in enumerate(qf_pairings):
+        match_id = 97 + idx
+        res = simulate_deterministic_knockout_match(t1, t2, match_id)
+        qf_results.append(res)
+        qf_winners.append(res['predicted_winner'])
+
+    # SF (Match 101 to 102)
+    sf_pairings = [
+        (qf_winners[0], qf_winners[1]),
+        (qf_winners[2], qf_winners[3])
+    ]
+    sf_results = []
+    sf_winners = []
+    for idx, (t1, t2) in enumerate(sf_pairings):
+        match_id = 101 + idx
+        res = simulate_deterministic_knockout_match(t1, t2, match_id)
+        sf_results.append(res)
+        sf_winners.append(res['predicted_winner'])
+
+    # Final (Match 104)
+    final_res = simulate_deterministic_knockout_match(sf_winners[0], sf_winners[1], 104)
+
+    return {
+        "group_stage": group_stage_matches,
+        "r32": r32_results,
+        "r16": r16_results,
+        "qf": qf_results,
+        "sf": sf_results,
+        "final": final_res
+    }
 
 # -------------------------------------------------------------
 # BAGIAN 2 - FUNGSI PREDIKSI
@@ -442,9 +677,14 @@ def simulate_knockout(qualified_32, group_standings, model, feature_names, team_
     
     return {
         'qualified_32': [t['team'] for t in qualified_32],
+        'r32_pairings': r32_pairings,
+        'r16_pairings': r16_pairings,
         'r16_winners': r16_winners,
+        'qf_pairings': qf_pairings,
         'qf_winners': qf_winners,
+        'sf_pairings': sf_pairings,
         'sf_winners': sf_winners,
+        'final_pairing': (sf_winners[0], sf_winners[1]),
         'champion': champion
     }
 
@@ -485,6 +725,15 @@ def run_simulation(team_features_df, model, feature_names, model_name, model_f1,
                 'champion_count': 0
             }
             
+    # Track opponents per round per team
+    path_tracker = {team: {
+        'r32_opponents': [],
+        'r16_opponents': [],
+        'qf_opponents': [],
+        'sf_opponents': [],
+        'final_opponents': []
+    } for team in stats.keys()}
+            
     print(f"\nRunning {n_simulations} tournament simulations...")
     
     for sim_idx in range(1, n_simulations + 1):
@@ -511,6 +760,44 @@ def run_simulation(team_features_df, model, feature_names, model_name, model_f1,
         
         # 3. Simulate Knockout Stage
         knockout_results = simulate_knockout(qualified_32_info, group_standings, model, feature_names, team_features_df)
+        
+        # Track opponents per round
+        qualified_32_set = set(knockout_results['qualified_32'])
+        
+        # R32 opponents
+        for t1, t2 in knockout_results['r32_pairings']:
+            if t1 in path_tracker:
+                path_tracker[t1]['r32_opponents'].append(t2)
+            if t2 in path_tracker:
+                path_tracker[t2]['r32_opponents'].append(t1)
+                
+        # R16 opponents
+        for t1, t2 in knockout_results['r16_pairings']:
+            if t1 in path_tracker:
+                path_tracker[t1]['r16_opponents'].append(t2)
+            if t2 in path_tracker:
+                path_tracker[t2]['r16_opponents'].append(t1)
+                
+        # QF opponents
+        for t1, t2 in knockout_results['qf_pairings']:
+            if t1 in path_tracker:
+                path_tracker[t1]['qf_opponents'].append(t2)
+            if t2 in path_tracker:
+                path_tracker[t2]['qf_opponents'].append(t1)
+                
+        # SF opponents
+        for t1, t2 in knockout_results['sf_pairings']:
+            if t1 in path_tracker:
+                path_tracker[t1]['sf_opponents'].append(t2)
+            if t2 in path_tracker:
+                path_tracker[t2]['sf_opponents'].append(t1)
+                
+        # Final opponents
+        t1, t2 = knockout_results['final_pairing']
+        if t1 in path_tracker:
+            path_tracker[t1]['final_opponents'].append(t2)
+        if t2 in path_tracker:
+            path_tracker[t2]['final_opponents'].append(t1)
         
         # 4. Update Stats
         # Group qualifiers (they all play in R32)
@@ -552,6 +839,45 @@ def run_simulation(team_features_df, model, feature_names, model_name, model_f1,
             'group_qualify_rate': counts['group_qualify_count'] / n_simulations
         }
         
+    # Build most_likely_path for each team
+    for team in stats.keys():
+        group_letter = team_to_group[team]
+        group_opponents = [t for t in groups[group_letter] if t != team]
+        
+        path = [
+            {
+                "round": "Group Stage",
+                "opponents": group_opponents,
+                "qualify_rate": float(team_results[team]['group_qualify_rate'])
+            }
+        ]
+        
+        rounds_info = [
+            ("R32", "r32_opponents", "r32_rate"),
+            ("R16", "r16_opponents", "r16_rate"),
+            ("QF", "qf_opponents", "qf_rate"),
+            ("SF", "sf_opponents", "sf_rate"),
+            ("Final", "final_opponents", "final_rate")
+        ]
+        
+        for round_name, tracker_key, rate_key in rounds_info:
+            reach_rate = team_results[team][rate_key]
+            if reach_rate > 0:
+                opp_list = path_tracker[team][tracker_key]
+                if opp_list:
+                    counter = Counter(opp_list)
+                    most_likely_opponent = counter.most_common(1)[0][0]
+                else:
+                    most_likely_opponent = "None"
+                    
+                path.append({
+                    "round": round_name,
+                    "most_likely_opponent": most_likely_opponent,
+                    "reach_rate": float(reach_rate)
+                })
+                
+        team_results[team]['most_likely_path'] = path
+        
     # Get most likely champion, finalists and semifinalists
     sorted_by_champion = sorted(team_results.items(), key=lambda x: x[1]['champion_rate'], reverse=True)
     sorted_by_finalist = sorted(team_results.items(), key=lambda x: x[1]['final_rate'], reverse=True)
@@ -565,6 +891,9 @@ def run_simulation(team_features_df, model, feature_names, model_name, model_f1,
     # BAGIAN 4 - OUTPUT
     # -------------------------------------------------------------
     
+    # Generate most likely bracket
+    bracket_res = generate_most_likely_bracket(groups, team_features_df, model, feature_names)
+
     output_json = {
         'metadata': {
             'n_simulations': n_simulations,
@@ -575,7 +904,8 @@ def run_simulation(team_features_df, model, feature_names, model_name, model_f1,
         'teams': team_results,
         'most_likely_champion': most_likely_champion,
         'most_likely_finalist': most_likely_finalist,
-        'most_likely_semifinalists': most_likely_semifinalists
+        'most_likely_semifinalists': most_likely_semifinalists,
+        'bracket': bracket_res
     }
     
     output_path = "data/output/simulation_results.json"
@@ -584,51 +914,17 @@ def run_simulation(team_features_df, model, feature_names, model_name, model_f1,
         
     print(f"\nSaved simulation results to {output_path}")
     
-    # Hardcoded champion rates before adding FIFA Ranking
-    prev_champion_rates = {
-        "Brazil": 24.84,
-        "Germany": 13.37,
-        "France": 10.13,
-        "Argentina": 7.93,
-        "England": 6.47,
-        "Spain": 5.92,
-        "Netherlands": 5.11,
-        "Portugal": 4.78,
-        "Turkey": 4.46,
-        "Uruguay": 4.39
-    }
-    
-    # Country flags dictionary
-    flags = {
-        "Argentina": "🇦🇷", "Spain": "🇪🇸", "France": "🇫🇷", "England": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        "Portugal": "🇵🇹", "Brazil": "🇧🇷", "Morocco": "🇲🇦", "Netherlands": "🇳🇱",
-        "Belgium": "🇧🇪", "Germany": "🇩🇪", "Croatia": "🇭🇷", "Colombia": "🇨🇴",
-        "Mexico": "🇲🇽", "Senegal": "🇸🇳", "United States": "🇺🇸", "Uruguay": "🇺🇾",
-        "Japan": "🇯🇵", "Switzerland": "🇨🇭", "Iran": "🇮🇷", "Turkey": "🇹🇷",
-        "Austria": "🇦🇹", "Ecuador": "🇪🇨", "South Korea": "🇰🇷", "Australia": "🇦🇺",
-        "Algeria": "🇩🇿", "Egypt": "🇪🇬", "Canada": "🇨🇦", "Norway": "🇳🇴",
-        "Ivory Coast": "🇨🇮", "Panama": "🇵🇦", "Scotland": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "DR Congo": "🇨🇩",
-        "Tunisia": "🇹🇳", "Uzbekistan": "🇺🇿", "Paraguay": "🇵🇾", "Czechia": "🇨🇿",
-        "Sweden": "🇸🇪", "Ghana": "🇬🇭", "South Africa": "🇿🇦", "Bosnia and Herzegovina": "🇧🇦",
-        "Saudi Arabia": "🇸🇦", "Iraq": "🇮🇶", "Jordan": "🇯🇴", "Qatar": "🇶🇦",
-        "Cape Verde": "🇨🇻", "New Zealand": "🇳🇿", "Haiti": "🇭🇹", "Curacao": "🇨🇼"
-    }
-
     # Print summary reports
     print("\n" + "="*50)
     print("SIMULATION SUMMARY")
     print("="*50)
-    print(f"Top 10 Teams by Champion Rate (Compared to Before):")
+    print(f"Top 10 Teams by Champion Rate:")
     for rank, (team, data) in enumerate(sorted_by_champion[:10], 1):
-        prev_rate = prev_champion_rates.get(team, 0.0)
-        diff = (data['champion_rate']*100) - prev_rate
-        flag = flags.get(team, "")
-        print(f"  {rank}. {flag} {team}: {data['champion_rate']*100:.2f}% (Before: {prev_rate:.2f}%, Diff: {diff:+.2f}%)")
+        print(f"  {rank}. {team}: {data['champion_rate']*100:.2f}%")
         
     print(f"\nTop 10 Teams by Finalist Rate:")
     for rank, (team, data) in enumerate(sorted_by_finalist[:10], 1):
-        flag = flags.get(team, "")
-        print(f"  {rank}. {flag} {team}: {data['final_rate']*100:.2f}%")
+        print(f"  {rank}. {team}: {data['final_rate']*100:.2f}%")
         
     print(f"\nModel Used: {model_name}")
     print(f"Model F1-Weighted Cross-Validation Score: {model_f1:.4f}")

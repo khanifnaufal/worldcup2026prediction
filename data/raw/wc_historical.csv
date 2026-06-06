@@ -1,0 +1,966 @@
+year,stage,home_team,away_team,home_score,away_score
+1930,group,France,Mexico,4,1
+1930,group,Argentina,France,1,0
+1930,group,Chile,Mexico,3,0
+1930,group,Chile,France,1,0
+1930,group,Argentina,Mexico,6,3
+1930,group,Argentina,Chile,3,1
+1930,group,Yugoslavia,Brazil,2,1
+1930,group,Yugoslavia,Bolivia,4,0
+1930,group,Brazil,Bolivia,4,0
+1930,group,Romania,Peru,3,1
+1930,group,Uruguay,Peru,1,0
+1930,group,Uruguay,Romania,4,0
+1930,group,United States,Belgium,3,0
+1930,group,United States,Paraguay,3,0
+1930,group,Paraguay,Belgium,1,0
+1930,knockout,Argentina,United States,6,1
+1930,knockout,Uruguay,Yugoslavia,6,1
+1930,knockout,Uruguay,Argentina,4,2
+1934,knockout,Spain,Brazil,3,1
+1934,knockout,Hungary,Egypt,4,2
+1934,knockout,Switzerland,Netherlands,3,2
+1934,knockout,Italy,United States,7,1
+1934,knockout,Czechoslovakia,Romania,2,1
+1934,knockout,Sweden,Argentina,3,2
+1934,knockout,Austria,France,3,2
+1934,knockout,Germany,Belgium,5,2
+1934,knockout,Austria,Hungary,2,1
+1934,knockout,Italy,Spain,1,1
+1934,knockout,Germany,Sweden,2,1
+1934,knockout,Czechoslovakia,Switzerland,3,2
+1934,knockout,Italy,Spain,1,0
+1934,knockout,Italy,Austria,1,0
+1934,knockout,Czechoslovakia,Germany,3,1
+1934,knockout,Germany,Austria,3,2
+1934,knockout,Italy,Czechoslovakia,2,1
+1938,knockout,Switzerland,Germany,1,1
+1938,knockout,Hungary,Dutch East Indies,6,0
+1938,knockout,Sweden,Austria,,
+1938,knockout,Cuba,Romania,3,3
+1938,knockout,France,Belgium,3,1
+1938,knockout,Italy,Norway,2,1
+1938,knockout,Brazil,Poland,6,5
+1938,knockout,Czechoslovakia,Netherlands,3,0
+1938,knockout,Switzerland,Germany,4,2
+1938,knockout,Cuba,Romania,2,1
+1938,knockout,Hungary,Switzerland,2,0
+1938,knockout,Sweden,Cuba,8,0
+1938,knockout,Italy,France,3,1
+1938,knockout,Brazil,Czechoslovakia,1,1
+1938,knockout,Brazil,Czechoslovakia,2,1
+1938,knockout,Hungary,Sweden,5,1
+1938,knockout,Italy,Brazil,2,1
+1938,knockout,Brazil,Sweden,4,2
+1938,knockout,Italy,Hungary,4,2
+1950,group,Brazil,Mexico,4,0
+1950,group,Yugoslavia,Switzerland,3,0
+1950,group,Brazil,Switzerland,2,2
+1950,group,Yugoslavia,Mexico,4,1
+1950,group,Brazil,Yugoslavia,2,0
+1950,group,Switzerland,Mexico,2,1
+1950,group,England,Chile,2,0
+1950,group,Spain,United States,3,1
+1950,group,Spain,Chile,2,0
+1950,group,United States,England,1,0
+1950,group,Spain,England,1,0
+1950,group,Chile,United States,5,2
+1950,group,Sweden,Italy,3,2
+1950,group,Sweden,Paraguay,2,2
+1950,group,Italy,Paraguay,2,0
+1950,group,Uruguay,Bolivia,8,0
+1950,group,Uruguay,Spain,2,2
+1950,group,Brazil,Sweden,7,1
+1950,group,Brazil,Spain,6,1
+1950,group,Uruguay,Sweden,3,2
+1950,group,Sweden,Spain,3,1
+1950,group,Uruguay,Brazil,2,1
+1954,group,Brazil,Mexico,5,0
+1954,group,Yugoslavia,France,1,0
+1954,group,Brazil,Yugoslavia,1,1
+1954,group,France,Mexico,3,2
+1954,group,West Germany,Turkey,4,1
+1954,group,Hungary,South Korea,9,0
+1954,group,Hungary,West Germany,8,3
+1954,group,Turkey,South Korea,7,0
+1954,knockout,West Germany,Turkey,7,2
+1954,group,Uruguay,Czechoslovakia,2,0
+1954,group,Austria,Scotland,1,0
+1954,group,Uruguay,Scotland,7,0
+1954,group,Austria,Czechoslovakia,5,0
+1954,group,Switzerland,Italy,2,1
+1954,group,England,Belgium,4,4
+1954,group,Italy,Belgium,4,1
+1954,group,England,Switzerland,2,0
+1954,knockout,Switzerland,Italy,4,1
+1954,knockout,Austria,Switzerland,7,5
+1954,knockout,Uruguay,England,4,2
+1954,knockout,West Germany,Yugoslavia,2,0
+1954,knockout,Hungary,Brazil,4,2
+1954,knockout,West Germany,Austria,6,1
+1954,knockout,Hungary,Uruguay,4,2
+1954,knockout,Austria,Uruguay,3,1
+1954,knockout,West Germany,Hungary,3,2
+1958,group,Argentina,West Germany,1,3
+1958,group,Northern Ireland,Czechoslovakia,1,0
+1958,group,West Germany,Czechoslovakia,2,2
+1958,group,Argentina,Northern Ireland,3,1
+1958,group,West Germany,Northern Ireland,2,2
+1958,group,Czechoslovakia,Argentina,6,1
+1958,knockout,Northern Ireland,Czechoslovakia,2,1
+1958,group,France,Paraguay,7,3
+1958,group,Yugoslavia,Scotland,1,1
+1958,group,Yugoslavia,France,3,2
+1958,group,Paraguay,Scotland,3,2
+1958,group,France,Scotland,2,1
+1958,group,Paraguay,Yugoslavia,3,3
+1958,group,Sweden,Mexico,3,0
+1958,group,Hungary,Wales,1,1
+1958,group,Mexico,Wales,1,1
+1958,group,Sweden,Hungary,2,1
+1958,group,Sweden,Wales,0,0
+1958,group,Hungary,Mexico,4,0
+1958,knockout,Wales,Hungary,2,1
+1958,group,Brazil,Austria,3,0
+1958,group,Soviet Union,England,2,2
+1958,group,Brazil,England,0,0
+1958,group,Soviet Union,Austria,2,0
+1958,group,England,Austria,2,2
+1958,group,Brazil,Soviet Union,2,0
+1958,knockout,Soviet Union,England,1,0
+1958,knockout,Brazil,Wales,1,0
+1958,knockout,France,Northern Ireland,4,0
+1958,knockout,Sweden,Soviet Union,2,0
+1958,knockout,West Germany,Yugoslavia,1,0
+1958,knockout,Brazil,France,5,2
+1958,knockout,Sweden,West Germany,3,1
+1958,knockout,France,West Germany,6,3
+1958,knockout,Brazil,Sweden,5,2
+1962,group,Uruguay,Colombia,2,1
+1962,group,Soviet Union,Yugoslavia,2,0
+1962,group,Yugoslavia,Uruguay,3,1
+1962,group,Soviet Union,Colombia,4,4
+1962,group,Soviet Union,Uruguay,2,1
+1962,group,Yugoslavia,Colombia,5,0
+1962,group,Chile,Switzerland,3,1
+1962,group,West Germany,Italy,0,0
+1962,group,Chile,Italy,2,0
+1962,group,West Germany,Switzerland,2,1
+1962,group,West Germany,Chile,2,0
+1962,group,Italy,Switzerland,3,0
+1962,group,Brazil,Mexico,2,0
+1962,group,Czechoslovakia,Spain,1,0
+1962,group,Brazil,Czechoslovakia,0,0
+1962,group,Spain,Mexico,1,0
+1962,group,Brazil,Spain,2,1
+1962,group,Mexico,Czechoslovakia,3,1
+1962,group,Argentina,Bulgaria,1,0
+1962,group,Hungary,England,2,1
+1962,group,England,Argentina,3,1
+1962,group,Hungary,Bulgaria,6,1
+1962,group,Hungary,Argentina,0,0
+1962,group,England,Bulgaria,0,0
+1962,knockout,Chile,Soviet Union,2,1
+1962,knockout,Czechoslovakia,Hungary,1,0
+1962,knockout,Brazil,England,3,1
+1962,knockout,Yugoslavia,West Germany,1,0
+1962,knockout,Czechoslovakia,Yugoslavia,3,1
+1962,knockout,Brazil,Chile,4,2
+1962,knockout,Chile,Yugoslavia,1,0
+1962,knockout,Brazil,Czechoslovakia,3,1
+1966,group,England,Uruguay,0,0
+1966,group,France,Mexico,1,1
+1966,group,Uruguay,France,2,1
+1966,group,England,Mexico,2,0
+1966,group,Mexico,Uruguay,0,0
+1966,group,England,France,2,0
+1966,group,West Germany,Switzerland,5,0
+1966,group,Argentina,Spain,2,1
+1966,group,Spain,Switzerland,2,1
+1966,group,Argentina,West Germany,0,0
+1966,group,Argentina,Switzerland,2,0
+1966,group,West Germany,Spain,2,1
+1966,group,Brazil,Bulgaria,2,0
+1966,group,Portugal,Hungary,3,1
+1966,group,Hungary,Brazil,3,1
+1966,group,Portugal,Bulgaria,3,0
+1966,group,Portugal,Brazil,3,1
+1966,group,Hungary,Bulgaria,3,1
+1966,group,Soviet Union,North Korea,3,0
+1966,group,Italy,Chile,2,0
+1966,group,Chile,North Korea,1,1
+1966,group,Soviet Union,Italy,1,0
+1966,group,North Korea,Italy,1,0
+1966,group,Soviet Union,Chile,2,1
+1966,knockout,England,Argentina,1,0
+1966,knockout,West Germany,Uruguay,4,0
+1966,knockout,Soviet Union,Hungary,2,1
+1966,knockout,Portugal,North Korea,5,3
+1966,knockout,West Germany,Soviet Union,2,1
+1966,knockout,England,Portugal,2,1
+1966,knockout,Portugal,Soviet Union,2,1
+1966,knockout,England,West Germany,4,2
+1970,group,Mexico,Soviet Union,0,0
+1970,group,Belgium,El Salvador,3,0
+1970,group,Soviet Union,Belgium,4,1
+1970,group,Mexico,El Salvador,4,0
+1970,group,Soviet Union,El Salvador,2,0
+1970,group,Mexico,Belgium,1,0
+1970,group,Uruguay,Israel,2,0
+1970,group,Italy,Sweden,1,0
+1970,group,Uruguay,Italy,0,0
+1970,group,Sweden,Israel,1,1
+1970,group,Sweden,Uruguay,1,0
+1970,group,Italy,Israel,0,0
+1970,group,England,Romania,1,0
+1970,group,Brazil,Czechoslovakia,4,1
+1970,group,Romania,Czechoslovakia,2,1
+1970,group,Brazil,England,1,0
+1970,group,Brazil,Romania,3,2
+1970,group,England,Czechoslovakia,1,0
+1970,group,Peru,Bulgaria,3,2
+1970,group,West Germany,Morocco,2,1
+1970,group,Peru,Morocco,3,0
+1970,group,West Germany,Bulgaria,5,2
+1970,group,West Germany,Peru,3,1
+1970,group,Bulgaria,Morocco,1,1
+1970,knockout,Soviet Union,Uruguay,0,1
+1970,knockout,Italy,Mexico,4,1
+1970,knockout,Brazil,Peru,4,2
+1970,knockout,West Germany,England,3,2
+1970,knockout,Brazil,Uruguay,3,1
+1970,knockout,Italy,West Germany,4,3
+1970,knockout,West Germany,Uruguay,1,0
+1970,knockout,Brazil,Italy,4,1
+1974,group,West Germany,Chile,1,0
+1974,group,East Germany,Australia,2,0
+1974,group,Australia,West Germany,0,3
+1974,group,Chile,East Germany,1,1
+1974,group,Australia,Chile,0,0
+1974,group,East Germany,West Germany,1,0
+1974,group,Brazil,Yugoslavia,0,0
+1974,group,Zaire,Scotland,0,2
+1974,group,Yugoslavia,Zaire,9,0
+1974,group,Scotland,Brazil,0,0
+1974,group,Scotland,Yugoslavia,1,1
+1974,group,Zaire,Brazil,0,3
+1974,group,Uruguay,Netherlands,0,2
+1974,group,Sweden,Bulgaria,0,0
+1974,group,Bulgaria,Uruguay,1,1
+1974,group,Netherlands,Sweden,0,0
+1974,group,Bulgaria,Netherlands,1,4
+1974,group,Sweden,Uruguay,3,0
+1974,group,Italy,Haiti,3,1
+1974,group,Poland,Argentina,3,2
+1974,group,Argentina,Italy,1,1
+1974,group,Haiti,Poland,0,7
+1974,group,Argentina,Haiti,4,1
+1974,group,Poland,Italy,2,1
+1974,group,Netherlands,Argentina,4,0
+1974,group,Brazil,East Germany,1,0
+1974,group,Argentina,Brazil,1,2
+1974,group,East Germany,Netherlands,0,2
+1974,group,Argentina,East Germany,1,1
+1974,group,Netherlands,Brazil,2,0
+1974,group,Yugoslavia,West Germany,0,2
+1974,group,Sweden,Poland,0,1
+1974,group,Poland,Yugoslavia,2,1
+1974,group,West Germany,Sweden,4,2
+1974,group,Poland,West Germany,0,1
+1974,group,Sweden,Yugoslavia,2,1
+1974,knockout,Brazil,Poland,0,1
+1974,knockout,Netherlands,West Germany,1,2
+1978,group,Italy,France,2,1
+1978,group,Argentina,Hungary,2,1
+1978,group,Italy,Hungary,3,1
+1978,group,Argentina,France,2,1
+1978,group,France,Hungary,3,1
+1978,group,Argentina,Italy,0,1
+1978,group,West Germany,Poland,0,0
+1978,group,Tunisia,Mexico,3,1
+1978,group,West Germany,Mexico,6,0
+1978,group,Poland,Tunisia,1,0
+1978,group,West Germany,Tunisia,0,0
+1978,group,Poland,Mexico,3,1
+1978,group,Austria,Spain,2,1
+1978,group,Brazil,Sweden,1,1
+1978,group,Austria,Sweden,1,0
+1978,group,Brazil,Spain,0,0
+1978,group,Spain,Sweden,1,0
+1978,group,Brazil,Austria,1,0
+1978,group,Peru,Scotland,3,1
+1978,group,Netherlands,Iran,3,0
+1978,group,Scotland,Iran,1,1
+1978,group,Netherlands,Peru,0,0
+1978,group,Peru,Iran,4,1
+1978,group,Scotland,Netherlands,3,2
+1978,group,Austria,Netherlands,1,5
+1978,group,Italy,West Germany,0,0
+1978,group,Netherlands,West Germany,2,2
+1978,group,Italy,Austria,1,0
+1978,group,Austria,West Germany,3,2
+1978,group,Italy,Netherlands,1,2
+1978,group,Brazil,Peru,3,0
+1978,group,Argentina,Poland,2,0
+1978,group,Peru,Poland,0,1
+1978,group,Argentina,Brazil,0,0
+1978,group,Brazil,Poland,3,1
+1978,group,Argentina,Peru,6,0
+1978,knockout,Brazil,Italy,2,1
+1978,knockout,Argentina,Netherlands,3,1
+1982,group,Italy,Poland,0,0
+1982,group,Peru,Cameroon,0,0
+1982,group,Italy,Peru,1,1
+1982,group,Poland,Cameroon,0,0
+1982,group,Poland,Peru,5,1
+1982,group,Italy,Cameroon,1,1
+1982,group,West Germany,Algeria,1,2
+1982,group,Chile,Austria,0,1
+1982,group,West Germany,Chile,4,1
+1982,group,Algeria,Austria,0,2
+1982,group,Algeria,Chile,3,2
+1982,group,West Germany,Austria,1,0
+1982,group,Argentina,Belgium,0,1
+1982,group,Hungary,El Salvador,10,1
+1982,group,Argentina,Hungary,4,1
+1982,group,Belgium,El Salvador,1,0
+1982,group,Belgium,Hungary,1,1
+1982,group,Argentina,El Salvador,2,0
+1982,group,England,France,3,1
+1982,group,Czechoslovakia,Kuwait,1,1
+1982,group,England,Czechoslovakia,2,0
+1982,group,France,Kuwait,4,1
+1982,group,France,Czechoslovakia,1,1
+1982,group,England,Kuwait,1,0
+1982,group,Spain,Honduras,1,1
+1982,group,Yugoslavia,Northern Ireland,0,0
+1982,group,Spain,Yugoslavia,2,1
+1982,group,Honduras,Northern Ireland,1,1
+1982,group,Honduras,Yugoslavia,0,1
+1982,group,Spain,Northern Ireland,0,1
+1982,group,Brazil,Soviet Union,2,1
+1982,group,Scotland,New Zealand,5,2
+1982,group,Brazil,Scotland,4,1
+1982,group,Soviet Union,New Zealand,3,0
+1982,group,Soviet Union,Scotland,2,2
+1982,group,Brazil,New Zealand,4,0
+1982,group,Poland,Belgium,3,0
+1982,group,Belgium,Soviet Union,0,1
+1982,group,Soviet Union,Poland,0,0
+1982,group,West Germany,England,0,0
+1982,group,West Germany,Spain,2,1
+1982,group,Spain,England,0,0
+1982,group,Italy,Argentina,2,1
+1982,group,Argentina,Brazil,1,3
+1982,group,Italy,Brazil,3,2
+1982,group,Austria,France,0,1
+1982,group,Austria,Northern Ireland,2,2
+1982,group,France,Northern Ireland,4,1
+1982,knockout,Poland,Italy,0,2
+1982,knockout,West Germany,France,3,3
+1982,knockout,Poland,France,3,2
+1982,knockout,Italy,West Germany,3,1
+1986,group,Bulgaria,Italy,1,1
+1986,group,Argentina,South Korea,3,1
+1986,group,Italy,Argentina,1,1
+1986,group,South Korea,Bulgaria,1,1
+1986,group,South Korea,Italy,2,3
+1986,group,Argentina,Bulgaria,2,0
+1986,group,Belgium,Mexico,1,2
+1986,group,Paraguay,Iraq,1,0
+1986,group,Mexico,Paraguay,1,1
+1986,group,Iraq,Belgium,1,2
+1986,group,Paraguay,Belgium,2,2
+1986,group,Iraq,Mexico,0,1
+1986,group,Canada,France,0,1
+1986,group,Soviet Union,Hungary,6,0
+1986,group,France,Soviet Union,1,1
+1986,group,Hungary,Canada,2,0
+1986,group,Hungary,France,0,3
+1986,group,Soviet Union,Canada,2,0
+1986,group,Spain,Brazil,0,1
+1986,group,Algeria,Northern Ireland,1,1
+1986,group,Brazil,Algeria,1,0
+1986,group,Northern Ireland,Spain,1,2
+1986,group,Northern Ireland,Brazil,0,3
+1986,group,Algeria,Spain,0,3
+1986,group,Uruguay,West Germany,1,1
+1986,group,Scotland,Denmark,0,1
+1986,group,West Germany,Scotland,2,1
+1986,group,Denmark,Uruguay,6,1
+1986,group,Denmark,West Germany,2,0
+1986,group,Scotland,Uruguay,0,0
+1986,group,Morocco,Poland,0,0
+1986,group,Portugal,England,1,0
+1986,group,England,Morocco,0,0
+1986,group,Poland,Portugal,1,0
+1986,group,England,Poland,3,0
+1986,group,Portugal,Morocco,1,3
+1986,knockout,Mexico,Bulgaria,2,0
+1986,knockout,Soviet Union,Belgium,3,4
+1986,knockout,Brazil,Poland,4,0
+1986,knockout,Argentina,Uruguay,1,0
+1986,knockout,Italy,France,0,2
+1986,knockout,Morocco,West Germany,0,1
+1986,knockout,England,Paraguay,3,0
+1986,knockout,Denmark,Spain,1,5
+1986,knockout,Brazil,France,1,1
+1986,knockout,West Germany,Mexico,0,0
+1986,knockout,Argentina,England,2,1
+1986,knockout,Spain,Belgium,1,1
+1986,knockout,France,West Germany,0,2
+1986,knockout,Argentina,Belgium,2,0
+1986,knockout,Belgium,France,2,4
+1986,knockout,Argentina,West Germany,3,2
+1990,group,Italy,Austria,1,0
+1990,group,United States,Czechoslovakia,1,5
+1990,group,Italy,United States,1,0
+1990,group,Austria,Czechoslovakia,0,1
+1990,group,Italy,Czechoslovakia,2,0
+1990,group,Austria,United States,2,1
+1990,group,Argentina,Cameroon,0,1
+1990,group,Soviet Union,Romania,0,2
+1990,group,Argentina,Soviet Union,2,0
+1990,group,Cameroon,Romania,2,1
+1990,group,Argentina,Romania,1,1
+1990,group,Cameroon,Soviet Union,0,4
+1990,group,Brazil,Sweden,2,1
+1990,group,Costa Rica,Scotland,1,0
+1990,group,Brazil,Costa Rica,1,0
+1990,group,Sweden,Scotland,1,2
+1990,group,Brazil,Scotland,1,0
+1990,group,Sweden,Costa Rica,1,2
+1990,group,United Arab Emirates,Colombia,0,2
+1990,group,West Germany,Yugoslavia,4,1
+1990,group,Yugoslavia,Colombia,1,0
+1990,group,West Germany,United Arab Emirates,5,1
+1990,group,West Germany,Colombia,1,1
+1990,group,Yugoslavia,United Arab Emirates,4,1
+1990,group,Belgium,South Korea,2,0
+1990,group,Uruguay,Spain,0,0
+1990,group,Belgium,Uruguay,3,1
+1990,group,South Korea,Spain,1,3
+1990,group,Belgium,Spain,1,2
+1990,group,South Korea,Uruguay,0,1
+1990,group,England,Republic of Ireland,1,1
+1990,group,Netherlands,Egypt,1,1
+1990,group,England,Netherlands,0,0
+1990,group,Republic of Ireland,Egypt,0,0
+1990,group,England,Egypt,1,0
+1990,group,Republic of Ireland,Netherlands,1,1
+1990,knockout,Cameroon,Colombia,2,1
+1990,knockout,Czechoslovakia,Costa Rica,4,1
+1990,knockout,Brazil,Argentina,0,1
+1990,knockout,West Germany,Netherlands,2,1
+1990,knockout,Republic of Ireland,Romania,0,0
+1990,knockout,Italy,Uruguay,2,0
+1990,knockout,Spain,Yugoslavia,1,2
+1990,knockout,England,Belgium,1,0
+1990,knockout,Argentina,Yugoslavia,0,0
+1990,knockout,Republic of Ireland,Italy,0,1
+1990,knockout,Czechoslovakia,West Germany,0,1
+1990,knockout,Cameroon,England,2,3
+1990,knockout,Argentina,Italy,1,1
+1990,knockout,West Germany,England,1,1
+1990,knockout,Italy,England,2,1
+1990,knockout,West Germany,Argentina,1,0
+1994,group,United States,Switzerland,1,1
+1994,group,Colombia,Romania,1,3
+1994,group,Romania,Switzerland,1,4
+1994,group,United States,Colombia,2,1
+1994,group,Switzerland,Colombia,0,2
+1994,group,United States,Romania,0,1
+1994,group,Cameroon,Sweden,2,2
+1994,group,Brazil,Russia,2,0
+1994,group,Brazil,Cameroon,3,0
+1994,group,Sweden,Russia,3,1
+1994,group,Russia,Cameroon,6,1
+1994,group,Brazil,Sweden,1,1
+1994,group,Germany,Bolivia,1,0
+1994,group,Spain,South Korea,2,2
+1994,group,Germany,Spain,1,1
+1994,group,South Korea,Bolivia,0,0
+1994,group,Bolivia,Spain,1,3
+1994,group,Germany,South Korea,3,2
+1994,group,Argentina,Greece,4,0
+1994,group,Nigeria,Bulgaria,3,0
+1994,group,Argentina,Nigeria,2,1
+1994,group,Bulgaria,Greece,4,0
+1994,group,Argentina,Bulgaria,0,2
+1994,group,Greece,Nigeria,0,2
+1994,group,Italy,Republic of Ireland,0,1
+1994,group,Norway,Mexico,1,0
+1994,group,Italy,Norway,1,0
+1994,group,Mexico,Republic of Ireland,2,1
+1994,group,Italy,Mexico,1,1
+1994,group,Republic of Ireland,Norway,0,0
+1994,group,Belgium,Morocco,1,0
+1994,group,Netherlands,Saudi Arabia,2,1
+1994,group,Belgium,Netherlands,1,0
+1994,group,Saudi Arabia,Morocco,2,1
+1994,group,Belgium,Saudi Arabia,0,1
+1994,group,Morocco,Netherlands,1,2
+1994,knockout,Germany,Belgium,3,2
+1994,knockout,Spain,Switzerland,3,0
+1994,knockout,Saudi Arabia,Sweden,1,3
+1994,knockout,Romania,Argentina,3,2
+1994,knockout,Netherlands,Republic of Ireland,2,0
+1994,knockout,Brazil,United States,1,0
+1994,knockout,Nigeria,Italy,1,2
+1994,knockout,Mexico,Bulgaria,1,1
+1994,knockout,Italy,Spain,2,1
+1994,knockout,Netherlands,Brazil,2,3
+1994,knockout,Bulgaria,Germany,2,1
+1994,knockout,Romania,Sweden,2,2
+1994,knockout,Bulgaria,Italy,1,2
+1994,knockout,Sweden,Brazil,0,1
+1994,knockout,Sweden,Bulgaria,4,0
+1994,knockout,Brazil,Italy,0,0
+1998,knockout,Italy,Norway,1,0
+1998,knockout,Brazil,Chile,4,1
+1998,knockout,France,Paraguay,1,0
+1998,knockout,Nigeria,Denmark,1,4
+1998,knockout,Germany,Mexico,2,1
+1998,knockout,Netherlands,FR Yugoslavia,2,1
+1998,knockout,Romania,Croatia,0,1
+1998,knockout,Argentina,England,2,2
+1998,knockout,Italy,France,0,0
+1998,knockout,Brazil,Denmark,3,2
+1998,knockout,Netherlands,Argentina,2,1
+1998,knockout,Germany,Croatia,0,3
+1998,knockout,Brazil,Netherlands,1,1
+1998,knockout,France,Croatia,2,1
+1998,knockout,Netherlands,Croatia,1,2
+1998,knockout,Brazil,France,0,3
+1998,group,Brazil,Scotland,2,1
+1998,group,Morocco,Norway,2,2
+1998,group,Scotland,Norway,1,1
+1998,group,Brazil,Morocco,3,0
+1998,group,Scotland,Morocco,0,3
+1998,group,Brazil,Norway,1,2
+1998,group,Italy,Chile,2,2
+1998,group,Cameroon,Austria,1,1
+1998,group,Chile,Austria,1,1
+1998,group,Italy,Cameroon,3,0
+1998,group,Italy,Austria,2,1
+1998,group,Chile,Cameroon,1,1
+1998,group,Saudi Arabia,Denmark,0,1
+1998,group,France,South Africa,3,0
+1998,group,South Africa,Denmark,1,1
+1998,group,France,Saudi Arabia,4,0
+1998,group,France,Denmark,2,1
+1998,group,South Africa,Saudi Arabia,2,2
+1998,group,Paraguay,Bulgaria,0,0
+1998,group,Spain,Nigeria,2,3
+1998,group,Nigeria,Bulgaria,1,0
+1998,group,Spain,Paraguay,0,0
+1998,group,Nigeria,Paraguay,1,3
+1998,group,Spain,Bulgaria,6,1
+1998,group,South Korea,Mexico,1,3
+1998,group,Netherlands,Belgium,0,0
+1998,group,Belgium,Mexico,2,2
+1998,group,Netherlands,South Korea,5,0
+1998,group,Netherlands,Mexico,2,2
+1998,group,Belgium,South Korea,1,1
+1998,group,FR Yugoslavia,Iran,1,0
+1998,group,Germany,United States,2,0
+1998,group,Germany,FR Yugoslavia,2,2
+1998,group,United States,Iran,1,2
+1998,group,Germany,Iran,2,0
+1998,group,United States,FR Yugoslavia,0,1
+1998,group,England,Tunisia,2,0
+1998,group,Romania,Colombia,1,0
+1998,group,Colombia,Tunisia,1,0
+1998,group,Romania,England,2,1
+1998,group,Colombia,England,0,2
+1998,group,Romania,Tunisia,1,1
+1998,group,Argentina,Japan,1,0
+1998,group,Jamaica,Croatia,1,3
+1998,group,Japan,Croatia,0,1
+1998,group,Argentina,Jamaica,5,0
+1998,group,Argentina,Croatia,1,0
+1998,group,Japan,Jamaica,1,2
+2002,knockout,Germany,Paraguay,1,0
+2002,knockout,Denmark,England,0,3
+2002,knockout,Sweden,Senegal,1,2
+2002,knockout,Spain,Republic of Ireland,1,1
+2002,knockout,Mexico,United States,0,2
+2002,knockout,Brazil,Belgium,2,0
+2002,knockout,Japan,Turkey,0,1
+2002,knockout,South Korea,Italy,2,1
+2002,knockout,England,Brazil,1,2
+2002,knockout,Germany,United States,1,0
+2002,knockout,Spain,South Korea,0,0
+2002,knockout,Senegal,Turkey,0,1
+2002,knockout,Germany,South Korea,1,0
+2002,knockout,Brazil,Turkey,1,0
+2002,knockout,South Korea,Turkey,2,3
+2002,knockout,Germany,Brazil,0,2
+2002,group,France,Senegal,0,1
+2002,group,Uruguay,Denmark,1,2
+2002,group,Denmark,Senegal,1,1
+2002,group,France,Uruguay,0,0
+2002,group,Denmark,France,2,0
+2002,group,Senegal,Uruguay,3,3
+2002,group,Paraguay,South Africa,2,2
+2002,group,Spain,Slovenia,3,1
+2002,group,Spain,Paraguay,3,1
+2002,group,South Africa,Slovenia,1,0
+2002,group,South Africa,Spain,2,3
+2002,group,Slovenia,Paraguay,1,3
+2002,group,Brazil,Turkey,2,1
+2002,group,China,Costa Rica,0,2
+2002,group,Brazil,China,4,0
+2002,group,Costa Rica,Turkey,1,1
+2002,group,Costa Rica,Brazil,2,5
+2002,group,Turkey,China,3,0
+2002,group,South Korea,Poland,2,0
+2002,group,United States,Portugal,3,2
+2002,group,South Korea,United States,1,1
+2002,group,Portugal,Poland,4,0
+2002,group,Portugal,South Korea,0,1
+2002,group,Poland,United States,3,1
+2002,group,Republic of Ireland,Cameroon,1,1
+2002,group,Germany,Saudi Arabia,8,0
+2002,group,Germany,Republic of Ireland,1,1
+2002,group,Cameroon,Saudi Arabia,1,0
+2002,group,Cameroon,Germany,0,2
+2002,group,Saudi Arabia,Republic of Ireland,0,3
+2002,group,Argentina,Nigeria,1,0
+2002,group,England,Sweden,1,1
+2002,group,Sweden,Nigeria,2,1
+2002,group,Argentina,England,0,1
+2002,group,Sweden,Argentina,1,1
+2002,group,Nigeria,England,0,0
+2002,group,Croatia,Mexico,0,1
+2002,group,Italy,Ecuador,2,0
+2002,group,Italy,Croatia,1,2
+2002,group,Mexico,Ecuador,2,1
+2002,group,Mexico,Italy,1,1
+2002,group,Ecuador,Croatia,1,0
+2002,group,Japan,Belgium,2,2
+2002,group,Russia,Tunisia,2,0
+2002,group,Japan,Russia,1,0
+2002,group,Tunisia,Belgium,1,1
+2002,group,Tunisia,Japan,0,2
+2002,group,Belgium,Russia,3,2
+2006,knockout,Germany,Sweden,2,0
+2006,knockout,Argentina,Mexico,2,1
+2006,knockout,England,Ecuador,1,0
+2006,knockout,Portugal,Netherlands,1,0
+2006,knockout,Italy,Australia,1,0
+2006,knockout,Switzerland,Ukraine,0,0
+2006,knockout,Brazil,Ghana,3,0
+2006,knockout,Spain,France,1,3
+2006,knockout,Germany,Argentina,1,1
+2006,knockout,Italy,Ukraine,3,0
+2006,knockout,England,Portugal,0,0
+2006,knockout,Brazil,France,0,1
+2006,knockout,Germany,Italy,0,2
+2006,knockout,Portugal,France,0,1
+2006,knockout,Germany,Portugal,3,1
+2006,knockout,Italy,France,1,1
+2006,group,Germany,Costa Rica,4,2
+2006,group,Poland,Ecuador,0,2
+2006,group,Germany,Poland,1,0
+2006,group,Ecuador,Costa Rica,3,0
+2006,group,Ecuador,Germany,0,3
+2006,group,Costa Rica,Poland,1,2
+2006,group,England,Paraguay,1,0
+2006,group,Trinidad and Tobago,Sweden,0,0
+2006,group,England,Trinidad and Tobago,2,0
+2006,group,Sweden,Paraguay,1,0
+2006,group,Sweden,England,2,2
+2006,group,Paraguay,Trinidad and Tobago,2,0
+2006,group,Argentina,Ivory Coast,2,1
+2006,group,Serbia and Montenegro,Netherlands,0,1
+2006,group,Argentina,Serbia and Montenegro,6,0
+2006,group,Netherlands,Ivory Coast,2,1
+2006,group,Netherlands,Argentina,0,0
+2006,group,Ivory Coast,Serbia and Montenegro,3,2
+2006,group,Mexico,Iran,3,1
+2006,group,Angola,Portugal,0,1
+2006,group,Mexico,Angola,0,0
+2006,group,Portugal,Iran,2,0
+2006,group,Portugal,Mexico,2,1
+2006,group,Iran,Angola,1,1
+2006,group,United States,Czech Republic,0,3
+2006,group,Italy,Ghana,2,0
+2006,group,Czech Republic,Ghana,0,2
+2006,group,Italy,United States,1,1
+2006,group,Czech Republic,Italy,0,2
+2006,group,Ghana,United States,2,1
+2006,group,Australia,Japan,3,1
+2006,group,Brazil,Croatia,1,0
+2006,group,Japan,Croatia,0,0
+2006,group,Brazil,Australia,2,0
+2006,group,Japan,Brazil,1,4
+2006,group,Croatia,Australia,2,2
+2006,group,South Korea,Togo,2,1
+2006,group,France,Switzerland,0,0
+2006,group,France,South Korea,1,1
+2006,group,Togo,Switzerland,0,2
+2006,group,Togo,France,0,2
+2006,group,Switzerland,South Korea,2,0
+2006,group,Spain,Ukraine,4,0
+2006,group,Tunisia,Saudi Arabia,2,2
+2006,group,Saudi Arabia,Ukraine,0,4
+2006,group,Spain,Tunisia,3,1
+2006,group,Saudi Arabia,Spain,0,1
+2006,group,Ukraine,Tunisia,1,0
+2010,knockout,Uruguay,South Korea,2,1
+2010,knockout,United States,Ghana,1,2
+2010,knockout,Germany,England,4,1
+2010,knockout,Argentina,Mexico,3,1
+2010,knockout,Netherlands,Slovakia,2,1
+2010,knockout,Brazil,Chile,3,0
+2010,knockout,Paraguay,Japan,0,0
+2010,knockout,Spain,Portugal,1,0
+2010,knockout,Netherlands,Brazil,2,1
+2010,knockout,Uruguay,Ghana,1,1
+2010,knockout,Argentina,Germany,0,4
+2010,knockout,Paraguay,Spain,0,1
+2010,knockout,Uruguay,Netherlands,2,3
+2010,knockout,Germany,Spain,0,1
+2010,knockout,Uruguay,Germany,2,3
+2010,knockout,Netherlands,Spain,0,1
+2010,group,South Africa,Mexico,1,1
+2010,group,Uruguay,France,0,0
+2010,group,South Africa,Uruguay,0,3
+2010,group,France,Mexico,0,2
+2010,group,Mexico,Uruguay,0,1
+2010,group,France,South Africa,1,2
+2010,group,South Korea,Greece,2,0
+2010,group,Argentina,Nigeria,1,0
+2010,group,Argentina,South Korea,4,1
+2010,group,Greece,Nigeria,2,1
+2010,group,Nigeria,South Korea,2,2
+2010,group,Greece,Argentina,0,2
+2010,group,England,United States,1,1
+2010,group,Algeria,Slovenia,0,1
+2010,group,Slovenia,United States,2,2
+2010,group,England,Algeria,0,0
+2010,group,Slovenia,England,0,1
+2010,group,United States,Algeria,1,0
+2010,group,Serbia,Ghana,0,1
+2010,group,Germany,Australia,4,0
+2010,group,Germany,Serbia,0,1
+2010,group,Ghana,Australia,1,1
+2010,group,Ghana,Germany,0,1
+2010,group,Australia,Serbia,2,1
+2010,group,Netherlands,Denmark,2,0
+2010,group,Japan,Cameroon,1,0
+2010,group,Netherlands,Japan,1,0
+2010,group,Cameroon,Denmark,1,2
+2010,group,Denmark,Japan,1,3
+2010,group,Cameroon,Netherlands,1,2
+2010,group,Italy,Paraguay,1,1
+2010,group,New Zealand,Slovakia,1,1
+2010,group,Slovakia,Paraguay,0,2
+2010,group,Italy,New Zealand,1,1
+2010,group,Slovakia,Italy,3,2
+2010,group,Paraguay,New Zealand,0,0
+2010,group,Ivory Coast,Portugal,0,0
+2010,group,Brazil,North Korea,2,1
+2010,group,Brazil,Ivory Coast,3,1
+2010,group,Portugal,North Korea,7,0
+2010,group,Portugal,Brazil,0,0
+2010,group,North Korea,Ivory Coast,0,3
+2010,group,Honduras,Chile,0,1
+2010,group,Spain,Switzerland,0,1
+2010,group,Chile,Switzerland,1,0
+2010,group,Spain,Honduras,2,0
+2010,group,Chile,Spain,1,2
+2010,group,Switzerland,Honduras,0,0
+2014,knockout,Brazil,Chile,1,1
+2014,knockout,Colombia,Uruguay,2,0
+2014,knockout,Netherlands,Mexico,2,1
+2014,knockout,Costa Rica,Greece,1,1
+2014,knockout,France,Nigeria,2,0
+2014,knockout,Germany,Algeria,2,1
+2014,knockout,Argentina,Switzerland,1,0
+2014,knockout,Belgium,United States,2,1
+2014,knockout,France,Germany,0,1
+2014,knockout,Brazil,Colombia,2,1
+2014,knockout,Argentina,Belgium,1,0
+2014,knockout,Netherlands,Costa Rica,0,0
+2014,knockout,Brazil,Germany,1,7
+2014,knockout,Netherlands,Argentina,0,0
+2014,knockout,Brazil,Netherlands,0,3
+2014,knockout,Germany,Argentina,1,0
+2014,group,Brazil,Croatia,3,1
+2014,group,Mexico,Cameroon,1,0
+2014,group,Brazil,Mexico,0,0
+2014,group,Cameroon,Croatia,0,4
+2014,group,Cameroon,Brazil,1,4
+2014,group,Croatia,Mexico,1,3
+2014,group,Spain,Netherlands,1,5
+2014,group,Chile,Australia,3,1
+2014,group,Australia,Netherlands,2,3
+2014,group,Spain,Chile,0,2
+2014,group,Australia,Spain,0,3
+2014,group,Netherlands,Chile,2,0
+2014,group,Colombia,Greece,3,0
+2014,group,Ivory Coast,Japan,2,1
+2014,group,Colombia,Ivory Coast,2,1
+2014,group,Japan,Greece,0,0
+2014,group,Japan,Colombia,1,4
+2014,group,Greece,Ivory Coast,2,1
+2014,group,Uruguay,Costa Rica,1,3
+2014,group,England,Italy,1,2
+2014,group,Uruguay,England,2,1
+2014,group,Italy,Costa Rica,0,1
+2014,group,Italy,Uruguay,0,1
+2014,group,Costa Rica,England,0,0
+2014,group,Switzerland,Ecuador,2,1
+2014,group,France,Honduras,3,0
+2014,group,Switzerland,France,2,5
+2014,group,Honduras,Ecuador,1,2
+2014,group,Honduras,Switzerland,0,3
+2014,group,Ecuador,France,0,0
+2014,group,Argentina,Bosnia and Herzegovina,2,1
+2014,group,Iran,Nigeria,0,0
+2014,group,Argentina,Iran,1,0
+2014,group,Nigeria,Bosnia and Herzegovina,1,0
+2014,group,Nigeria,Argentina,2,3
+2014,group,Bosnia and Herzegovina,Iran,3,1
+2014,group,Germany,Portugal,4,0
+2014,group,Ghana,United States,1,2
+2014,group,Germany,Ghana,2,2
+2014,group,United States,Portugal,2,2
+2014,group,United States,Germany,0,1
+2014,group,Portugal,Ghana,2,1
+2014,group,Belgium,Algeria,2,1
+2014,group,Russia,South Korea,1,1
+2014,group,Belgium,Russia,1,0
+2014,group,South Korea,Algeria,2,4
+2014,group,South Korea,Belgium,0,1
+2014,group,Algeria,Russia,1,1
+2018,knockout,France,Argentina,4,3
+2018,knockout,Uruguay,Portugal,2,1
+2018,knockout,Spain,Russia,1,1
+2018,knockout,Croatia,Denmark,1,1
+2018,knockout,Brazil,Mexico,2,0
+2018,knockout,Belgium,Japan,3,2
+2018,knockout,Sweden,Switzerland,1,0
+2018,knockout,Colombia,England,1,1
+2018,knockout,Uruguay,France,0,2
+2018,knockout,Brazil,Belgium,1,2
+2018,knockout,Sweden,England,0,2
+2018,knockout,Russia,Croatia,2,2
+2018,knockout,France,Belgium,1,0
+2018,knockout,Croatia,England,2,1
+2018,knockout,Belgium,England,2,0
+2018,knockout,France,Croatia,4,2
+2018,group,Russia,Saudi Arabia,5,0
+2018,group,Egypt,Uruguay,0,1
+2018,group,Russia,Egypt,3,1
+2018,group,Uruguay,Saudi Arabia,1,0
+2018,group,Uruguay,Russia,3,0
+2018,group,Saudi Arabia,Egypt,2,1
+2018,group,Morocco,Iran,0,1
+2018,group,Portugal,Spain,3,3
+2018,group,Portugal,Morocco,1,0
+2018,group,Iran,Spain,0,1
+2018,group,Iran,Portugal,1,1
+2018,group,Spain,Morocco,2,2
+2018,group,France,Australia,2,1
+2018,group,Peru,Denmark,0,1
+2018,group,Denmark,Australia,1,1
+2018,group,France,Peru,1,0
+2018,group,Denmark,France,0,0
+2018,group,Australia,Peru,0,2
+2018,group,Argentina,Iceland,1,1
+2018,group,Croatia,Nigeria,2,0
+2018,group,Argentina,Croatia,0,3
+2018,group,Nigeria,Iceland,2,0
+2018,group,Nigeria,Argentina,1,2
+2018,group,Iceland,Croatia,1,2
+2018,group,Costa Rica,Serbia,0,1
+2018,group,Brazil,Switzerland,1,1
+2018,group,Brazil,Costa Rica,2,0
+2018,group,Serbia,Switzerland,1,2
+2018,group,Serbia,Brazil,0,2
+2018,group,Switzerland,Costa Rica,2,2
+2018,group,Germany,Mexico,0,1
+2018,group,Sweden,South Korea,1,0
+2018,group,South Korea,Mexico,1,2
+2018,group,Germany,Sweden,2,1
+2018,group,South Korea,Germany,2,0
+2018,group,Mexico,Sweden,0,3
+2018,group,Belgium,Panama,3,0
+2018,group,Tunisia,England,1,2
+2018,group,Belgium,Tunisia,5,2
+2018,group,England,Panama,6,1
+2018,group,England,Belgium,0,1
+2018,group,Panama,Tunisia,1,2
+2018,group,Colombia,Japan,1,2
+2018,group,Poland,Senegal,1,2
+2018,group,Japan,Senegal,2,2
+2018,group,Poland,Colombia,0,3
+2018,group,Japan,Poland,0,1
+2018,group,Senegal,Colombia,0,1
+2022,knockout,Netherlands,United States,3,1
+2022,knockout,Argentina,Australia,2,1
+2022,knockout,France,Poland,3,1
+2022,knockout,England,Senegal,3,0
+2022,knockout,Japan,Croatia,1,1
+2022,knockout,Brazil,South Korea,4,1
+2022,knockout,Morocco,Spain,0,0
+2022,knockout,Portugal,Switzerland,6,1
+2022,knockout,Croatia,Brazil,1,1
+2022,knockout,Netherlands,Argentina,2,2
+2022,knockout,Morocco,Portugal,1,0
+2022,knockout,England,France,1,2
+2022,knockout,Argentina,Croatia,3,0
+2022,knockout,France,Morocco,2,0
+2022,knockout,Croatia,Morocco,2,1
+2022,knockout,Argentina,France,3,3
+2022,group,Qatar,Ecuador,0,2
+2022,group,Senegal,Netherlands,0,2
+2022,group,Qatar,Senegal,1,3
+2022,group,Netherlands,Ecuador,1,1
+2022,group,Ecuador,Senegal,1,2
+2022,group,Netherlands,Qatar,2,0
+2022,group,England,Iran,6,2
+2022,group,United States,Wales,1,1
+2022,group,Wales,Iran,0,2
+2022,group,England,United States,0,0
+2022,group,Wales,England,0,3
+2022,group,Iran,United States,0,1
+2022,group,Argentina,Saudi Arabia,1,2
+2022,group,Mexico,Poland,0,0
+2022,group,Poland,Saudi Arabia,2,0
+2022,group,Argentina,Mexico,2,0
+2022,group,Poland,Argentina,0,2
+2022,group,Saudi Arabia,Mexico,1,2
+2022,group,Denmark,Tunisia,0,0
+2022,group,France,Australia,4,1
+2022,group,Tunisia,Australia,0,1
+2022,group,France,Denmark,2,1
+2022,group,Australia,Denmark,1,0
+2022,group,Tunisia,France,1,0
+2022,group,Germany,Japan,1,2
+2022,group,Spain,Costa Rica,7,0
+2022,group,Japan,Costa Rica,0,1
+2022,group,Spain,Germany,1,1
+2022,group,Japan,Spain,2,1
+2022,group,Costa Rica,Germany,2,4
+2022,group,Morocco,Croatia,0,0
+2022,group,Belgium,Canada,1,0
+2022,group,Belgium,Morocco,0,2
+2022,group,Croatia,Canada,4,1
+2022,group,Croatia,Belgium,0,0
+2022,group,Canada,Morocco,1,2
+2022,group,Switzerland,Cameroon,1,0
+2022,group,Brazil,Serbia,2,0
+2022,group,Cameroon,Serbia,3,3
+2022,group,Brazil,Switzerland,1,0
+2022,group,Serbia,Switzerland,2,3
+2022,group,Cameroon,Brazil,1,0
+2022,group,Uruguay,South Korea,0,0
+2022,group,Portugal,Ghana,3,2
+2022,group,South Korea,Ghana,2,3
+2022,group,Portugal,Uruguay,2,0
+2022,group,Ghana,Uruguay,0,2
+2022,group,South Korea,Portugal,2,1

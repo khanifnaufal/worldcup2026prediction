@@ -188,10 +188,9 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
     <div className="space-y-10 fade-in">
       {/* Hero Section */}
       <div
-        className="relative rounded-2xl border border-gold-border p-4 md:p-6 overflow-hidden shadow-2xl text-center flex flex-col justify-center"
+        className="relative rounded-2xl border border-gold-border p-4 md:p-6 overflow-hidden shadow-2xl text-center flex flex-col justify-center min-h-[500px] lg:h-[calc(100vh-8rem)] py-8 lg:py-4"
         style={{
           backgroundColor: "#080808",
-          height: "calc(100vh - 8rem)",
           backgroundImage:
             "repeating-linear-gradient(-45deg, transparent 0px, transparent 40px, rgba(201,168,76,0.025) 40px, rgba(201,168,76,0.025) 41px)",
         }}
@@ -296,15 +295,15 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
           </div>
 
           <div className="space-y-0.5">
-            <h1 className="text-3xl md:text-[56px] font-bebas text-white-alt leading-[0.9] tracking-tight uppercase">
+            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bebas text-white-alt leading-[0.9] tracking-tight uppercase">
               FIFA WORLD CUP 2026
             </h1>
-            <h1 className="text-3xl md:text-[56px] font-bebas text-gold leading-[0.9] tracking-tight uppercase">
+            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bebas text-gold leading-[0.9] tracking-tight uppercase">
               PREDICTION
             </h1>
           </div>
 
-          <p className="text-text-muted-alt text-[12px] max-w-3xl mx-auto font-noto font-light leading-none truncate whitespace-nowrap overflow-hidden my-1">
+          <p className="text-text-muted-alt text-[11px] sm:text-xs max-w-3xl mx-auto font-noto font-light leading-normal my-2 px-2">
             Based on{" "}
             <span className="text-white-alt font-semibold">
               {metadata?.n_simulations?.toLocaleString()}
@@ -318,24 +317,24 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
 
           {/* Most Likely Final Badge */}
           {most_likely_finalist && (
-            <div className="inline-block mt-1.5 mb-1.5 border border-gold/30 bg-gold-muted rounded-xl px-4 py-1.5 shadow-lg self-center">
+            <div className="inline-block mt-1.5 mb-1.5 border border-gold/30 bg-gold-muted rounded-xl px-3 py-1.5 sm:px-4 shadow-lg self-center max-w-[90%]">
               <span className="text-[9px] text-gold uppercase tracking-[0.2em] block font-bold mb-0.5 font-noto leading-none">
                 Most Likely Final
               </span>
-              <span className="text-base md:text-lg font-bebas text-white-alt flex items-center justify-center gap-2 leading-none mt-1">
+              <span className="text-sm sm:text-base md:text-lg font-bebas text-white-alt flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 leading-none mt-1">
                 <TeamFlag
                   teamName={most_likely_finalist[0]}
-                  className="w-5 h-3.5 shadow"
+                  className="w-4 h-3 sm:w-5 sm:h-3.5 shadow"
                 />
-                <span>{most_likely_finalist[0]}</span>
-                <span className="text-gold font-noto text-xs lowercase font-normal px-1">
+                <span className="truncate max-w-[80px] sm:max-w-none">{most_likely_finalist[0]}</span>
+                <span className="text-gold font-noto text-[10px] sm:text-xs lowercase font-normal px-0.5">
                   vs
                 </span>
                 <TeamFlag
                   teamName={most_likely_finalist[1]}
-                  className="w-5 h-3.5 shadow"
+                  className="w-4 h-3 sm:w-5 sm:h-3.5 shadow"
                 />
-                <span>{most_likely_finalist[1]}</span>
+                <span className="truncate max-w-[80px] sm:max-w-none">{most_likely_finalist[1]}</span>
               </span>
             </div>
           )}
@@ -343,7 +342,7 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
 
         {/* Podium section */}
         {podium.length >= 3 && (
-          <div className="mt-2 flex justify-center items-end gap-3 md:gap-6 max-w-2xl mx-auto px-4 relative z-10 select-none">
+          <div className="mt-2 flex justify-center items-end gap-2 sm:gap-4 md:gap-6 max-w-2xl mx-auto px-1 sm:px-4 relative z-10 select-none">
             {/* 2nd Place (Left) */}
             <div
               onClick={() => onSelectTeam && onSelectTeam(podium[0].name)}
@@ -351,26 +350,26 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
             >
               <TeamFlag
                 teamName={podium[0].name}
-                className="w-12 h-8 md:w-16 md:h-11 rounded border border-white/10 shadow-lg mb-2"
+                className="w-10 h-7 sm:w-14 sm:h-9 md:w-16 md:h-11 rounded border border-white/10 shadow-lg mb-2"
               />
               <span
-                className="font-bebas text-xl md:text-2xl text-white-alt leading-tight truncate max-w-[120px] md:max-w-none"
+                className="font-bebas text-base sm:text-xl md:text-2xl text-white-alt leading-tight truncate w-full text-center max-w-[75px] sm:max-w-none px-0.5"
                 title={podium[0].name}
               >
                 {podium[0].name}
               </span>
-              <span className="font-bebas text-2xl md:text-3xl text-gold mt-0.5 leading-none">
+              <span className="font-bebas text-lg sm:text-2xl md:text-3xl text-gold mt-0.5 leading-none">
                 {champValue1.toFixed(1)}%
               </span>
-              <span className="font-noto text-[9px] uppercase tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
+              <span className="font-noto text-[8px] sm:text-[9px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
                 RUNNER UP
               </span>
               {/* Vertical platform line */}
-              <div className="w-0.5 bg-gold/30" style={{ height: "30px" }} />
+              <div className="w-0.5 bg-gold/30 h-6 sm:h-8" />
             </div>
 
             {/* Divider Line */}
-            <div className="w-px h-28 bg-gold-border self-center opacity-60" />
+            <div className="w-px h-20 sm:h-28 bg-gold-border self-center opacity-60" />
 
             {/* 1st Place (Center - Higher) */}
             <div
@@ -379,26 +378,26 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
             >
               <TeamFlag
                 teamName={podium[1].name}
-                className="w-14 h-10 md:w-20 md:h-14 rounded border border-white/10 shadow-lg mb-2"
+                className="w-12 h-8 sm:w-16 sm:h-11 md:w-20 md:h-14 rounded border border-white/10 shadow-lg mb-2"
               />
               <span
-                className="font-bebas text-xl md:text-2xl text-white-alt leading-tight truncate max-w-[140px] md:max-w-none"
+                className="font-bebas text-lg sm:text-xl md:text-2xl text-white-alt leading-tight truncate w-full text-center max-w-[85px] sm:max-w-none px-0.5"
                 title={podium[1].name}
               >
                 {podium[1].name}
               </span>
-              <span className="font-bebas text-3xl md:text-[40px] text-gold mt-0.5 leading-none">
+              <span className="font-bebas text-xl sm:text-3xl md:text-[40px] text-gold mt-0.5 leading-none">
                 {champValue0.toFixed(1)}%
               </span>
-              <span className="font-noto text-[9px] uppercase tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
+              <span className="font-noto text-[8px] sm:text-[9px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
                 CHAMPION
               </span>
               {/* Vertical platform line */}
-              <div className="w-0.5 bg-gold" style={{ height: "50px" }} />
+              <div className="w-0.5 bg-gold h-10 sm:h-12" />
             </div>
 
             {/* Divider Line */}
-            <div className="w-px h-28 bg-gold-border self-center opacity-60" />
+            <div className="w-px h-20 sm:h-28 bg-gold-border self-center opacity-60" />
 
             {/* 3rd Place (Right) */}
             <div
@@ -407,22 +406,22 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
             >
               <TeamFlag
                 teamName={podium[2].name}
-                className="w-12 h-8 md:w-16 md:h-11 rounded border border-white/10 shadow-lg mb-2"
+                className="w-10 h-7 sm:w-14 sm:h-9 md:w-16 md:h-11 rounded border border-white/10 shadow-lg mb-2"
               />
               <span
-                className="font-bebas text-xl md:text-2xl text-white-alt leading-tight truncate max-w-[120px] md:max-w-none"
+                className="font-bebas text-base sm:text-xl md:text-2xl text-white-alt leading-tight truncate w-full text-center max-w-[75px] sm:max-w-none px-0.5"
                 title={podium[2].name}
               >
                 {podium[2].name}
               </span>
-              <span className="font-bebas text-2xl md:text-3xl text-gold mt-0.5 leading-none">
+              <span className="font-bebas text-lg sm:text-2xl md:text-3xl text-gold mt-0.5 leading-none">
                 {champValue2.toFixed(1)}%
               </span>
-              <span className="font-noto text-[9px] uppercase tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
+              <span className="font-noto text-[8px] sm:text-[9px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
                 SEMI FINAL
               </span>
               {/* Vertical platform line */}
-              <div className="w-0.5 bg-gold/15" style={{ height: "20px" }} />
+              <div className="w-0.5 bg-gold/15 h-4 sm:h-6" />
             </div>
           </div>
         )}
@@ -453,7 +452,7 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
                   <button
                     key={filter}
                     onClick={() => setActiveFilter(filter)}
-                    className={`px-3 py-1 text-xs font-semibold rounded-md transition-all duration-200 ${
+                    className={`px-2 py-1 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-semibold rounded-md transition-all duration-200 ${
                       activeFilter === filter
                         ? "border border-gold bg-gold-muted text-gold"
                         : "border border-transparent text-text-muted-alt hover:text-white-alt"
@@ -491,7 +490,7 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
                   <BarChart
                     data={filteredTeams}
                     layout="vertical"
-                    margin={{ top: 0, right: 55, left: 10, bottom: 0 }}
+                    margin={{ top: 0, right: 45, left: 5, bottom: 0 }}
                     height={filteredTeams.length * (barSize + 16)}
                   >
                     <defs>
@@ -566,7 +565,7 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
                         />
                       </linearGradient>
                     </defs>
-
+ 
                     <XAxis
                       type="number"
                       hide
@@ -579,11 +578,11 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
                       tickLine={false}
                       tick={{
                         fill: "#F0EDE8",
-                        fontSize: 13,
+                        fontSize: 12,
                         fontFamily: "Noto Sans",
                         fontWeight: 400,
                       }}
-                      width={100}
+                      width={85}
                     />
                     <Tooltip
                       content={<CustomTooltip />}
@@ -628,13 +627,13 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
                         formatter={(val) => formatPercent(val)}
                         style={{
                           fill: "#C9A84C",
-                          fontSize: 15,
+                          fontSize: 13,
                           fontFamily: "Bebas Neue",
                           fontWeight: 600,
                           opacity: animated ? 1 : 0,
                           transition: "opacity 0.5s ease-out 0.8s",
                         }}
-                        offset={10}
+                        offset={6}
                       />
                     </Bar>
                   </BarChart>

@@ -214,10 +214,10 @@ export default function MatchDetailModal({ match, teamStats, onClose }) {
 
           <button
             onClick={onClose}
-            className="text-gold hover:text-white-alt transition-colors text-3xl font-light leading-none p-1 -mt-2 -mr-1 cursor-pointer"
+            className="text-gold hover:text-white-alt transition-colors p-1.5 rounded-lg hover:bg-white/5 cursor-pointer flex items-center justify-center"
             title="Close"
           >
-            &times;
+            <X className="w-5 h-5" />
           </button>
         </div>
 
@@ -231,9 +231,9 @@ export default function MatchDetailModal({ match, teamStats, onClose }) {
               <div className="flex-1 flex flex-col items-center gap-1.5 min-w-0">
                 <TeamFlag
                   teamName={home}
-                  className="w-12 h-8 rounded border border-white/10 shadow-md"
+                  className="w-10 h-7 sm:w-12 sm:h-8 rounded border border-white/10 shadow-md"
                 />
-                <span className="text-sm font-bold text-white-alt truncate w-full font-noto">
+                <span className="text-xs sm:text-sm font-bold text-white-alt font-noto line-clamp-2 leading-tight px-1 text-center break-words max-w-full">
                   {home}
                 </span>
                 <span
@@ -246,7 +246,7 @@ export default function MatchDetailModal({ match, teamStats, onClose }) {
 
               {/* VS separator */}
               <div className="flex-shrink-0 flex flex-col items-center">
-                <span className="font-bebas text-gold text-2xl tracking-widest select-none bg-[#141414] px-3 py-1 rounded-lg border border-gold-border/20">
+                <span className="font-bebas text-gold text-xl sm:text-2xl tracking-widest select-none bg-[#141414] px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg border border-gold-border/20">
                   VS
                 </span>
               </div>
@@ -255,9 +255,9 @@ export default function MatchDetailModal({ match, teamStats, onClose }) {
               <div className="flex-1 flex flex-col items-center gap-1.5 min-w-0">
                 <TeamFlag
                   teamName={away}
-                  className="w-12 h-8 rounded border border-white/10 shadow-md"
+                  className="w-10 h-7 sm:w-12 sm:h-8 rounded border border-white/10 shadow-md"
                 />
-                <span className="text-sm font-bold text-white-alt truncate w-full font-noto">
+                <span className="text-xs sm:text-sm font-bold text-white-alt font-noto line-clamp-2 leading-tight px-1 text-center break-words max-w-full">
                   {away}
                 </span>
                 <span
@@ -437,15 +437,15 @@ export default function MatchDetailModal({ match, teamStats, onClose }) {
                   {/* Values Row */}
                   <div className="flex justify-between items-baseline text-xs font-semibold">
                     <span
-                      className={`w-14 truncate ${metric.homeBetter ? "text-gold font-extrabold" : "text-text-muted-alt font-normal"}`}
+                      className={`min-w-[3.5rem] truncate ${metric.homeBetter ? "text-gold font-extrabold" : "text-text-muted-alt font-normal"}`}
                     >
                       {metric.homeDisplay}
                     </span>
-                    <span className="text-[9px] uppercase tracking-wider text-text-muted-alt/80 font-bold select-none text-center flex-1">
+                    <span className="text-[9px] uppercase tracking-wider text-text-muted-alt/80 font-bold select-none text-center flex-1 px-1">
                       {metric.label}
                     </span>
                     <span
-                      className={`w-14 truncate text-right ${metric.awayBetter ? "text-gold font-extrabold" : "text-text-muted-alt font-normal"}`}
+                      className={`min-w-[3.5rem] truncate text-right ${metric.awayBetter ? "text-gold font-extrabold" : "text-text-muted-alt font-normal"}`}
                     >
                       {metric.awayDisplay}
                     </span>

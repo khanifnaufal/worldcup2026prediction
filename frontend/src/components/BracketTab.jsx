@@ -239,8 +239,8 @@ export default function BracketTab({ simulationData }) {
         </div>
 
         {/* Horizontal Scrollable Bracket Workspace */}
-        <div className="md:overflow-x-visible pt-2">
-          <div className="w-full px-2">
+        <div className="overflow-x-auto custom-scrollbar pt-2 -mx-4 px-4 sm:-mx-6 sm:px-6">
+          <div className="min-w-[950px] lg:min-w-full pb-4">
             
             {/* Column Headers */}
             <div className="flex items-center gap-0 pb-3 mb-4 border-b border-white/5 text-center font-bebas text-gold text-xs tracking-[0.2em]">

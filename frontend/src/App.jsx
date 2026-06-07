@@ -5,6 +5,7 @@ import GroupsTab from './components/GroupsTab';
 import BracketTab from './components/BracketTab';
 import TeamsTab from './components/TeamsTab';
 import TeamDetailModal from './components/TeamDetailModal';
+import { LayoutDashboard, Grid, Trophy, Shield } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -42,7 +43,7 @@ export default function App() {
           </div>
 
           {/* Navigation Tabs */}
-          <nav className="flex items-stretch h-16">
+          <nav className="hidden md:flex items-stretch h-16">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -67,7 +68,7 @@ export default function App() {
       </header>
 
       {/* Main Content Viewport */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
         
         {/* Render Tab Content */}
         <div key={activeTab} className="fade-slide-up">
@@ -94,7 +95,7 @@ export default function App() {
       </main>
 
       {/* Premium Footer */}
-      <footer className="bg-dark-card border-t border-gold/10 py-6 text-center text-xs text-text-muted-alt mt-12">
+      <footer className="bg-dark-card border-t border-gold/10 py-6 text-center text-xs text-text-muted-alt mt-12 mb-16 md:mb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
           <p>© 2026 FIFA World Cup Prediction Dashboard. All simulation weights are computational estimates.</p>
           <div className="flex justify-center flex-wrap gap-x-4 gap-y-1 text-[10px] text-gold/60 font-semibold pt-1">
@@ -106,6 +107,39 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Premium Mobile Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-dark-bg/95 backdrop-blur-md border-t border-gold/15 shadow-[0_-4px_12px_rgba(0,0,0,0.5)] flex justify-around items-center h-16 px-4">
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab.id;
+          let Icon;
+          if (tab.id === 'overview') Icon = LayoutDashboard;
+          else if (tab.id === 'groups') Icon = Grid;
+          else if (tab.id === 'bracket') Icon = Trophy;
+          else if (tab.id === 'teams') Icon = Shield;
+
+          return (
+            <button
+              key={tab.id}
+              onClick={() => {
+                setActiveTab(tab.id);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex flex-col items-center justify-center flex-1 h-full py-1 transition-all duration-200 relative ${
+                isActive ? 'text-gold' : 'text-text-muted-alt hover:text-white-alt'
+              }`}
+            >
+              {Icon && <Icon className={`w-5 h-5 transition-transform duration-200 ${isActive ? 'scale-110' : ''}`} />}
+              <span className="text-[10px] font-semibold tracking-wider uppercase mt-1 font-noto">
+                {tab.label}
+              </span>
+              {isActive && (
+                <span className="absolute bottom-0 w-8 h-0.5 bg-gold rounded-full" />
+              )}
+            </button>
+          );
+        })}
+      </nav>
 
       {/* Shared Detail Modal */}
       {selectedTeam && (

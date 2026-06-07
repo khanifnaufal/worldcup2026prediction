@@ -38,13 +38,13 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
       />
 
       {/* Modal Card Box */}
-      <div className="relative bg-[#101010] border border-gold-border rounded-2xl w-full max-w-[560px] md:max-w-[1000px] max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col z-10 scale-up scrollbar-thin">
+      <div className="relative bg-[#101010] border border-gold-border rounded-2xl w-full max-w-[560px] md:max-w-[1000px] max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col z-10 scale-up custom-scrollbar">
         {/* Header banner */}
         <div className="relative p-6 border-b border-white/5 flex justify-between items-start bg-[#080808]/40">
           <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-3">
-              <TeamFlag teamName={teamName} className="w-10 h-7 rounded border border-white/10 shadow-sm" />
-              <h2 className="text-4xl font-bebas text-white-alt leading-none mt-1">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <TeamFlag teamName={teamName} className="w-8 h-5.5 sm:w-10 sm:h-7 rounded border border-white/10 shadow-sm" />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bebas text-white-alt leading-none mt-1">
                 {teamName}
               </h2>
               <span 
@@ -62,15 +62,15 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
 
           <button 
             onClick={onClose}
-            className="text-gold hover:text-white-alt transition-colors text-3xl font-light leading-none p-1 -mt-2 -mr-1 cursor-pointer"
+            className="text-gold hover:text-white-alt transition-colors p-1.5 rounded-lg hover:bg-white/5 cursor-pointer flex items-center justify-center"
             title="Close"
           >
-            &times;
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Content Grid (Stacked vertically on mobile, side-by-side on desktop) */}
-        <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 overflow-hidden">
+        <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           
           {/* Section 1: Probability Stepper */}
           <div className="space-y-3">
@@ -148,7 +148,7 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
                       </span>
 
                       {isGroupStage ? (
-                        <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold text-white-alt truncate">
+                        <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold text-white-alt">
                           <span className="text-text-muted-alt font-normal mr-0.5">vs</span>
                           {pathStep.opponents ? pathStep.opponents.map((opp) => (
                             <span key={opp} className="inline-flex items-center gap-1 bg-[#101010] px-2 py-0.5 rounded border border-white/5 font-semibold text-white-alt">

@@ -1,8 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { getConfedColor, getTeamConfed, formatPercent } from '../utils/helpers';
 import TeamFlag from './TeamFlag';
 
 export default function GroupsTab({ simulationData }) {
+  const [animated, setAnimated] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimated(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
   const { teams } = simulationData;
 
   // Group teams by their designated letters A to L
@@ -83,7 +88,7 @@ export default function GroupsTab({ simulationData }) {
         {Object.entries(groups).map(([letter, groupTeams]) => (
           <div
             key={letter}
-            className="bg-dark-card border border-white/5 rounded-xl overflow-hidden shadow-lg hover:border-gold-border/50 hover:shadow-2xl transition-all duration-150 flex flex-col"
+            className="bg-dark-card border border-white/5 rounded-xl overflow-hidden shadow-lg flex flex-col card-hover"
           >
             {/* Header */}
             <div className="bg-[#080808]/60 px-4 py-3.5 border-b border-white/5 flex justify-between items-center">
@@ -130,10 +135,12 @@ export default function GroupsTab({ simulationData }) {
                         <div className="flex items-center gap-2.5">
                           <div className="flex-1 bg-[#080808] rounded-full h-1 overflow-hidden border border-white/5">
                             <div
-                              className="h-full rounded-full transition-all duration-500 animate-grow-width"
+                              className="h-full rounded-full"
                               style={{
-                                width: `${team.group_qualify_rate * 100}%`,
-                                backgroundColor: team.color
+                                width: animated ? `${team.group_qualify_rate * 100}%` : '0%',
+                                backgroundColor: team.color,
+                                transition: `width 0.8s ease-out ${idx * 0.05}s`,
+                                willChange: 'width'
                               }}
                             ></div>
                           </div>

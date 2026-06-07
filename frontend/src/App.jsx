@@ -70,21 +70,26 @@ export default function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Render Tab Content */}
-        {activeTab === 'overview' && (
-          <OverviewTab simulationData={simulationData} />
-        )}
-        {activeTab === 'groups' && (
-          <GroupsTab simulationData={simulationData} />
-        )}
-        {activeTab === 'bracket' && (
-          <BracketTab simulationData={simulationData} />
-        )}
-        {activeTab === 'teams' && (
-          <TeamsTab 
-            simulationData={simulationData} 
-            onSelectTeam={setSelectedTeam} 
-          />
-        )}
+        <div key={activeTab} className="fade-slide-up">
+          {activeTab === 'overview' && (
+            <OverviewTab 
+              simulationData={simulationData} 
+              onSelectTeam={setSelectedTeam} 
+            />
+          )}
+          {activeTab === 'groups' && (
+            <GroupsTab simulationData={simulationData} />
+          )}
+          {activeTab === 'bracket' && (
+            <BracketTab simulationData={simulationData} />
+          )}
+          {activeTab === 'teams' && (
+            <TeamsTab 
+              simulationData={simulationData} 
+              onSelectTeam={setSelectedTeam} 
+            />
+          )}
+        </div>
 
       </main>
 

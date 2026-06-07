@@ -1,0 +1,434 @@
+{
+  "Qatar": {
+    "fifa_rank": 72,
+    "fifa_points": 1350.0,
+    "avg_gf": 1.6083333333333334,
+    "avg_ga": 1.2583333333333333,
+    "avg_gd": 0.35,
+    "wc_appearances": 1,
+    "win_rate": 0.48333333333333334
+  },
+  "Sweden": {
+    "fifa_rank": 38,
+    "fifa_points": 1509.79,
+    "avg_gf": 1.5408163265306123,
+    "avg_ga": 1.1734693877551021,
+    "avg_gd": 0.3673469387755102,
+    "wc_appearances": 12,
+    "win_rate": 0.4897959183673469
+  },
+  "Bosnia and Herzegovina": {
+    "fifa_rank": 58,
+    "fifa_points": 1420.0,
+    "avg_gf": 1.1,
+    "avg_ga": 1.4,
+    "avg_gd": -0.3,
+    "wc_appearances": 1,
+    "win_rate": 0.3
+  },
+  "Colombia": {
+    "fifa_rank": 13,
+    "fifa_points": 1695.99,
+    "avg_gf": 1.5483870967741935,
+    "avg_ga": 0.8172043010752689,
+    "avg_gd": 0.7311827956989247,
+    "wc_appearances": 6,
+    "win_rate": 0.5161290322580645
+  },
+  "Portugal": {
+    "fifa_rank": 5,
+    "fifa_points": 1763.83,
+    "avg_gf": 2.313131313131313,
+    "avg_ga": 0.8383838383838383,
+    "avg_gd": 1.4747474747474747,
+    "wc_appearances": 8,
+    "win_rate": 0.6161616161616161
+  },
+  "Cape Verde": {
+    "fifa_rank": 75,
+    "fifa_points": 1330.0,
+    "avg_gf": 1.2142857142857142,
+    "avg_ga": 0.9,
+    "avg_gd": 0.3142857142857143,
+    "wc_appearances": 0,
+    "win_rate": 0.44285714285714284
+  },
+  "Switzerland": {
+    "fifa_rank": 19,
+    "fifa_points": 1650.75,
+    "avg_gf": 1.8350515463917525,
+    "avg_ga": 1.1134020618556701,
+    "avg_gd": 0.7216494845360825,
+    "wc_appearances": 12,
+    "win_rate": 0.44329896907216493
+  },
+  "Austria": {
+    "fifa_rank": 23,
+    "fifa_points": 1597.41,
+    "avg_gf": 1.7865168539325842,
+    "avg_ga": 1.0112359550561798,
+    "avg_gd": 0.7752808988764045,
+    "wc_appearances": 7,
+    "win_rate": 0.5617977528089888
+  },
+  "Croatia": {
+    "fifa_rank": 11,
+    "fifa_points": 1712.24,
+    "avg_gf": 1.72,
+    "avg_ga": 1.14,
+    "avg_gd": 0.58,
+    "wc_appearances": 6,
+    "win_rate": 0.51
+  },
+  "Belgium": {
+    "fifa_rank": 9,
+    "fifa_points": 1739.54,
+    "avg_gf": 2.357142857142857,
+    "avg_ga": 0.8469387755102041,
+    "avg_gd": 1.510204081632653,
+    "wc_appearances": 14,
+    "win_rate": 0.6428571428571429
+  },
+  "Mexico": {
+    "fifa_rank": 14,
+    "fifa_points": 1687.48,
+    "avg_gf": 1.523076923076923,
+    "avg_ga": 0.9769230769230769,
+    "avg_gd": 0.5461538461538461,
+    "wc_appearances": 17,
+    "win_rate": 0.5307692307692308
+  },
+  "Saudi Arabia": {
+    "fifa_rank": 56,
+    "fifa_points": 1425.0,
+    "avg_gf": 1.1951219512195121,
+    "avg_ga": 1.016260162601626,
+    "avg_gd": 0.17886178861788618,
+    "wc_appearances": 6,
+    "win_rate": 0.4146341463414634
+  },
+  "Spain": {
+    "fifa_rank": 2,
+    "fifa_points": 1873.02,
+    "avg_gf": 2.41,
+    "avg_ga": 0.82,
+    "avg_gd": 1.59,
+    "wc_appearances": 16,
+    "win_rate": 0.63
+  },
+  "New Zealand": {
+    "fifa_rank": 95,
+    "fifa_points": 1220.0,
+    "avg_gf": 1.7959183673469388,
+    "avg_ga": 0.9591836734693877,
+    "avg_gd": 0.8367346938775511,
+    "wc_appearances": 2,
+    "win_rate": 0.4489795918367347
+  },
+  "DR Congo": {
+    "fifa_rank": 45,
+    "fifa_points": 1479.68,
+    "avg_gf": 1.1139240506329113,
+    "avg_ga": 0.8734177215189873,
+    "avg_gd": 0.24050632911392406,
+    "wc_appearances": 1,
+    "win_rate": 0.3670886075949367
+  },
+  "Panama": {
+    "fifa_rank": 34,
+    "fifa_points": 1540.59,
+    "avg_gf": 1.424778761061947,
+    "avg_ga": 1.3982300884955752,
+    "avg_gd": 0.02654867256637168,
+    "wc_appearances": 1,
+    "win_rate": 0.415929203539823
+  },
+  "Uruguay": {
+    "fifa_rank": 17,
+    "fifa_points": 1673.07,
+    "avg_gf": 1.423913043478261,
+    "avg_ga": 0.8260869565217391,
+    "avg_gd": 0.5978260869565217,
+    "wc_appearances": 14,
+    "win_rate": 0.4782608695652174
+  },
+  "Paraguay": {
+    "fifa_rank": 40,
+    "fifa_points": 1503.5,
+    "avg_gf": 0.8961038961038961,
+    "avg_ga": 1.2207792207792207,
+    "avg_gd": -0.3246753246753247,
+    "wc_appearances": 8,
+    "win_rate": 0.2597402597402597
+  },
+  "Netherlands": {
+    "fifa_rank": 8,
+    "fifa_points": 1751.09,
+    "avg_gf": 2.3118279569892475,
+    "avg_ga": 0.967741935483871,
+    "avg_gd": 1.3440860215053763,
+    "wc_appearances": 11,
+    "win_rate": 0.5806451612903226
+  },
+  "Scotland": {
+    "fifa_rank": 43,
+    "fifa_points": 1499.92,
+    "avg_gf": 1.4186046511627908,
+    "avg_ga": 1.3488372093023255,
+    "avg_gd": 0.06976744186046512,
+    "wc_appearances": 8,
+    "win_rate": 0.4418604651162791
+  },
+  "Haiti": {
+    "fifa_rank": 105,
+    "fifa_points": 1180.0,
+    "avg_gf": 2.276923076923077,
+    "avg_ga": 1.2461538461538462,
+    "avg_gd": 1.0307692307692307,
+    "wc_appearances": 1,
+    "win_rate": 0.5230769230769231
+  },
+  "England": {
+    "fifa_rank": 4,
+    "fifa_points": 1825.97,
+    "avg_gf": 2.25,
+    "avg_ga": 0.6634615384615384,
+    "avg_gd": 1.5865384615384615,
+    "wc_appearances": 16,
+    "win_rate": 0.6538461538461539
+  },
+  "Japan": {
+    "fifa_rank": 18,
+    "fifa_points": 1661.58,
+    "avg_gf": 2.3773584905660377,
+    "avg_ga": 0.8113207547169812,
+    "avg_gd": 1.5660377358490567,
+    "wc_appearances": 7,
+    "win_rate": 0.6415094339622641
+  },
+  "Ecuador": {
+    "fifa_rank": 24,
+    "fifa_points": 1596.48,
+    "avg_gf": 1.1931818181818181,
+    "avg_ga": 0.9090909090909091,
+    "avg_gd": 0.2840909090909091,
+    "wc_appearances": 4,
+    "win_rate": 0.3977272727272727
+  },
+  "Ivory Coast": {
+    "fifa_rank": 33,
+    "fifa_points": 1540.87,
+    "avg_gf": 1.7209302325581395,
+    "avg_ga": 0.7558139534883721,
+    "avg_gd": 0.9651162790697675,
+    "wc_appearances": 3,
+    "win_rate": 0.5930232558139535
+  },
+  "Uzbekistan": {
+    "fifa_rank": 50,
+    "fifa_points": 1461.21,
+    "avg_gf": 1.6071428571428572,
+    "avg_ga": 0.8690476190476191,
+    "avg_gd": 0.7380952380952381,
+    "wc_appearances": 0,
+    "win_rate": 0.5238095238095238
+  },
+  "Curacao": {
+    "fifa_rank": 88,
+    "fifa_points": 1250.0,
+    "avg_gf": 1.8421052631578947,
+    "avg_ga": 1.0701754385964912,
+    "avg_gd": 0.7719298245614035,
+    "wc_appearances": 0,
+    "win_rate": 0.38596491228070173
+  },
+  "Iraq": {
+    "fifa_rank": 62,
+    "fifa_points": 1400.0,
+    "avg_gf": 1.2924528301886793,
+    "avg_ga": 0.8962264150943396,
+    "avg_gd": 0.39622641509433965,
+    "wc_appearances": 1,
+    "win_rate": 0.46226415094339623
+  },
+  "Morocco": {
+    "fifa_rank": 7,
+    "fifa_points": 1757.29,
+    "avg_gf": 1.841121495327103,
+    "avg_ga": 0.5420560747663551,
+    "avg_gd": 1.2990654205607477,
+    "wc_appearances": 6,
+    "win_rate": 0.6728971962616822
+  },
+  "Argentina": {
+    "fifa_rank": 1,
+    "fifa_points": 1874.81,
+    "avg_gf": 2.01010101010101,
+    "avg_ga": 0.6363636363636364,
+    "avg_gd": 1.3737373737373737,
+    "wc_appearances": 18,
+    "win_rate": 0.6868686868686869
+  },
+  "Czechia": {
+    "fifa_rank": 39,
+    "fifa_points": 1505.74,
+    "avg_gf": 1.625,
+    "avg_ga": 1.25,
+    "avg_gd": 0.375,
+    "wc_appearances": 1,
+    "win_rate": 0.48863636363636365
+  },
+  "Canada": {
+    "fifa_rank": 30,
+    "fifa_points": 1560.61,
+    "avg_gf": 2.0898876404494384,
+    "avg_ga": 0.8876404494382022,
+    "avg_gd": 1.202247191011236,
+    "wc_appearances": 2,
+    "win_rate": 0.5617977528089888
+  },
+  "France": {
+    "fifa_rank": 3,
+    "fifa_points": 1869.43,
+    "avg_gf": 2.1346153846153846,
+    "avg_ga": 0.8653846153846154,
+    "avg_gd": 1.2692307692307692,
+    "wc_appearances": 16,
+    "win_rate": 0.6538461538461539
+  },
+  "Brazil": {
+    "fifa_rank": 6,
+    "fifa_points": 1762.66,
+    "avg_gf": 1.958762886597938,
+    "avg_ga": 0.6288659793814433,
+    "avg_gd": 1.3298969072164948,
+    "wc_appearances": 22,
+    "win_rate": 0.6288659793814433
+  },
+  "Turkey": {
+    "fifa_rank": 22,
+    "fifa_points": 1601.99,
+    "avg_gf": 1.8043478260869565,
+    "avg_ga": 1.3043478260869565,
+    "avg_gd": 0.5,
+    "wc_appearances": 2,
+    "win_rate": 0.5
+  },
+  "Egypt": {
+    "fifa_rank": 29,
+    "fifa_points": 1565.56,
+    "avg_gf": 1.5052631578947369,
+    "avg_ga": 0.7263157894736842,
+    "avg_gd": 0.7789473684210526,
+    "wc_appearances": 3,
+    "win_rate": 0.5473684210526316
+  },
+  "Australia": {
+    "fifa_rank": 27,
+    "fifa_points": 1578.65,
+    "avg_gf": 1.858974358974359,
+    "avg_ga": 0.7692307692307693,
+    "avg_gd": 1.0897435897435896,
+    "wc_appearances": 6,
+    "win_rate": 0.5769230769230769
+  },
+  "Jordan": {
+    "fifa_rank": 68,
+    "fifa_points": 1370.0,
+    "avg_gf": 1.4954128440366972,
+    "avg_ga": 1.055045871559633,
+    "avg_gd": 0.44036697247706424,
+    "wc_appearances": 0,
+    "win_rate": 0.46788990825688076
+  },
+  "South Korea": {
+    "fifa_rank": 25,
+    "fifa_points": 1591.63,
+    "avg_gf": 1.7830188679245282,
+    "avg_ga": 0.8679245283018868,
+    "avg_gd": 0.9150943396226415,
+    "wc_appearances": 11,
+    "win_rate": 0.5660377358490566
+  },
+  "United States": {
+    "fifa_rank": 16,
+    "fifa_points": 1675.71,
+    "avg_gf": 1.8760330578512396,
+    "avg_ga": 0.8842975206611571,
+    "avg_gd": 0.9917355371900827,
+    "wc_appearances": 11,
+    "win_rate": 0.5454545454545454
+  },
+  "Germany": {
+    "fifa_rank": 10,
+    "fifa_points": 1731.3,
+    "avg_gf": 2.168421052631579,
+    "avg_ga": 1.2,
+    "avg_gd": 0.968421052631579,
+    "wc_appearances": 20,
+    "win_rate": 0.5052631578947369
+  },
+  "Norway": {
+    "fifa_rank": 31,
+    "fifa_points": 1555.59,
+    "avg_gf": 2.1265822784810124,
+    "avg_ga": 0.9493670886075949,
+    "avg_gd": 1.1772151898734178,
+    "wc_appearances": 3,
+    "win_rate": 0.5822784810126582
+  },
+  "Tunisia": {
+    "fifa_rank": 46,
+    "fifa_points": 1479.09,
+    "avg_gf": 1.4403669724770642,
+    "avg_ga": 0.7522935779816514,
+    "avg_gd": 0.6880733944954128,
+    "wc_appearances": 6,
+    "win_rate": 0.5321100917431193
+  },
+  "South Africa": {
+    "fifa_rank": 60,
+    "fifa_points": 1410.0,
+    "avg_gf": 1.40625,
+    "avg_ga": 0.7708333333333334,
+    "avg_gd": 0.6354166666666666,
+    "wc_appearances": 3,
+    "win_rate": 0.46875
+  },
+  "Iran": {
+    "fifa_rank": 20,
+    "fifa_points": 1619.58,
+    "avg_gf": 2.045977011494253,
+    "avg_ga": 0.7011494252873564,
+    "avg_gd": 1.3448275862068966,
+    "wc_appearances": 6,
+    "win_rate": 0.6666666666666666
+  },
+  "Algeria": {
+    "fifa_rank": 28,
+    "fifa_points": 1571.04,
+    "avg_gf": 2.1333333333333333,
+    "avg_ga": 0.780952380952381,
+    "avg_gd": 1.3523809523809525,
+    "wc_appearances": 4,
+    "win_rate": 0.6571428571428571
+  },
+  "Ghana": {
+    "fifa_rank": 55,
+    "fifa_points": 1430.0,
+    "avg_gf": 1.2933333333333332,
+    "avg_ga": 1.0266666666666666,
+    "avg_gd": 0.26666666666666666,
+    "wc_appearances": 4,
+    "win_rate": 0.4
+  },
+  "Senegal": {
+    "fifa_rank": 15,
+    "fifa_points": 1686.41,
+    "avg_gf": 1.7128712871287128,
+    "avg_ga": 0.6336633663366337,
+    "avg_gd": 1.0792079207920793,
+    "wc_appearances": 3,
+    "win_rate": 0.6237623762376238
+  }
+}

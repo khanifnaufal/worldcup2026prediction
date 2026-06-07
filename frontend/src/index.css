@@ -106,3 +106,102 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(201, 168, 76, 0.4);
 }
+
+/* Animations */
+.fade-slide-up {
+  animation: fadeSlideUp 0.25s ease forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.podium-entrance {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: transform, opacity;
+}
+
+.podium-entrance-active {
+  animation: podiumEntrance 0.6s ease-out forwards;
+}
+
+@keyframes podiumEntrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-hover {
+  transition: all 0.15s ease;
+  will-change: transform, box-shadow, border-color;
+}
+
+.card-hover:hover {
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.12);
+  border-color: rgba(201, 168, 76, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* Prefers Reduced Motion Settings */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Gold Glow Animation for Bracket SVG Connectors */
+@keyframes connectorGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 1px rgba(201, 168, 76, 0.3)) drop-shadow(0 0 2px rgba(201, 168, 76, 0.15));
+    stroke: rgba(201, 168, 76, 0.5);
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgba(201, 168, 76, 0.8)) drop-shadow(0 0 8px rgba(232, 201, 106, 0.4));
+    stroke: rgba(232, 201, 106, 0.95);
+  }
+}
+
+.animate-connector-glow {
+  animation: connectorGlow 3s infinite ease-in-out;
+}
+
+/* Custom scrollbar for container classes */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 168, 76, 0.25) #101010;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #101010;
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.25);
+  border-radius: 8px;
+  border: 1px solid #101010;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 168, 76, 0.5);
+}
+
+

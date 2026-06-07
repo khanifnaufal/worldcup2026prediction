@@ -150,7 +150,7 @@ export default function TeamsTab({ simulationData, onSelectTeam }) {
               <div
                 key={team.name}
                 onClick={() => onSelectTeam(team.name)}
-                className="relative group bg-dark-card border border-white/5 hover:border-gold-border hover:bg-[#141414] p-4 pt-5 rounded-xl shadow cursor-pointer transition-all duration-150 hover:-translate-y-[2px] flex flex-col justify-between h-32 overflow-hidden select-none"
+                className="relative group bg-dark-card border border-white/5 hover:bg-[#141414] p-4 pt-5 rounded-xl shadow cursor-pointer flex flex-col justify-between h-32 overflow-hidden select-none card-hover"
               >
                 {/* Confederation Color Top Accent strip */}
                 <div 

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { getConfedColor, getTeamConfed, formatPercent } from '../utils/helpers';
 import TeamFlag from './TeamFlag';
 
 export default function TeamDetailModal({ teamName, simulationData, onClose }) {
+  const [animated, setAnimated] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimated(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   if (!teamName) return null;
 
   const team = simulationData.teams[teamName];
@@ -101,8 +107,12 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
                     {/* Progress Bar */}
                     <div className="w-full bg-[#080808] rounded-full h-1 overflow-hidden border border-white/5">
                       <div 
-                        className="h-full rounded-full bg-gold transition-all duration-500 animate-grow-width"
-                        style={{ width: `${step.rate * 100}%` }}
+                        className="h-full rounded-full bg-gold"
+                        style={{ 
+                          width: animated ? `${step.rate * 100}%` : '0%',
+                          transition: `width 0.8s ease-out ${idx * 0.05}s`,
+                          willChange: 'width'
+                        }}
                       />
                     </div>
                   </div>

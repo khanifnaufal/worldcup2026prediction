@@ -6,7 +6,7 @@ export default function TeamFlag({ teamName, className = "w-5 h-3.5" }) {
   if (!code) return <span className="text-[10px]">🏳️</span>;
   return (
     <img 
-      src={`https://flagcdn.com/w40/${code}.png`} 
+      src={`https://flagcdn.com/w160/${code}.png`} 
       alt={teamName} 
       className={`inline-block object-cover rounded-sm shadow-sm flex-shrink-0 ${className}`}
       style={{ verticalAlign: 'middle' }}

@@ -100,3 +100,20 @@ export function formatPercent(val) {
   if (val === undefined || val === null) return '0.0%';
   return `${(val * 100).toFixed(1)}%`;
 }
+
+export function getTeamFlagEmoji(teamName) {
+  const code = TEAM_ISO_CODES[teamName];
+  if (!code) return '🏳️';
+  if (code === 'gb-eng') return '🏴󠁧󠁢󠁥󠁮󠁧󠁿';
+  if (code === 'gb-sct') return '🏴󠁧󠁢󠁳󠁣󠁴󠁿';
+  
+  const codePoints = code
+    .toUpperCase()
+    .split('')
+    .map(char => 127397 + char.charCodeAt(0));
+  try {
+    return String.fromCodePoint(...codePoints);
+  } catch (e) {
+    return '🏳️';
+  }
+}

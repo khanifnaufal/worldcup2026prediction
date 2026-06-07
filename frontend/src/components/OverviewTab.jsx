@@ -46,27 +46,29 @@ export default function OverviewTab({ simulationData }) {
 
   // Dynamic height based on number of items to make sure it looks spaced out and readable
   const chartHeight = useMemo(() => {
-    return Math.max(300, filteredTeams.length * 28);
+    return Math.max(300, filteredTeams.length * 36);
   }, [filteredTeams]);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-slate-800 border border-slate-700 p-3 rounded-lg shadow-xl text-xs">
-          <p className="font-bold text-white mb-1 flex items-center gap-1.5">
-            <TeamFlag teamName={data.name} className="w-4.5 h-3" />
+        <div className="bg-dark-card border border-gold-border p-4 rounded-xl shadow-2xl text-xs max-w-xs font-noto">
+          <p className="font-bebas text-lg text-white-alt mb-2 flex items-center gap-2">
+            <TeamFlag teamName={data.name} className="w-7 h-5 rounded-sm shadow-sm" />
             {data.name}
           </p>
-          <p className="text-slate-300">Group: <span className="text-indigo-400 font-semibold">{data.group}</span></p>
-          <p className="text-slate-300">Confederation: <span className="font-semibold" style={{ color: data.color }}>{data.confed}</span></p>
-          <div className="mt-2 pt-2 border-t border-slate-700 space-y-1">
-            <p className="text-emerald-400 font-medium">Champion: {formatPercent(data.champion_rate)}</p>
-            <p className="text-blue-400">Reach Final: {formatPercent(data.final_rate)}</p>
-            <p className="text-indigo-400">Reach Semis: {formatPercent(data.sf_rate)}</p>
-            <p className="text-amber-400">Reach Quarters: {formatPercent(data.qf_rate)}</p>
-            <p className="text-purple-400">Reach R16: {formatPercent(data.r16_rate)}</p>
-            <p className="text-slate-400">Group Qualify: {formatPercent(data.group_qualify_rate)}</p>
+          <div className="space-y-1.5 border-t border-white/5 pt-2">
+            <p className="text-text-muted-alt">Group: <span className="text-white-alt font-semibold">{data.group}</span></p>
+            <p className="text-text-muted-alt">Confederation: <span className="font-semibold" style={{ color: data.color }}>{data.confed}</span></p>
+            <div className="mt-2.5 pt-2.5 border-t border-white/5 space-y-1">
+              <p className="text-gold font-bold">Champion: {formatPercent(data.champion_rate)}</p>
+              <p className="text-white-alt/90">Reach Final: {formatPercent(data.final_rate)}</p>
+              <p className="text-white-alt/80">Reach Semis: {formatPercent(data.sf_rate)}</p>
+              <p className="text-white-alt/70">Reach Quarters: {formatPercent(data.qf_rate)}</p>
+              <p className="text-white-alt/60">Reach R16: {formatPercent(data.r16_rate)}</p>
+              <p className="text-white-alt/50">Group Qualify: {formatPercent(data.group_qualify_rate)}</p>
+            </div>
           </div>
         </div>
       );
@@ -75,36 +77,89 @@ export default function OverviewTab({ simulationData }) {
   };
 
   return (
-    <div className="space-y-8 fade-in">
+    <div className="space-y-10 fade-in">
       {/* Hero Section */}
-      <div className="relative rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-8 overflow-hidden shadow-2xl text-center">
-        {/* Glow Effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl translate-y-1/2"></div>
+      <div 
+        className="relative rounded-2xl border border-gold-border p-4 md:p-6 overflow-hidden shadow-2xl text-center flex flex-col justify-center"
+        style={{
+          backgroundColor: '#080808',
+          height: 'calc(100vh - 8rem)',
+          backgroundImage: 'repeating-linear-gradient(-45deg, transparent 0px, transparent 40px, rgba(201,168,76,0.025) 40px, rgba(201,168,76,0.025) 41px)'
+        }}
+      >
+        {/* Soccer Field Background */}
+        <div className="absolute inset-0 z-0 opacity-12 pointer-events-none select-none">
+          <svg viewBox="0 0 200 100" fill="none" stroke="currentColor" className="w-full h-full text-gold">
+            {/* Outer Boundary */}
+            <rect x="4" y="4" width="192" height="92" strokeWidth="0.8" />
+            
+            {/* Left Penalty Box */}
+            <rect x="4" y="22" width="24" height="56" strokeWidth="0.8" />
+            {/* Left Goal Box */}
+            <rect x="4" y="38" width="8" height="24" strokeWidth="0.8" />
+            {/* Left Penalty Spot */}
+            <circle cx="18" cy="50" r="1" fill="currentColor" />
+            {/* Left Penalty Arc */}
+            <path d="M 28,40 A 12,12 0 0,1 28,60" strokeWidth="0.8" />
+            
+            {/* Right Penalty Box */}
+            <rect x="172" y="22" width="24" height="56" strokeWidth="0.8" />
+            {/* Right Goal Box */}
+            <rect x="188" y="38" width="8" height="24" strokeWidth="0.8" />
+            {/* Right Penalty Spot */}
+            <circle cx="182" cy="50" r="1" fill="currentColor" />
+            {/* Right Penalty Arc */}
+            <path d="M 172,40 A 12,12 0 0,0 172,60" strokeWidth="0.8" />
+            
+            {/* Corner Arcs */}
+            <path d="M 4,9 A 5,5 0 0,0 9,4" strokeWidth="0.8" />
+            <path d="M 4,91 A 5,5 0 0,1 9,96" strokeWidth="0.8" />
+            <path d="M 196,9 A 5,5 0 0,1 191,4" strokeWidth="0.8" />
+            <path d="M 196,91 A 5,5 0 0,0 191,96" strokeWidth="0.8" />
 
-        <div className="relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            AI Simulation Engine
+            {/* Tactical Plays - Passing Paths & Player Positions */}
+            {/* Top Left Attack */}
+            <circle cx="35" cy="18" r="2.5" strokeWidth="0.8" className="animate-pulse" />
+            <text x="32" y="13" className="text-[3px] font-bebas fill-current" stroke="none">MF</text>
+            <path d="M 35,18 Q 55,10 75,20" strokeDasharray="1.5,1.5" strokeWidth="0.5" />
+            <polygon points="75,18 78,22 73,22" fill="currentColor" transform="rotate(35, 75, 20)" className="animate-pulse" />
+            
+            {/* Bottom Right Attack */}
+            <circle cx="165" cy="82" r="2.5" strokeWidth="0.8" className="animate-pulse" />
+            <text x="162" y="90" className="text-[3px] font-bebas fill-current" stroke="none">FW</text>
+            <path d="M 165,82 Q 145,90 125,80" strokeDasharray="1.5,1.5" strokeWidth="0.5" />
+            <polygon points="125,78 122,82 127,82" fill="currentColor" transform="rotate(-35, 125, 80)" className="animate-pulse" />
+          </svg>
+        </div>
+
+        <div className="relative z-10 flex-grow flex flex-col justify-center py-1 md:py-2 select-none">
+          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-gold-border bg-gold-muted text-gold text-[10px] font-semibold tracking-[0.25em] font-noto uppercase self-center mb-3">
+            WE ARE 26
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400">
-            FIFA World Cup 2026 Prediction
-          </h1>
-          <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
-            Based on <span className="text-slate-200 font-semibold">{metadata?.n_simulations?.toLocaleString()}</span> Monte Carlo simulations using a <span className="text-slate-200 font-semibold">{metadata?.model_used}</span> model (F1-Score: {metadata?.model_f1_score?.toFixed(4)}).
+          <div className="space-y-0.5">
+            <h1 className="text-3xl md:text-[56px] font-bebas text-white-alt leading-[0.9] tracking-tight uppercase">
+              FIFA WORLD CUP 2026
+            </h1>
+            <h1 className="text-3xl md:text-[56px] font-bebas text-gold leading-[0.9] tracking-tight uppercase">
+              PREDICTION
+            </h1>
+          </div>
+
+          <p className="text-text-muted-alt text-[12px] max-w-3xl mx-auto font-noto font-light leading-none truncate whitespace-nowrap overflow-hidden my-1">
+            Based on <span className="text-white-alt font-semibold">{metadata?.n_simulations?.toLocaleString()}</span> Monte Carlo simulations using a <span className="text-white-alt font-semibold">{metadata?.model_used}</span> model (F1-Score: {metadata?.model_f1_score?.toFixed(4)}).
           </p>
 
           {/* Most Likely Final Badge */}
           {most_likely_finalist && (
-            <div className="inline-block mt-4 bg-slate-900/60 border border-slate-800/80 rounded-xl px-5 py-2.5 shadow-lg">
-              <span className="text-xs text-slate-400 uppercase tracking-widest block font-medium mb-0.5">Most Likely Final</span>
-              <span className="text-base font-bold text-indigo-300 flex items-center justify-center gap-2">
-                <TeamFlag teamName={most_likely_finalist[0]} className="w-5 h-3.5" />
-                {most_likely_finalist[0]}
-                <span className="text-slate-500 font-normal">vs</span>
-                <TeamFlag teamName={most_likely_finalist[1]} className="w-5 h-3.5" />
-                {most_likely_finalist[1]}
+            <div className="inline-block mt-1.5 mb-1.5 border border-gold/30 bg-gold-muted rounded-xl px-4 py-1.5 shadow-lg self-center">
+              <span className="text-[9px] text-gold uppercase tracking-[0.2em] block font-bold mb-0.5 font-noto leading-none">Most Likely Final</span>
+              <span className="text-base md:text-lg font-bebas text-white-alt flex items-center justify-center gap-2 leading-none mt-1">
+                <TeamFlag teamName={most_likely_finalist[0]} className="w-5 h-3.5 shadow" />
+                <span>{most_likely_finalist[0]}</span>
+                <span className="text-gold font-noto text-xs lowercase font-normal px-1">vs</span>
+                <TeamFlag teamName={most_likely_finalist[1]} className="w-5 h-3.5 shadow" />
+                <span>{most_likely_finalist[1]}</span>
               </span>
             </div>
           )}
@@ -112,74 +167,99 @@ export default function OverviewTab({ simulationData }) {
 
         {/* Podium section */}
         {podium.length >= 3 && (
-          <div className="mt-12 flex justify-center items-end gap-3 max-w-xl mx-auto px-4">
-            {/* 2nd Place */}
-            <div className="flex flex-col items-center flex-1 group">
-              <span className="text-xs font-semibold text-slate-400 mb-1 flex items-center gap-1 truncate max-w-[95px] md:max-w-none" title={podium[0].name}>
-                <TeamFlag teamName={podium[0].name} className="w-4 h-3" />
-                <span className="truncate">{podium[0].name}</span>
+          <div className="mt-2 flex justify-center items-end gap-3 md:gap-6 max-w-2xl mx-auto px-4 relative z-10 select-none">
+            {/* 2nd Place (Left) */}
+            <div className="flex flex-col items-center flex-1">
+              <TeamFlag teamName={podium[0].name} className="w-12 h-8 md:w-16 md:h-11 rounded border border-white/10 shadow-lg mb-2" />
+              <span className="font-bebas text-xl md:text-2xl text-white-alt leading-tight truncate max-w-[120px] md:max-w-none" title={podium[0].name}>
+                {podium[0].name}
               </span>
-              <span className="text-sm font-bold text-slate-300 mb-2">{formatPercent(podium[0].champion_rate)}</span>
-              <div className="w-full h-24 md:h-32 bg-gradient-to-t from-slate-800 to-slate-700/80 rounded-t-xl flex flex-col justify-between p-3 border-t-2 border-slate-400/50 shadow-lg group-hover:scale-102 transition-transform duration-300">
-                <div className="w-7 h-7 rounded-full bg-slate-600/50 flex items-center justify-center text-xs font-bold text-slate-300 mx-auto shadow">2</div>
-                <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Runner Up</div>
-              </div>
+              <span className="font-bebas text-2xl md:text-3xl text-gold mt-0.5 leading-none">
+                {formatPercent(podium[0].champion_rate)}
+              </span>
+              <span className="font-noto text-[9px] uppercase tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
+                RUNNER UP
+              </span>
+              {/* Vertical platform line */}
+              <div 
+                className="w-0.5 bg-gold/30" 
+                style={{ height: '30px' }}
+              />
             </div>
 
-            {/* 1st Place */}
-            <div className="flex flex-col items-center flex-1 -translate-y-2 group">
-              <Trophy className="w-8 h-8 text-yellow-400 animate-bounce mb-1" />
-              <span className="text-sm font-bold text-white mb-1 flex items-center gap-1 truncate max-w-[110px] md:max-w-none" title={podium[1].name}>
-                <TeamFlag teamName={podium[1].name} className="w-4.5 h-3.5" />
-                <span className="truncate">{podium[1].name}</span>
+            {/* Divider Line */}
+            <div className="w-px h-28 bg-gold-border self-center opacity-60" />
+
+            {/* 1st Place (Center - Higher) */}
+            <div className="flex flex-col items-center flex-1 border-t-2 border-gold pt-3 relative">
+              <TeamFlag teamName={podium[1].name} className="w-14 h-10 md:w-20 md:h-14 rounded border border-white/10 shadow-lg mb-2" />
+              <span className="font-bebas text-xl md:text-2xl text-white-alt leading-tight truncate max-w-[140px] md:max-w-none" title={podium[1].name}>
+                {podium[1].name}
               </span>
-              <span className="text-base font-black text-yellow-400 mb-2">{formatPercent(podium[1].champion_rate)}</span>
-              <div className="w-full h-32 md:h-44 bg-gradient-to-t from-yellow-950/60 to-yellow-800/40 rounded-t-xl flex flex-col justify-between p-3 border-t-4 border-yellow-500 shadow-2xl relative group-hover:scale-102 transition-transform duration-300">
-                <div className="absolute inset-0 bg-yellow-500/5 rounded-t-xl blur-lg"></div>
-                <div className="w-9 h-9 rounded-full bg-yellow-500/20 border border-yellow-400/30 flex items-center justify-center text-sm font-black text-yellow-400 mx-auto shadow-inner relative z-10">1</div>
-                <div className="text-xs uppercase font-extrabold tracking-widest text-yellow-400 relative z-10">Champion</div>
-              </div>
+              <span className="font-bebas text-3xl md:text-[40px] text-gold mt-0.5 leading-none">
+                {formatPercent(podium[1].champion_rate)}
+              </span>
+              <span className="font-noto text-[9px] uppercase tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
+                CHAMPION
+              </span>
+              {/* Vertical platform line */}
+              <div 
+                className="w-0.5 bg-gold" 
+                style={{ height: '50px' }}
+              />
             </div>
 
-            {/* 3rd Place */}
-            <div className="flex flex-col items-center flex-1 group">
-              <span className="text-xs font-semibold text-slate-400 mb-1 flex items-center gap-1 truncate max-w-[95px] md:max-w-none" title={podium[2].name}>
-                <TeamFlag teamName={podium[2].name} className="w-4 h-3" />
-                <span className="truncate">{podium[2].name}</span>
+            {/* Divider Line */}
+            <div className="w-px h-28 bg-gold-border self-center opacity-60" />
+
+            {/* 3rd Place (Right) */}
+            <div className="flex flex-col items-center flex-1">
+              <TeamFlag teamName={podium[2].name} className="w-12 h-8 md:w-16 md:h-11 rounded border border-white/10 shadow-lg mb-2" />
+              <span className="font-bebas text-xl md:text-2xl text-white-alt leading-tight truncate max-w-[120px] md:max-w-none" title={podium[2].name}>
+                {podium[2].name}
               </span>
-              <span className="text-sm font-bold text-slate-300 mb-2">{formatPercent(podium[2].champion_rate)}</span>
-              <div className="w-full h-20 md:h-26 bg-gradient-to-t from-slate-800 to-slate-700/80 rounded-t-xl flex flex-col justify-between p-3 border-t-2 border-amber-600/50 shadow-lg group-hover:scale-102 transition-transform duration-300">
-                <div className="w-7 h-7 rounded-full bg-amber-800/40 flex items-center justify-center text-xs font-bold text-amber-500 mx-auto shadow">3</div>
-                <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Semi Final</div>
-              </div>
+              <span className="font-bebas text-2xl md:text-3xl text-gold mt-0.5 leading-none">
+                {formatPercent(podium[2].champion_rate)}
+              </span>
+              <span className="font-noto text-[9px] uppercase tracking-[0.2em] text-text-muted-alt mt-1 mb-2">
+                SEMI FINAL
+              </span>
+              {/* Vertical platform line */}
+              <div 
+                className="w-0.5 bg-gold/15" 
+                style={{ height: '20px' }}
+              />
             </div>
           </div>
         )}
       </div>
 
+      {/* Horizontal Divider */}
+      <div className="h-px w-full bg-gold/10" />
+
       {/* Grid: Win Probability Chart & Dark Horses */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Horizontal Bar Chart (2 cols) */}
-        <div className="lg:col-span-2 bg-[#1E293B] border border-slate-800 rounded-xl p-5 md:p-6 shadow-xl space-y-6">
+        <div className="lg:col-span-2 bg-dark-card border border-gold-border rounded-xl p-5 md:p-6 shadow-xl space-y-6 flex flex-col justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-indigo-400" />
-                Win Probability Chart
+              <h2 className="text-2xl font-bebas text-white-alt flex items-center gap-2 tracking-wide uppercase">
+                <TrendingUp className="w-5 h-5 text-gold" />
+                CHAMPIONSHIP PROBABILITY
               </h2>
-              <p className="text-xs text-slate-400">Hover for detailed advancement rates</p>
+              <p className="text-xs text-text-muted-alt font-noto">Hover bar for detailed advancement metrics</p>
             </div>
 
             {/* Filter buttons */}
-            <div className="flex flex-wrap gap-1.5 bg-slate-900/60 p-1 rounded-lg border border-slate-800/80">
+            <div className="flex flex-wrap gap-1.5 bg-[#080808] p-1 rounded-lg border border-white/5">
               {['All', 'UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC'].map(filter => (
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
-                  className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all duration-200 ${
+                  className={`px-3 py-1 text-xs font-semibold rounded-md transition-all duration-200 ${
                     activeFilter === filter
-                      ? 'bg-indigo-600 text-white shadow-md'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                      ? 'border border-gold bg-gold-muted text-gold'
+                      : 'border border-transparent text-text-muted-alt hover:text-white-alt'
                   }`}
                 >
                   {filter}
@@ -189,9 +269,9 @@ export default function OverviewTab({ simulationData }) {
           </div>
 
           {/* Chart Wrapper with fixed height scrollable viewport */}
-          <div className="overflow-y-auto max-h-[500px] pr-2 rounded-lg border border-slate-900 bg-slate-900/40 p-4">
+          <div className="overflow-y-auto max-h-[500px] pr-2 rounded-lg border border-white/5 bg-[#080808]/40 p-4">
             {filteredTeams.length === 0 ? (
-              <div className="h-48 flex items-center justify-center text-slate-400 text-sm">
+              <div className="h-48 flex items-center justify-center text-text-muted-alt text-sm">
                 No teams found for this confederation.
               </div>
             ) : (
@@ -199,28 +279,65 @@ export default function OverviewTab({ simulationData }) {
                 <BarChart
                   data={filteredTeams}
                   layout="vertical"
-                  margin={{ top: 5, right: 45, left: 10, bottom: 5 }}
+                  margin={{ top: 5, right: 55, left: 10, bottom: 5 }}
                 >
+                  <defs>
+                    <linearGradient id="grad-top" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#E8C96A" />
+                      <stop offset="100%" stopColor="#C9A84C" />
+                    </linearGradient>
+                    <linearGradient id="grad-UEFA" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#3B82F6" />
+                      <stop offset="100%" stopColor="#3B82F6" stopOpacity={0.7} />
+                    </linearGradient>
+                    <linearGradient id="grad-CONMEBOL" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#10B981" />
+                      <stop offset="100%" stopColor="#10B981" stopOpacity={0.7} />
+                    </linearGradient>
+                    <linearGradient id="grad-CONCACAF" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#F59E0B" />
+                      <stop offset="100%" stopColor="#F59E0B" stopOpacity={0.7} />
+                    </linearGradient>
+                    <linearGradient id="grad-CAF" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#EF4444" />
+                      <stop offset="100%" stopColor="#EF4444" stopOpacity={0.7} />
+                    </linearGradient>
+                    <linearGradient id="grad-AFC" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#8B5CF6" />
+                      <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.7} />
+                    </linearGradient>
+                    <linearGradient id="grad-OFC" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#6B7280" />
+                      <stop offset="100%" stopColor="#6B7280" stopOpacity={0.7} />
+                    </linearGradient>
+                  </defs>
+                  
                   <XAxis type="number" hide />
                   <YAxis
                     dataKey="name"
                     type="category"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 600 }}
+                    tick={{ fill: '#F0EDE8', fontSize: 13, fontFamily: 'Noto Sans', fontWeight: 400 }}
                     width={100}
                   />
-                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(51, 65, 85, 0.2)' }} />
-                  <Bar dataKey="champion_rate" radius={[0, 4, 4, 0]} barSize={14}>
-                    {filteredTeams.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(201, 168, 76, 0.04)' }} />
+                  <Bar 
+                    dataKey="champion_rate" 
+                    radius={[0, 4, 4, 0]} 
+                    barSize={16}
+                    background={{ fill: '#181818', radius: [0, 4, 4, 0] }}
+                  >
+                    {filteredTeams.map((entry, index) => {
+                      const fillId = index === 0 ? 'url(#grad-top)' : `url(#grad-${entry.confed})`;
+                      return <Cell key={`cell-${index}`} fill={fillId} />;
+                    })}
                     <LabelList
                       dataKey="champion_rate"
                       position="right"
                       formatter={(val) => formatPercent(val)}
-                      style={{ fill: '#CBD5E1', fontSize: 9, fontWeight: 700 }}
-                      offset={8}
+                      style={{ fill: '#C9A84C', fontSize: 15, fontFamily: 'Bebas Neue', fontWeight: 600 }}
+                      offset={10}
                     />
                   </Bar>
                 </BarChart>
@@ -230,63 +347,58 @@ export default function OverviewTab({ simulationData }) {
         </div>
 
         {/* Surprise Packages / Dark Horses */}
-        <div className="bg-[#1E293B] border border-slate-800 rounded-xl p-6 shadow-xl flex flex-col justify-between">
+        <div className="bg-dark-card border border-gold-border rounded-xl p-6 shadow-xl flex flex-col justify-between">
           <div className="space-y-6">
             <div className="space-y-1">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                Surprise Packages 🎯
+              <h2 className="text-3xl font-bebas text-white-alt tracking-wide uppercase">
+                DARK HORSES
               </h2>
-              <p className="text-xs text-slate-400">Top rates excluding main favorites</p>
+              <p className="text-xs text-text-muted-alt font-noto">Teams that could surprise the world</p>
             </div>
 
             <div className="space-y-4">
-              {darkHorses.map((team, idx) => (
+              {darkHorses.map((team) => (
                 <div
                   key={team.name}
-                  className="relative group overflow-hidden bg-slate-900/50 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700/80 p-4 rounded-xl shadow transition-all duration-300"
+                  className="relative overflow-hidden bg-dark-card border border-gold-border/60 hover:border-gold-border hover:-translate-y-[2px] p-4 rounded-xl shadow transition-all duration-150"
+                  style={{ borderLeft: `3px solid ${team.color}` }}
                 >
-                  {/* Confederation Color Left Accent bar */}
-                  <div
-                    className="absolute top-0 left-0 bottom-0 w-1.5"
-                    style={{ backgroundColor: team.color }}
-                  ></div>
-
                   <div className="flex justify-between items-start pl-2">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-white text-sm group-hover:text-indigo-400 transition-colors duration-200 flex items-center gap-1.5">
-                          <TeamFlag teamName={team.name} className="w-4 h-3" />
+                        <h3 className="font-bebas text-xl text-white-alt flex items-center gap-2">
+                          <TeamFlag teamName={team.name} className="w-7 h-5 rounded-sm shadow-sm" />
                           {team.name}
                         </h3>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded font-bold bg-slate-800 text-slate-400 border border-slate-700/50">
+                        <span className="text-[9px] px-1.5 py-0.5 rounded font-noto font-bold bg-dark-card-alt text-text-muted-alt border border-white/5">
                           {team.confed}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400">
-                        Group <span className="text-indigo-300 font-semibold">{team.group}</span>
+                      <p className="text-xs text-text-muted-alt font-noto">
+                        Group <span className="text-gold font-semibold">{team.group}</span>
                       </p>
                     </div>
 
-                    <div className="text-right">
-                      <p className="text-xs text-slate-400 font-medium">Champion Rate</p>
-                      <p className="text-base font-black text-emerald-400">
+                    <div className="text-right flex flex-col">
+                      <span className="text-[9px] text-text-muted-alt font-bold uppercase tracking-wider font-noto">Champ Rate</span>
+                      <span className="text-2xl font-bebas text-gold leading-none mt-1">
                         {formatPercent(team.champion_rate)}
-                      </p>
+                      </span>
                     </div>
                   </div>
 
-                  {/* Micro timeline on hover/always */}
-                  <div className="mt-3 pl-2 pt-2 border-t border-slate-800 flex justify-between text-[10px] text-slate-500">
-                    <div>QF: <span className="text-slate-300">{formatPercent(team.qf_rate)}</span></div>
-                    <div>SF: <span className="text-slate-300">{formatPercent(team.sf_rate)}</span></div>
-                    <div>Final: <span className="text-slate-300">{formatPercent(team.final_rate)}</span></div>
+                  {/* Micro timeline */}
+                  <div className="mt-3 pl-2 pt-2 border-t border-white/5 flex justify-between text-[10px] text-text-muted-alt font-noto">
+                    <div>QF: <span className="text-white-alt font-semibold">{formatPercent(team.qf_rate)}</span></div>
+                    <div>SF: <span className="text-white-alt font-semibold">{formatPercent(team.sf_rate)}</span></div>
+                    <div>Final: <span className="text-white-alt font-semibold">{formatPercent(team.final_rate)}</span></div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="mt-6 p-4 rounded-lg bg-indigo-950/20 border border-indigo-900/30 text-xs text-indigo-300/90 leading-relaxed">
+          <div className="mt-6 p-4 rounded-lg bg-gold-muted border border-gold-border text-xs text-gold/90 leading-relaxed font-noto">
             💡 <strong>Dark Horses</strong> are selected dynamically based on their high simulation winning probabilities, excluding the top 4 favorites who represent the clear tournament heavyweights.
           </div>
         </div>

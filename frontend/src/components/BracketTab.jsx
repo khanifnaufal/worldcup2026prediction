@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ChevronRight, Award, HelpCircle } from 'lucide-react';
+import { ChevronRight, Award, HelpCircle, Trophy } from 'lucide-react';
 import { getConfedColor, formatPercent } from '../utils/helpers';
 import TeamFlag from './TeamFlag';
 
@@ -14,14 +14,14 @@ export default function BracketTab({ simulationData }) {
   // Helper to render the split probability bar
   const ProbBar = ({ homeColor, awayColor, homeProb, drawProb, awayProb }) => {
     return (
-      <div className="w-full h-2 rounded-full overflow-hidden bg-slate-900 flex mt-2 border border-slate-900">
+      <div className="w-full h-1.5 rounded-full overflow-hidden bg-[#080808] flex mt-2 border border-[#080808]">
         <div
           className="h-full transition-all duration-300"
           style={{ width: `${homeProb * 100}%`, backgroundColor: homeColor }}
           title={`Home Win: ${formatPercent(homeProb)}`}
         />
         <div
-          className="h-full bg-slate-650 transition-all duration-300 bg-slate-600"
+          className="h-full bg-[#333] transition-all duration-300"
           style={{ width: `${drawProb * 100}%` }}
           title={`Draw: ${formatPercent(drawProb)}`}
         />
@@ -37,7 +37,7 @@ export default function BracketTab({ simulationData }) {
   // Helper to format win/draw/loss text nicely
   const ProbText = ({ home, away, homeProb, drawProb, awayProb }) => {
     return (
-      <div className="flex justify-between items-center text-[10px] text-slate-400 mt-1 font-semibold tabular-nums px-0.5">
+      <div className="flex justify-between items-center text-[10px] text-text-muted-alt mt-1 font-semibold font-noto tabular-nums px-0.5">
         <span>{formatPercent(homeProb)}</span>
         <span>Draw {formatPercent(drawProb)}</span>
         <span>{formatPercent(awayProb)}</span>
@@ -46,7 +46,7 @@ export default function BracketTab({ simulationData }) {
   };
 
   // Helper to render individual match cards
-  const MatchCard = ({ match, isSmall = false }) => {
+  const MatchCard = ({ match }) => {
     if (!match) return null;
     
     const homeColor = getConfedColor(match.home);
@@ -57,72 +57,132 @@ export default function BracketTab({ simulationData }) {
     const isAwayWinner = match.predicted_winner === match.away;
     const isDrawWinner = match.predicted_winner === 'Draw';
 
-    return (
-      <div className="bg-[#1E293B] border border-slate-800 rounded-xl p-3.5 shadow-lg relative overflow-hidden hover:border-slate-700/80 transition-all duration-200 w-full max-w-sm">
-        {/* Card subtle background accent based on predicted winner */}
-        <div 
-          className="absolute left-0 top-0 bottom-0 w-1" 
-          style={{ 
-            backgroundColor: isHomeWinner ? homeColor : isAwayWinner ? awayColor : '#6B7280' 
-          }}
-        />
-
-        <div className="space-y-2.5">
-          {/* Home Team Row */}
-          <div className={`flex justify-between items-center ${isHomeWinner ? 'font-black text-white' : 'text-slate-400 font-medium'}`}>
-            <div className="flex items-center gap-2 truncate">
-              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: homeColor }} />
-              <TeamFlag teamName={match.home} className="w-4.5 h-3" />
-              <span className="truncate text-xs md:text-sm">{match.home}</span>
+    if (hasDraw) {
+      // Group Stage Card
+      return (
+        <div className="bg-dark-card border border-white/5 rounded-xl p-3.5 shadow-lg hover:border-gold-border/40 hover:-translate-y-[2px] transition-all duration-150 w-full max-w-sm space-y-2.5">
+          <div className="space-y-1">
+            {/* Home Team */}
+            <div className={`flex justify-between items-center px-2 py-1 rounded transition-all ${
+              isHomeWinner ? 'bg-gold-muted font-bold text-white-alt border-l border-gold' : 'text-text-muted-alt'
+            }`}>
+              <div className="flex items-center gap-2 truncate">
+                {isHomeWinner ? (
+                  <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0 animate-pulse" />
+                ) : (
+                  <span className="w-1 h-1 rounded-full bg-text-dim flex-shrink-0" />
+                )}
+                <TeamFlag teamName={match.home} className="w-4.5 h-3 shadow-sm" />
+                <span className="truncate text-xs font-noto">{match.home}</span>
+              </div>
+              {isHomeWinner && <span className="text-gold font-bebas text-[10px] tracking-wider">WINNER</span>}
             </div>
-            {isHomeWinner && <Award className="w-3.5 h-3.5 text-yellow-400 flex-shrink-0" />}
+
+            {/* Draw Option */}
+            {isDrawWinner ? (
+              <div className="flex justify-between items-center px-2 py-1 rounded bg-gold-muted border-l border-gold font-bold text-white-alt">
+                <div className="flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0 animate-pulse" />
+                  <span className="text-xs font-noto">Draw (Predicted)</span>
+                </div>
+                <span className="text-gold font-bebas text-[10px] tracking-wider">DRAW</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 px-2 py-0.5 text-text-muted-alt text-[10px] pl-[22px]">
+                <span className="font-noto">Draw Option</span>
+              </div>
+            )}
+
+            {/* Away Team */}
+            <div className={`flex justify-between items-center px-2 py-1 rounded transition-all ${
+              isAwayWinner ? 'bg-gold-muted font-bold text-white-alt border-l border-gold' : 'text-text-muted-alt'
+            }`}>
+              <div className="flex items-center gap-2 truncate">
+                {isAwayWinner ? (
+                  <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0 animate-pulse" />
+                ) : (
+                  <span className="w-1 h-1 rounded-full bg-text-dim flex-shrink-0" />
+                )}
+                <TeamFlag teamName={match.away} className="w-4.5 h-3 shadow-sm" />
+                <span className="truncate text-xs font-noto">{match.away}</span>
+              </div>
+              {isAwayWinner && <span className="text-gold font-bebas text-[10px] tracking-wider">WINNER</span>}
+            </div>
           </div>
 
-          {/* Draw Row (only for group stage matches that support draws) */}
-          {hasDraw && isDrawWinner && (
-            <div className="flex justify-between items-center font-bold text-slate-300">
-              <span className="text-[11px] text-slate-400 pl-4">Draw (Predicted)</span>
-              <Award className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-            </div>
-          )}
-
-          {/* Away Team Row */}
-          <div className={`flex justify-between items-center ${isAwayWinner ? 'font-black text-white' : 'text-slate-400 font-medium'}`}>
-            <div className="flex items-center gap-2 truncate">
-              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: awayColor }} />
-              <TeamFlag teamName={match.away} className="w-4.5 h-3" />
-              <span className="truncate text-xs md:text-sm">{match.away}</span>
-            </div>
-            {isAwayWinner && <Award className="w-3.5 h-3.5 text-yellow-400 flex-shrink-0" />}
+          {/* Probability splits */}
+          <div>
+            <ProbBar
+              homeColor={homeColor}
+              awayColor={awayColor}
+              homeProb={match.home_win_prob}
+              drawProb={match.draw_prob || 0}
+              awayProb={match.away_win_prob}
+            />
+            <ProbText
+              home={match.home}
+              away={match.away}
+              homeProb={match.home_win_prob}
+              drawProb={match.draw_prob || 0}
+              awayProb={match.away_win_prob}
+            />
           </div>
         </div>
+      );
+    } else {
+      // Knockout Stage Card
+      return (
+        <div className="bg-dark-card border border-white/5 border-l-[3px] border-l-white/5 rounded-xl p-3 shadow-lg hover:border-gold-border hover:-translate-y-[2px] transition-all duration-150 w-full max-w-sm space-y-2">
+          <div className="space-y-1">
+            {/* Home Team */}
+            <div className={`flex justify-between items-center px-1.5 py-0.5 rounded ${
+              isHomeWinner ? 'font-bold text-white-alt' : 'text-text-muted-alt font-normal'
+            }`}>
+              <div className="flex items-center gap-2 truncate">
+                <TeamFlag teamName={match.home} className="w-4.5 h-3 shadow-sm" />
+                <span className="truncate text-xs font-noto">{match.home}</span>
+              </div>
+              {isHomeWinner && <span className="text-gold font-bold text-xs">✓</span>}
+            </div>
 
-        {/* Win Probability Bar */}
-        <ProbBar
-          homeColor={homeColor}
-          awayColor={awayColor}
-          homeProb={match.home_win_prob}
-          drawProb={match.draw_prob || 0}
-          awayProb={match.away_win_prob}
-        />
+            {/* Away Team */}
+            <div className={`flex justify-between items-center px-1.5 py-0.5 rounded ${
+              isAwayWinner ? 'font-bold text-white-alt' : 'text-text-muted-alt font-normal'
+            }`}>
+              <div className="flex items-center gap-2 truncate">
+                <TeamFlag teamName={match.away} className="w-4.5 h-3 shadow-sm" />
+                <span className="truncate text-xs font-noto">{match.away}</span>
+              </div>
+              {isAwayWinner && <span className="text-gold font-bold text-xs">✓</span>}
+            </div>
+          </div>
 
-        {/* Win Probability Labels */}
-        <ProbText
-          home={match.home}
-          away={match.away}
-          homeProb={match.home_win_prob}
-          drawProb={match.draw_prob || 0}
-          awayProb={match.away_win_prob}
-        />
-      </div>
-    );
+          {/* Probability splits */}
+          <div>
+            <ProbBar
+              homeColor={homeColor}
+              awayColor={awayColor}
+              homeProb={match.home_win_prob}
+              drawProb={0}
+              awayProb={match.away_win_prob}
+            />
+            <ProbText
+              home={match.home}
+              away={match.away}
+              homeProb={match.home_win_prob}
+              drawProb={0}
+              awayProb={match.away_win_prob}
+            />
+          </div>
+        </div>
+      );
+    }
   };
 
   // Organize Knockout bracket paths
   const bracketData = useMemo(() => {
     if (!bracket) return null;
 
-    // Helper map to find match by ID
     const findMatch = (roundKey, id) => {
       const list = bracket[roundKey];
       if (Array.isArray(list)) {
@@ -134,11 +194,6 @@ export default function BracketTab({ simulationData }) {
       return null;
     };
 
-    // Upper Bracket matches structure
-    // R32: 73, 75 (feeds 89) | 74, 77 (feeds 90) | 76, 78 (feeds 91) | 79, 80 (feeds 92)
-    // R16: 89, 90 (feeds 97) | 91, 92 (feeds 98)
-    // QF: 97, 98 (feeds 101)
-    // SF: 101 (feeds 104)
     const upper = {
       r32: [73, 75, 74, 77, 76, 78, 79, 80].map(id => findMatch('r32', id)),
       r16: [89, 90, 91, 92].map(id => findMatch('r16', id)),
@@ -146,11 +201,6 @@ export default function BracketTab({ simulationData }) {
       sf: [101].map(id => findMatch('sf', id)),
     };
 
-    // Lower Bracket matches structure
-    // R32: 81, 82 (feeds 94) | 83, 84 (feeds 93) | 85, 87 (feeds 96) | 86, 88 (feeds 95)
-    // R16: 94, 93 (feeds 99) | 96, 95 (feeds 100)
-    // QF: 99, 100 (feeds 102)
-    // SF: 102 (feeds 104)
     const lower = {
       r32: [81, 82, 83, 84, 85, 87, 86, 88].map(id => findMatch('r32', id)),
       r16: [94, 93, 96, 95].map(id => findMatch('r16', id)),
@@ -167,28 +217,31 @@ export default function BracketTab({ simulationData }) {
 
   return (
     <div className="space-y-12 fade-in">
-      {/* 1. Group Stage Section */}
-      <div className="bg-[#1E293B] border border-slate-800 rounded-xl p-5 md:p-6 shadow-xl space-y-6">
-        <div>
-          <h2 className="text-xl font-bold text-white">Group Stage Predictions</h2>
-          <p className="text-xs text-slate-400">Match outcomes and win probabilities for all 6 matches per group</p>
+      {/* 1. Group Stage Predictions Section */}
+      <div className="bg-dark-card border border-gold-border rounded-xl p-5 md:p-6 shadow-xl space-y-6">
+        <div className="space-y-1">
+          <h2 className="text-3xl font-bebas text-white-alt tracking-wide uppercase">Group Stage Predictions</h2>
+          <p className="text-xs text-text-muted-alt font-noto">Match outcomes and win probabilities for all matches per group</p>
         </div>
 
-        {/* Group Tabs selector */}
-        <div className="flex overflow-x-auto gap-1.5 pb-2 scrollbar-thin">
-          {groupsList.map(g => (
-            <button
-              key={g}
-              onClick={() => setActiveGroup(g)}
-              className={`flex-shrink-0 px-3.5 py-2 text-xs font-black rounded-lg border transition-all duration-200 ${
-                activeGroup === g
-                  ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg'
-                  : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-              }`}
-            >
-              Group {g}
-            </button>
-          ))}
+        {/* Minimal Group selector tabs */}
+        <div className="flex items-center justify-between border-b border-white/5 overflow-x-auto pb-1 gap-4 scrollbar-none">
+          {groupsList.map(g => {
+            const isActive = activeGroup === g;
+            return (
+              <button
+                key={g}
+                onClick={() => setActiveGroup(g)}
+                className={`pb-2 text-lg sm:text-xl font-bebas transition-all duration-150 flex-shrink-0 relative ${
+                  isActive
+                    ? 'text-gold border-b-2 border-gold'
+                    : 'text-text-muted-alt hover:text-white-alt font-noto text-xs sm:text-sm font-medium -mt-1'
+                }`}
+              >
+                Group {g}
+              </button>
+            );
+          })}
         </div>
 
         {/* Group Matches Grid */}
@@ -200,36 +253,36 @@ export default function BracketTab({ simulationData }) {
       </div>
 
       {/* 2. Knockout Bracket Section */}
-      <div className="bg-[#1E293B] border border-slate-855 rounded-xl border-slate-800 p-5 md:p-6 shadow-xl space-y-6 overflow-hidden">
+      <div className="bg-dark-card border border-gold-border rounded-xl p-5 md:p-6 shadow-xl space-y-6 overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <div className="space-y-1">
+            <h2 className="text-3xl font-bebas text-white-alt tracking-wide uppercase">
               Tournament Knockout Bracket
             </h2>
-            <p className="text-xs text-slate-400">Monte Carlo predicted path to the World Cup trophy</p>
+            <p className="text-xs text-text-muted-alt font-noto">Monte Carlo predicted path to the World Cup trophy</p>
           </div>
 
           {/* Toggle buttons Upper/Lower Bracket */}
-          <div className="flex bg-slate-900/60 p-1 rounded-lg border border-slate-800/80">
+          <div className="flex bg-[#080808] p-1 rounded-lg border border-white/5">
             <button
               onClick={() => setBracketView('upper')}
-              className={`px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-200 ${
+              className={`px-4 py-1.5 text-xs font-bold font-noto uppercase tracking-wider rounded-md transition-all duration-150 ${
                 bracketView === 'upper'
-                  ? 'bg-indigo-600 text-white shadow-md'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-gold-muted text-gold border border-gold/30 shadow'
+                  : 'text-text-muted-alt hover:text-white-alt border border-transparent'
               }`}
             >
-              Upper Bracket (Match 73-80)
+              Upper Bracket
             </button>
             <button
               onClick={() => setBracketView('lower')}
-              className={`px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-200 ${
+              className={`px-4 py-1.5 text-xs font-bold font-noto uppercase tracking-wider rounded-md transition-all duration-150 ${
                 bracketView === 'lower'
-                  ? 'bg-indigo-600 text-white shadow-md'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-gold-muted text-gold border border-gold/30 shadow'
+                  : 'text-text-muted-alt hover:text-white-alt border border-transparent'
               }`}
             >
-              Lower Bracket (Match 81-88)
+              Lower Bracket
             </button>
           </div>
         </div>
@@ -240,130 +293,131 @@ export default function BracketTab({ simulationData }) {
             
             {/* Round of 32 Column */}
             <div className="flex flex-col gap-6 w-60">
-              <div className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider text-center border-b border-indigo-950 pb-2">
-                Round of 32
+              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
+                ROUND OF 32
               </div>
               {activeMatches?.r32.map((match, idx) => (
-                <div key={idx} className="h-[90px] flex items-center">
+                <div key={idx} className="h-[95px] flex items-center">
                   <MatchCard match={match} />
                 </div>
               ))}
             </div>
 
             {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-slate-700">
-              <ChevronRight className="w-5 h-5" />
-              <ChevronRight className="w-5 h-5" />
-              <ChevronRight className="w-5 h-5" />
-              <ChevronRight className="w-5 h-5" />
+            <div className="flex flex-col justify-around h-[900px] text-text-dim">
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
             </div>
 
             {/* Round of 16 Column */}
             <div className="flex flex-col justify-around h-[900px] w-60">
-              <div className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider text-center border-b border-indigo-950 pb-2">
-                Round of 16
+              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
+                ROUND OF 16
               </div>
               {activeMatches?.r16.map((match, idx) => (
-                <div key={idx} className="h-[200px] flex items-center">
+                <div key={idx} className="h-[210px] flex items-center">
                   <MatchCard match={match} />
                 </div>
               ))}
             </div>
 
             {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-slate-700">
-              <ChevronRight className="w-5 h-5" />
-              <ChevronRight className="w-5 h-5" />
+            <div className="flex flex-col justify-around h-[900px] text-text-dim">
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
             </div>
 
             {/* Quarter Finals Column */}
             <div className="flex flex-col justify-around h-[900px] w-60">
-              <div className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider text-center border-b border-indigo-950 pb-2">
-                Quarter Finals
+              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
+                QUARTER FINALS
               </div>
               {activeMatches?.qf.map((match, idx) => (
-                <div key={idx} className="h-[400px] flex items-center">
+                <div key={idx} className="h-[420px] flex items-center">
                   <MatchCard match={match} />
                 </div>
               ))}
             </div>
 
             {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-slate-700">
-              <ChevronRight className="w-5 h-5" />
+            <div className="flex flex-col justify-around h-[900px] text-text-dim">
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
             </div>
 
             {/* Semi Finals Column */}
             <div className="flex flex-col justify-around h-[900px] w-60">
-              <div className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider text-center border-b border-indigo-950 pb-2">
-                Semi Finals
+              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
+                SEMI FINALS
               </div>
               {activeMatches?.sf.map((match, idx) => (
-                <div key={idx} className="h-[800px] flex items-center">
+                <div key={idx} className="h-[840px] flex items-center">
                   <MatchCard match={match} />
                 </div>
               ))}
             </div>
 
             {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-slate-700">
-              <ChevronRight className="w-5 h-5 text-indigo-500 animate-pulse" />
+            <div className="flex flex-col justify-around h-[900px] text-text-dim animate-pulse">
+              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_4px_#C9A84C]" />
             </div>
 
             {/* Grand Final Column */}
             <div className="flex flex-col justify-center h-[900px] w-72">
-              <div className="text-xs text-yellow-400 font-black uppercase tracking-wider text-center border-b border-yellow-950 pb-2 mb-4">
-                Grand Final
+              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2 mb-4">
+                GRAND FINAL
               </div>
-              <div className="bg-gradient-to-br from-indigo-950/40 via-slate-900/60 to-emerald-950/20 border-2 border-yellow-500/40 hover:border-yellow-500 rounded-2xl p-5 shadow-2xl relative overflow-hidden group transition-all duration-300">
-                <div className="absolute -top-10 -right-10 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+              
+              <div className="bg-[#101010] border border-gold hover:border-gold-light rounded-2xl p-5 shadow-2xl relative overflow-hidden group transition-all duration-300">
+                <div className="absolute -top-10 -right-10 w-24 h-24 bg-gold/10 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
                 
                 <div className="text-center mb-4">
-                  <span className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 text-[10px] px-2.5 py-1 rounded-full font-black uppercase tracking-widest inline-flex items-center gap-1">
-                    <Award className="w-3 h-3" /> Champion Match
+                  <span className="bg-gold-muted text-gold border border-gold/30 text-xs px-3 py-1 rounded-full font-bebas tracking-[0.15em] inline-flex items-center gap-1.5">
+                    <Trophy className="w-3.5 h-3.5 text-gold" /> FINAL
                   </span>
                 </div>
 
                 {bracketData?.final && (
                   <div className="space-y-4">
                     {/* Home (Finalist 1) */}
-                    <div className={`p-2.5 rounded-xl border transition-all ${
+                    <div className={`p-3 rounded-xl border transition-all ${
                       bracketData.final.predicted_winner === bracketData.final.home
-                        ? 'bg-slate-900 border-indigo-500/40 text-white font-extrabold shadow-md'
-                        : 'bg-slate-900/30 border-transparent text-slate-500 font-medium'
+                        ? 'bg-gold-muted border-gold text-white-alt font-bold shadow'
+                        : 'bg-dark-card border-white/5 text-text-muted-alt font-normal'
                     }`}>
                       <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2 truncate">
-                          <TeamFlag teamName={bracketData.final.home} className="w-5 h-3.5" />
-                          <span className="truncate text-xs md:text-sm">{bracketData.final.home}</span>
+                        <div className="flex items-center gap-2.5 truncate">
+                          <TeamFlag teamName={bracketData.final.home} className="w-5 h-3.5 shadow-sm" />
+                          <span className="truncate text-xs md:text-sm font-noto">{bracketData.final.home}</span>
                         </div>
                         {bracketData.final.predicted_winner === bracketData.final.home && (
-                          <span className="bg-emerald-500/10 text-emerald-400 text-[10px] px-1.5 py-0.5 rounded border border-emerald-500/20">Winner</span>
+                          <span className="bg-gold/20 text-gold text-[9px] px-2 py-0.5 rounded border border-gold/30 font-bebas tracking-wider uppercase">Winner</span>
                         )}
                       </div>
                     </div>
 
-                    <div className="text-center font-black text-slate-600 text-xs">VS</div>
+                    <div className="text-center font-bebas text-gold text-sm tracking-widest">VS</div>
 
                     {/* Away (Finalist 2) */}
-                    <div className={`p-2.5 rounded-xl border transition-all ${
+                    <div className={`p-3 rounded-xl border transition-all ${
                       bracketData.final.predicted_winner === bracketData.final.away
-                        ? 'bg-slate-900 border-indigo-500/40 text-white font-extrabold shadow-md'
-                        : 'bg-slate-900/30 border-transparent text-slate-500 font-medium'
+                        ? 'bg-gold-muted border-gold text-white-alt font-bold shadow'
+                        : 'bg-dark-card border-white/5 text-text-muted-alt font-normal'
                     }`}>
                       <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2 truncate">
-                          <TeamFlag teamName={bracketData.final.away} className="w-5 h-3.5" />
-                          <span className="truncate text-xs md:text-sm">{bracketData.final.away}</span>
+                        <div className="flex items-center gap-2.5 truncate">
+                          <TeamFlag teamName={bracketData.final.away} className="w-5 h-3.5 shadow-sm" />
+                          <span className="truncate text-xs md:text-sm font-noto">{bracketData.final.away}</span>
                         </div>
                         {bracketData.final.predicted_winner === bracketData.final.away && (
-                          <span className="bg-emerald-500/10 text-emerald-400 text-[10px] px-1.5 py-0.5 rounded border border-emerald-500/20">Winner</span>
+                          <span className="bg-gold/20 text-gold text-[9px] px-2 py-0.5 rounded border border-gold/30 font-bebas tracking-wider uppercase">Winner</span>
                         )}
                       </div>
                     </div>
 
                     {/* Probabilities split */}
-                    <div className="pt-2 border-t border-slate-800">
+                    <div className="pt-2.5 border-t border-white/5">
                       <ProbBar
                         homeColor={getConfedColor(bracketData.final.home)}
                         awayColor={getConfedColor(bracketData.final.away)}

@@ -1,9 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #0F172A;
-  --color-dark-card: #1E293B;
-  --color-dark-border: #334155;
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-noto: "Noto Sans", sans-serif;
+
+  --color-gold: #C9A84C;
+  --color-gold-light: #E8C96A;
+  --color-gold-muted: rgba(201,168,76,0.12);
+  --color-gold-border: rgba(201,168,76,0.18);
+  --color-gold-border-hover: rgba(201,168,76,0.5);
+  
+  --color-dark-bg: #080808;
+  --color-dark-card: #101010;
+  --color-dark-card-alt: #181818;
+  --color-dark-card-hover: #202020;
+  --color-white-alt: #F0EDE8;
+  --color-text-muted-alt: #A3A3A3;
+  --color-text-dim: #5A5A5A;
+
   --color-confed-uefa: #3B82F6;
   --color-confed-conmebol: #10B981;
   --color-confed-concacaf: #F59E0B;
@@ -14,49 +28,81 @@
 
 @utility bracket-connector {
   position: absolute;
-  border-color: #334155;
+  border-color: #222222;
   border-style: solid;
 }
 
+@utility winner-connector-glow {
+  box-shadow: 0 0 8px rgba(201, 168, 76, 0.3);
+  border-color: #C9A84C !important;
+}
+
 @utility fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@utility scale-up {
+  animation: scaleUp 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(4px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes growWidth {
+  from {
+    width: 0;
+  }
+}
+
+.animate-grow-width {
+  animation: growWidth 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @layer base {
   body {
-    @apply bg-[#0F172A] text-slate-100 antialiased selection:bg-indigo-500 selection:text-white;
-    background-color: #0F172A;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-dark-bg text-white-alt antialiased selection:bg-gold selection:text-dark-bg;
+    background-color: #080808;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif;
   }
 }
 
 /* Custom scrollbar for premium aesthetics */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0F172A;
+  background: #080808;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
-  border: 2px solid #0F172A;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid #080808;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: rgba(201, 168, 76, 0.4);
 }

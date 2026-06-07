@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Trophy, Grid, GitMerge, Users, HelpCircle, Activity } from 'lucide-react';
 import simulationData from './data/simulation_results.json';
 import OverviewTab from './components/OverviewTab';
 import GroupsTab from './components/GroupsTab';
@@ -13,49 +12,53 @@ export default function App() {
 
   // Tab mapping
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: Trophy },
-    { id: 'groups', label: 'Groups', icon: Grid },
-    { id: 'bracket', label: 'Bracket', icon: GitMerge },
-    { id: 'teams', label: 'Teams', icon: Users },
+    { id: 'overview', label: 'Overview', num: '01' },
+    { id: 'groups', label: 'Groups', num: '02' },
+    { id: 'bracket', label: 'Bracket', num: '03' },
+    { id: 'teams', label: 'Teams', num: '04' },
   ];
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-slate-100 flex flex-col font-sans select-none antialiased">
+    <div className="min-h-screen bg-dark-bg text-white-alt flex flex-col font-noto select-none antialiased">
       {/* Premium Navigation Header */}
-      <header className="sticky top-0 z-40 bg-[#0F172A]/85 backdrop-blur-md border-b border-slate-800 shadow-md">
+      <header className="sticky top-0 z-40 bg-dark-bg/90 backdrop-blur-md border-b border-gold/15 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo / Title */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 border border-indigo-400/30">
-              <Trophy className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <span className="font-black tracking-tight text-white block text-sm sm:text-base leading-none">
-                WORLD CUP 2026
-              </span>
-              <span className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">
-                Simulation Engine
+          <div className="flex items-center gap-3">
+            <img 
+              src="/logo.avif" 
+              alt="FIFA World Cup 2026 Logo" 
+              className="h-9 w-auto object-contain select-none"
+            />
+            <div className="flex flex-col justify-center">
+              <div className="flex items-baseline gap-1">
+                <span className="font-bebas text-2xl tracking-normal text-gold leading-none">WORLD CUP</span>
+                <span className="font-bebas text-2xl tracking-normal text-white-alt leading-none">2026</span>
+              </div>
+              <span className="text-[9px] text-text-muted-alt font-noto font-semibold uppercase tracking-[0.25em] mt-0.5">
+                PREDICTION ENGINE
               </span>
             </div>
           </div>
 
-          {/* Desktop/Tablet Tabs */}
-          <nav className="flex items-center gap-1 sm:gap-2">
+          {/* Navigation Tabs */}
+          <nav className="flex items-stretch h-16">
             {tabs.map((tab) => {
-              const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 ${
+                  className={`flex items-center gap-1.5 px-3.5 sm:px-5 h-full transition-all duration-200 border-b-2 font-bebas text-base sm:text-lg uppercase tracking-wider relative ${
                     isActive
-                      ? 'bg-indigo-600/10 text-indigo-400 border border-indigo-500/20 shadow-inner'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 border border-transparent'
+                      ? 'bg-gold-muted border-gold text-gold'
+                      : 'border-transparent text-text-muted-alt hover:text-white-alt hover:bg-white/[0.02]'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-400' : 'text-slate-400'}`} />
-                  <span className="hidden sm:inline">{tab.label}</span>
+                  <span className="font-noto text-[9px] text-text-muted-alt/70 font-normal tracking-normal normal-case -mt-1.5">
+                    {tab.num}
+                  </span>
+                  <span>{tab.label}</span>
                 </button>
               );
             })}
@@ -86,10 +89,10 @@ export default function App() {
       </main>
 
       {/* Premium Footer */}
-      <footer className="bg-slate-950/40 border-t border-slate-900 py-6 text-center text-xs text-slate-500 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-1">
+      <footer className="bg-dark-card border-t border-gold/10 py-6 text-center text-xs text-text-muted-alt mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
           <p>© 2026 FIFA World Cup Prediction Dashboard. All simulation weights are computational estimates.</p>
-          <div className="flex justify-center gap-4 text-[10px] text-indigo-500/60 font-semibold pt-1">
+          <div className="flex justify-center flex-wrap gap-x-4 gap-y-1 text-[10px] text-gold/60 font-semibold pt-1">
             <span>MODEL: {simulationData.metadata.model_used}</span>
             <span>•</span>
             <span>SIMULATIONS: {simulationData.metadata.n_simulations.toLocaleString()}</span>

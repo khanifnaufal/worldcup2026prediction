@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Shield, ChevronRight, HelpCircle } from 'lucide-react';
+import { X } from 'lucide-react';
 import { getConfedColor, getTeamConfed, formatPercent } from '../utils/helpers';
 import TeamFlag from './TeamFlag';
 
@@ -23,98 +23,87 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
     { label: 'Champion', rate: team.champion_rate }
   ];
 
-  // Helper to color progress bars dynamically
-  const getRateColor = (rate) => {
-    if (rate > 0.5) return '#10B981'; // Green
-    if (rate >= 0.2) return '#F59E0B'; // Yellow
-    return '#EF4444'; // Red
-  };
-
-  const getRateColorClass = (rate) => {
-    if (rate > 0.5) return 'bg-emerald-500';
-    if (rate >= 0.2) return 'bg-amber-500';
-    return 'bg-rose-500';
-  };
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Blurred Backdrop */}
+      {/* Blurred Backdrop Scrim */}
       <div 
-        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity duration-300"
+        className="absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity duration-200"
         onClick={onClose}
       />
 
-      {/* Modal Card */}
-      <div className="relative bg-[#1E293B] border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col z-10 fade-in scrollbar-thin">
-        {/* Header banner with team colors */}
-        <div className="relative p-6 border-b border-slate-800 flex justify-between items-start bg-slate-900/40">
-          <div className="space-y-2.5">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h2 className="text-2xl font-black text-white flex items-center gap-2">
-                <TeamFlag teamName={teamName} className="w-6 h-4" />
+      {/* Modal Card Box */}
+      <div className="relative bg-[#101010] border border-gold-border rounded-2xl w-full max-w-[560px] max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col z-10 scale-up scrollbar-thin">
+        {/* Header banner */}
+        <div className="relative p-6 border-b border-white/5 flex justify-between items-start bg-[#080808]/40">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <TeamFlag teamName={teamName} className="w-10 h-7 rounded border border-white/10 shadow-sm" />
+              <h2 className="text-4xl font-bebas text-white-alt leading-none mt-1">
                 {teamName}
               </h2>
               <span 
-                className="text-[10px] font-extrabold px-2 py-0.5 rounded border uppercase tracking-wider text-white"
-                style={{ backgroundColor: `${confedColor}20`, borderColor: confedColor, color: confedColor }}
+                className="text-[9px] font-extrabold px-2 py-0.5 rounded border uppercase tracking-wider font-noto"
+                style={{ backgroundColor: `${confedColor}12`, borderColor: `${confedColor}40`, color: confedColor }}
               >
                 {confed}
               </span>
             </div>
             
-            <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
-              Group <span className="text-indigo-400 font-bold">{team.group}</span>
+            <p className="text-[10px] text-text-muted-alt font-semibold uppercase tracking-wider font-noto">
+              Group Stage <span className="text-gold font-bold">Group {team.group}</span>
             </p>
           </div>
 
           <button 
             onClick={onClose}
-            className="p-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60 hover:bg-slate-700/80 text-slate-400 hover:text-white transition-all shadow-md"
+            className="text-gold hover:text-white-alt transition-colors text-3xl font-light leading-none p-1 -mt-2 -mr-1 cursor-pointer"
             title="Close"
           >
-            <X className="w-5 h-5" />
+            &times;
           </button>
         </div>
 
-        {/* Modal Content Grid */}
-        <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8 overflow-y-auto">
+        {/* Modal Content Grid (Stacked vertically on mobile, side-by-side or stacked cleanly in max 560px) */}
+        <div className="p-6 space-y-8 overflow-y-auto">
           
           {/* Section 1: Probability Stepper */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-300 uppercase tracking-widest border-b border-slate-800 pb-2 mb-4">
-                Round Advancements
+              <h3 className="text-xl font-bebas text-white-alt tracking-wide uppercase border-b border-white/5 pb-1.5 mb-2">
+                PROBABILITY BY STAGE
               </h3>
-              <p className="text-[11px] text-slate-400 -mt-2 mb-4">Cumulative probability to reach or win each round</p>
+              <p className="text-[11px] text-text-muted-alt font-noto">Cumulative probability to reach or win each round</p>
             </div>
 
-            <div className="relative pl-6 border-l-2 border-slate-800 space-y-5">
+            <div className="relative pl-6 border-l border-dashed border-[#222] space-y-6 py-2 ml-2">
               {steps.map((step, idx) => {
-                const color = getRateColor(step.rate);
-                const colorClass = getRateColorClass(step.rate);
+                const hasReached = step.rate > 0;
 
                 return (
-                  <div key={idx} className="relative group">
-                    {/* Circle Bullet */}
+                  <div key={idx} className="relative group space-y-1">
+                    {/* 8px Dot centered on line */}
                     <div 
-                      className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 bg-slate-900 transition-all duration-300"
-                      style={{ borderColor: color }}
+                      className={`absolute -left-[28px] top-1.5 w-2 h-2 rounded-full transition-all duration-300 ${
+                        hasReached ? 'bg-gold shadow-[0_0_6px_#C9A84C]' : 'bg-[#2A2A2A]'
+                      }`}
                     />
 
-                    {/* Step Content */}
-                    <div className="space-y-1">
-                      <div className="flex justify-between items-center text-xs font-bold">
-                        <span className="text-slate-350 text-slate-200">{step.label}</span>
-                        <span style={{ color }}>{formatPercent(step.rate)}</span>
-                      </div>
+                    {/* Step Info Row */}
+                    <div className="flex justify-between items-baseline font-noto">
+                      <span className="text-xs tracking-[0.1em] text-text-muted-alt uppercase font-semibold">
+                        {step.label}
+                      </span>
+                      <span className="font-bebas text-xl text-gold tabular-nums">
+                        {formatPercent(step.rate)}
+                      </span>
+                    </div>
 
-                      {/* Micro Progress Bar */}
-                      <div className="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-900/60">
-                        <div 
-                          className={`h-full rounded-full transition-all duration-500 ${colorClass}`}
-                          style={{ width: `${step.rate * 100}%` }}
-                        />
-                      </div>
+                    {/* Progress Bar */}
+                    <div className="w-full bg-[#080808] rounded-full h-1.5 overflow-hidden border border-white/5">
+                      <div 
+                        className="h-full rounded-full bg-gold transition-all duration-500 animate-grow-width"
+                        style={{ width: `${step.rate * 100}%` }}
+                      />
                     </div>
                   </div>
                 );
@@ -123,17 +112,16 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
           </div>
 
           {/* Section 2: Most Likely Path */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-300 uppercase tracking-widest border-b border-slate-800 pb-2 mb-4">
-                Most Likely Path
+              <h3 className="text-xl font-bebas text-white-alt tracking-wide uppercase border-b border-white/5 pb-1.5 mb-2">
+                MOST LIKELY PATH
               </h3>
-              <p className="text-[11px] text-slate-400 -mt-2 mb-4">The highest probability matchups based on simulations</p>
+              <p className="text-[11px] text-text-muted-alt font-noto">The highest probability matchups based on simulations</p>
             </div>
 
             <div className="space-y-3">
               {team.most_likely_path && team.most_likely_path.map((pathStep, idx) => {
-                // Filter rounds with zero reach_rate (excluding Group Stage)
                 const rate = pathStep.round === 'Group Stage' ? pathStep.qualify_rate : pathStep.reach_rate;
                 if (rate !== undefined && rate <= 0) return null;
 
@@ -142,37 +130,37 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
                 return (
                   <div 
                     key={idx}
-                    className="bg-slate-900/40 border border-slate-800/80 hover:border-slate-700/60 p-3.5 rounded-xl flex flex-col justify-between gap-2.5 shadow transition-colors duration-200"
+                    className="bg-[#080808]/40 border border-white/5 hover:border-gold-border/40 p-3.5 rounded-xl flex items-center justify-between gap-3 shadow transition-colors duration-150"
                   >
-                    <div className="space-y-1">
-                      <span className="text-[10px] font-black uppercase text-indigo-400 tracking-wider">
+                    <div className="flex flex-col gap-1 flex-1 min-w-0 font-noto">
+                      <span className="text-[10px] font-bold uppercase text-text-muted-alt tracking-wider">
                         {pathStep.round}
                       </span>
 
                       {isGroupStage ? (
-                        <div className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-slate-350">
-                          <span className="text-slate-400 font-semibold mr-1">vs</span>
-                          {pathStep.opponents ? pathStep.opponents.map((opp, i) => (
-                            <span key={opp} className="inline-flex items-center gap-1 bg-slate-900 px-2 py-0.5 rounded border border-slate-800/60 font-semibold text-slate-200">
-                              <TeamFlag teamName={opp} className="w-3.5 h-2.5" />
+                        <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold text-white-alt truncate">
+                          <span className="text-text-muted-alt font-normal mr-0.5">vs</span>
+                          {pathStep.opponents ? pathStep.opponents.map((opp) => (
+                            <span key={opp} className="inline-flex items-center gap-1 bg-[#101010] px-2 py-0.5 rounded border border-white/5 font-semibold text-white-alt">
+                              <TeamFlag teamName={opp} className="w-3.5 h-2.5 shadow-sm" />
                               {opp}
                             </span>
                           )) : 'TBD'}
                         </div>
                       ) : (
-                        <p className="text-xs font-semibold text-slate-200 flex items-center gap-1.5">
-                          <span className="text-slate-400 font-semibold mr-1">vs</span>
-                          <TeamFlag teamName={pathStep.most_likely_opponent} className="w-4 h-2.5" />
-                          {pathStep.most_likely_opponent}
+                        <p className="text-xs font-bold text-white-alt flex items-center gap-1.5 truncate">
+                          <span className="text-text-muted-alt font-normal mr-0.5">vs</span>
+                          <TeamFlag teamName={pathStep.most_likely_opponent} className="w-4 h-2.5 shadow-sm" />
+                          <span className="truncate">{pathStep.most_likely_opponent}</span>
                         </p>
                       )}
                     </div>
 
-                    <div className="text-right border-t border-slate-800/45 pt-1.5 mt-0.5 flex justify-between items-center">
-                      <span className="text-[9px] uppercase tracking-wider text-slate-500 block font-bold">
+                    <div className="text-right flex-shrink-0 flex flex-col justify-center items-end">
+                      <span className="text-[9px] uppercase tracking-wider text-text-muted-alt font-semibold font-noto">
                         {isGroupStage ? 'Qualify Prob' : 'Reach Prob'}
                       </span>
-                      <span className="text-xs font-bold text-slate-300">
+                      <span className="text-xl font-bebas text-gold leading-none mt-0.5">
                         {formatPercent(rate)}
                       </span>
                     </div>
@@ -185,7 +173,7 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 bg-slate-900/60 border-t border-slate-850 flex justify-between items-center text-[10px] text-slate-500 font-semibold px-6">
+        <div className="p-4 bg-[#080808]/60 border-t border-white/5 flex justify-between items-center text-[9px] text-text-muted-alt font-semibold px-6 font-noto">
           <span>FIFA World Cup 2026 Simulation</span>
           <span>Logistic Regression Model</span>
         </div>

@@ -1,6 +1,6 @@
 # ⚽ World Cup 2026 Winner Prediction
 
-A project to predict the winner of the 2026 FIFA World Cup using machine learning and Monte Carlo simulations, with a planned React visualization. The data is compiled by scraping Wikipedia and utilizing a Kaggle dataset.
+An interactive prediction engine to simulate and forecast the winner of the 2026 FIFA World Cup using machine learning and Monte Carlo simulations (10,000+ runs), featuring a premium interactive React dashboard. The data is compiled by scraping Wikipedia and utilizing a Kaggle dataset.
 
 ---
 
@@ -21,6 +21,14 @@ worldcup2026/
 │   │   └── match_features.csv         # Match-level dataset for training
 │   └── output/
 │       └── simulation_results.json    # Results of 10,000 simulations
+├── frontend/                          # Interactive React + Vite frontend application
+│   ├── public/                        # Static assets
+│   ├── src/
+│   │   ├── components/                # Dashboard tabs, modals, and running marquee
+│   │   ├── data/                      # Simulation outputs imported in frontend
+│   │   └── utils/                     # Helper files (flags, configurations)
+│   ├── package.json
+│   └── vite.config.js
 ├── models/
 │   ├── best_model.pkl                 # Selected Logistic Regression model
 │   └── feature_names.pkl              # Feature names used by the model
@@ -150,6 +158,8 @@ python train_simulate.py
 
 ## ⚙️ Setup & Installation
 
+### 🐍 Backend & Model Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/khanifnaufal/worldcup2026.git
@@ -163,7 +173,7 @@ source .venv/bin/activate  # Mac/Linux
 # Install dependencies
 pip install requests beautifulsoup4 pandas numpy scikit-learn xgboost joblib
 
-# Run the pipeline
+# Run the data & simulation pipeline
 python scraper/scrape_wikipedia.py
 python process_kaggle.py
 python engineer_features.py
@@ -171,6 +181,23 @@ python train_simulate.py
 ```
 
 > **Note**: Make sure to download `results.csv` and `former_names.csv` from [Kaggle](https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017) and place them in the `data/raw/` directory before running the pipeline.
+
+### ⚛️ Frontend Setup & Run
+
+Once the pipeline generates `simulation_results.json`, the React dashboard displays and interacts with it:
+
+```bash
+# Navigate to the frontend directory
+cd frontend
+
+# Install Node dependencies
+npm install
+
+# Run the dashboard locally
+npm run dev
+```
+
+The app will start on [http://localhost:5173](http://localhost:5173).
 
 ---
 
@@ -193,7 +220,7 @@ However, the simulation output remains **fully aligned with football intuition**
 | Data Processing | pandas, numpy |
 | Machine Learning | scikit-learn, XGBoost |
 | Simulation | Monte Carlo (numpy random) |
-| Visualization | React, Recharts, Tailwind CSS (coming soon) |
+| Visualization | React, Recharts, Tailwind CSS (v4), Lucide Icons |
 
 ---
 

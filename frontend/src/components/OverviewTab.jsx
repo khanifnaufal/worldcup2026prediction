@@ -12,6 +12,7 @@ import {
 import { Trophy, Sparkles, TrendingUp } from "lucide-react";
 import { getConfedColor, getTeamConfed, formatPercent } from "../utils/helpers";
 import TeamFlag from "./TeamFlag";
+import MarqueeSeparator from "./MarqueeSeparator";
 
 const useCountUp = (target, duration = 1200, delay = 0) => {
   const [value, setValue] = useState(0);
@@ -82,6 +83,11 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
       }))
       .sort((a, b) => b.champion_rate - a.champion_rate);
   }, [teams]);
+
+  // Alphabetical list of teams for the marquee separator
+  const alphabeticalTeams = useMemo(() => {
+    return [...allTeams].sort((a, b) => a.name.localeCompare(b.name));
+  }, [allTeams]);
 
   // Podium teams
   const podium = useMemo(() => {
@@ -312,7 +318,7 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
             <span className="text-white-alt font-semibold">
               {metadata?.model_used}
             </span>{" "}
-            model (F1-Score: {metadata?.model_f1_score?.toFixed(4)}).
+            model.
           </p>
 
           {/* Most Likely Final Badge */}
@@ -427,8 +433,8 @@ export default function OverviewTab({ simulationData, onSelectTeam }) {
         )}
       </div>
 
-      {/* Horizontal Divider */}
-      <div className="h-px w-full bg-gold/10" />
+      {/* Running Text Marquee Separator */}
+      <MarqueeSeparator teams={alphabeticalTeams} onSelectTeam={onSelectTeam} />
 
       {/* Grid: Win Probability Chart & Dark Horses */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

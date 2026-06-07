@@ -32,7 +32,7 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
       />
 
       {/* Modal Card Box */}
-      <div className="relative bg-[#101010] border border-gold-border rounded-2xl w-full max-w-[560px] max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col z-10 scale-up scrollbar-thin">
+      <div className="relative bg-[#101010] border border-gold-border rounded-2xl w-full max-w-[560px] md:max-w-[1000px] max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col z-10 scale-up scrollbar-thin">
         {/* Header banner */}
         <div className="relative p-6 border-b border-white/5 flex justify-between items-start bg-[#080808]/40">
           <div className="space-y-2">
@@ -63,43 +63,43 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
           </button>
         </div>
 
-        {/* Modal Content Grid (Stacked vertically on mobile, side-by-side or stacked cleanly in max 560px) */}
-        <div className="p-6 space-y-8 overflow-y-auto">
+        {/* Modal Content Grid (Stacked vertically on mobile, side-by-side on desktop) */}
+        <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 overflow-hidden">
           
           {/* Section 1: Probability Stepper */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div>
-              <h3 className="text-xl font-bebas text-white-alt tracking-wide uppercase border-b border-white/5 pb-1.5 mb-2">
+              <h3 className="text-lg font-bebas text-white-alt tracking-wide uppercase border-b border-white/5 pb-1 mb-1">
                 PROBABILITY BY STAGE
               </h3>
-              <p className="text-[11px] text-text-muted-alt font-noto">Cumulative probability to reach or win each round</p>
+              <p className="text-[10px] text-text-muted-alt font-noto">Cumulative probability to reach or win each round</p>
             </div>
 
-            <div className="relative pl-6 border-l border-dashed border-[#222] space-y-6 py-2 ml-2">
+            <div className="relative pl-5 border-l border-dashed border-[#222] space-y-3 py-1 ml-1.5">
               {steps.map((step, idx) => {
                 const hasReached = step.rate > 0;
 
                 return (
-                  <div key={idx} className="relative group space-y-1">
+                  <div key={idx} className="relative group space-y-0.5">
                     {/* 8px Dot centered on line */}
                     <div 
-                      className={`absolute -left-[28px] top-1.5 w-2 h-2 rounded-full transition-all duration-300 ${
+                      className={`absolute -left-[24px] top-1 w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                         hasReached ? 'bg-gold shadow-[0_0_6px_#C9A84C]' : 'bg-[#2A2A2A]'
                       }`}
                     />
 
                     {/* Step Info Row */}
                     <div className="flex justify-between items-baseline font-noto">
-                      <span className="text-xs tracking-[0.1em] text-text-muted-alt uppercase font-semibold">
+                      <span className="text-[11px] tracking-[0.08em] text-text-muted-alt uppercase font-semibold">
                         {step.label}
                       </span>
-                      <span className="font-bebas text-xl text-gold tabular-nums">
+                      <span className="font-bebas text-xl text-gold tabular-nums leading-none">
                         {formatPercent(step.rate)}
                       </span>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full bg-[#080808] rounded-full h-1.5 overflow-hidden border border-white/5">
+                    <div className="w-full bg-[#080808] rounded-full h-1 overflow-hidden border border-white/5">
                       <div 
                         className="h-full rounded-full bg-gold transition-all duration-500 animate-grow-width"
                         style={{ width: `${step.rate * 100}%` }}
@@ -112,15 +112,15 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
           </div>
 
           {/* Section 2: Most Likely Path */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div>
-              <h3 className="text-xl font-bebas text-white-alt tracking-wide uppercase border-b border-white/5 pb-1.5 mb-2">
+              <h3 className="text-lg font-bebas text-white-alt tracking-wide uppercase border-b border-white/5 pb-1 mb-1">
                 MOST LIKELY PATH
               </h3>
-              <p className="text-[11px] text-text-muted-alt font-noto">The highest probability matchups based on simulations</p>
+              <p className="text-[10px] text-text-muted-alt font-noto">The highest probability matchups based on simulations</p>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               {team.most_likely_path && team.most_likely_path.map((pathStep, idx) => {
                 const rate = pathStep.round === 'Group Stage' ? pathStep.qualify_rate : pathStep.reach_rate;
                 if (rate !== undefined && rate <= 0) return null;
@@ -130,9 +130,9 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
                 return (
                   <div 
                     key={idx}
-                    className="bg-[#080808]/40 border border-white/5 hover:border-gold-border/40 p-3.5 rounded-xl flex items-center justify-between gap-3 shadow transition-colors duration-150"
+                    className="bg-[#080808]/40 border border-white/5 hover:border-gold-border/40 p-2.5 rounded-xl flex items-center justify-between gap-2.5 shadow transition-colors duration-150"
                   >
-                    <div className="flex flex-col gap-1 flex-1 min-w-0 font-noto">
+                    <div className="flex flex-col gap-0.5 flex-1 min-w-0 font-noto">
                       <span className="text-[10px] font-bold uppercase text-text-muted-alt tracking-wider">
                         {pathStep.round}
                       </span>
@@ -157,10 +157,10 @@ export default function TeamDetailModal({ teamName, simulationData, onClose }) {
                     </div>
 
                     <div className="text-right flex-shrink-0 flex flex-col justify-center items-end">
-                      <span className="text-[9px] uppercase tracking-wider text-text-muted-alt font-semibold font-noto">
+                      <span className="text-[8px] uppercase tracking-wider text-text-muted-alt font-semibold font-noto">
                         {isGroupStage ? 'Qualify Prob' : 'Reach Prob'}
                       </span>
-                      <span className="text-xl font-bebas text-gold leading-none mt-0.5">
+                      <span className="text-lg font-bebas text-gold leading-none mt-0.5">
                         {formatPercent(rate)}
                       </span>
                     </div>

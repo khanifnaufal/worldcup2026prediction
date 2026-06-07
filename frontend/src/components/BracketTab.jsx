@@ -11,172 +11,110 @@ export default function BracketTab({ simulationData }) {
 
   const groupsList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 
-  // Helper to render the split probability bar
-  const ProbBar = ({ homeColor, awayColor, homeProb, drawProb, awayProb }) => {
+  // Helper to render a team row with flag, name, and winner status (percentages moved to bottom progress bar)
+  const TeamRow = ({ name, isWinner, isDraw = false }) => {
     return (
-      <div className="w-full h-1.5 rounded-full overflow-hidden bg-[#080808] flex mt-2 border border-[#080808]">
-        <div
-          className="h-full transition-all duration-300"
-          style={{ width: `${homeProb * 100}%`, backgroundColor: homeColor }}
-          title={`Home Win: ${formatPercent(homeProb)}`}
-        />
-        <div
-          className="h-full bg-[#333] transition-all duration-300"
-          style={{ width: `${drawProb * 100}%` }}
-          title={`Draw: ${formatPercent(drawProb)}`}
-        />
-        <div
-          className="h-full transition-all duration-300"
-          style={{ width: `${awayProb * 100}%`, backgroundColor: awayColor }}
-          title={`Away Win: ${formatPercent(awayProb)}`}
-        />
+      <div className="w-full font-noto">
+        <div className={`flex justify-between items-center px-1.5 py-0.5 md:px-2 md:py-1 rounded transition-all ${
+          isWinner ? 'bg-gold-muted border-l border-gold font-bold text-white-alt' : 'text-text-muted-alt font-normal'
+        }`}>
+          <div className="flex items-center gap-1.5 truncate">
+            {isWinner ? (
+              <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 animate-pulse" />
+            ) : (
+              <span className="w-1.5 h-1.5 rounded-full bg-text-dim flex-shrink-0" />
+            )}
+            {!isDraw && <TeamFlag teamName={name} className="w-4.5 h-3 shadow-sm" />}
+            <span className="truncate text-[10px] font-noto">{isDraw ? 'Draw Option' : name}</span>
+          </div>
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {isWinner && (
+              <span className="bg-gold text-dark-bg font-bebas font-bold text-[10px] md:text-[11px] tracking-wider px-1.5 py-0.5 rounded shadow-sm select-none ml-1.5 inline-flex items-center leading-none align-middle animate-pulse">
+                {isDraw ? 'DRAW' : 'WINNER'}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
     );
   };
 
-  // Helper to format win/draw/loss text nicely
-  const ProbText = ({ home, away, homeProb, drawProb, awayProb }) => {
-    return (
-      <div className="flex justify-between items-center text-[10px] text-text-muted-alt mt-1 font-semibold font-noto tabular-nums px-0.5">
-        <span>{formatPercent(homeProb)}</span>
-        <span>Draw {formatPercent(drawProb)}</span>
-        <span>{formatPercent(awayProb)}</span>
-      </div>
-    );
-  };
-
-  // Helper to render individual match cards
-  const MatchCard = ({ match }) => {
+  // Helper to render individual match cards with bottom side-by-side probability bars & percentages
+  const MatchCard = ({ match, isKnockout = false }) => {
     if (!match) return null;
     
     const homeColor = getConfedColor(match.home);
     const awayColor = getConfedColor(match.away);
-    const hasDraw = match.draw_prob !== undefined;
+    const hasDraw = !isKnockout && match.draw_prob !== undefined;
 
     const isHomeWinner = match.predicted_winner === match.home;
     const isAwayWinner = match.predicted_winner === match.away;
     const isDrawWinner = match.predicted_winner === 'Draw';
 
-    if (hasDraw) {
-      // Group Stage Card
-      return (
-        <div className="bg-dark-card border border-white/5 rounded-xl p-3.5 shadow-lg hover:border-gold-border/40 hover:-translate-y-[2px] transition-all duration-150 w-full max-w-sm space-y-2.5">
-          <div className="space-y-1">
-            {/* Home Team */}
-            <div className={`flex justify-between items-center px-2 py-1 rounded transition-all ${
-              isHomeWinner ? 'bg-gold-muted font-bold text-white-alt border-l border-gold' : 'text-text-muted-alt'
-            }`}>
-              <div className="flex items-center gap-2 truncate">
-                {isHomeWinner ? (
-                  <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0 animate-pulse" />
-                ) : (
-                  <span className="w-1 h-1 rounded-full bg-text-dim flex-shrink-0" />
-                )}
-                <TeamFlag teamName={match.home} className="w-4.5 h-3 shadow-sm" />
-                <span className="truncate text-xs font-noto">{match.home}</span>
-              </div>
-              {isHomeWinner && <span className="text-gold font-bebas text-[10px] tracking-wider">WINNER</span>}
-            </div>
+    return (
+      <div className="bg-dark-card border border-white/5 rounded-xl p-1.5 shadow-lg hover:border-gold-border/40 hover:-translate-y-[2px] transition-all duration-150 w-full space-y-2.5">
+        <div className="space-y-1.5">
+          {/* Home Team */}
+          <TeamRow 
+            name={match.home}
+            isWinner={isHomeWinner}
+          />
 
-            {/* Draw Option */}
-            {isDrawWinner ? (
-              <div className="flex justify-between items-center px-2 py-1 rounded bg-gold-muted border-l border-gold font-bold text-white-alt">
-                <div className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0 animate-pulse" />
-                  <span className="text-xs font-noto">Draw (Predicted)</span>
-                </div>
-                <span className="text-gold font-bebas text-[10px] tracking-wider">DRAW</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2 px-2 py-0.5 text-text-muted-alt text-[10px] pl-[22px]">
-                <span className="font-noto">Draw Option</span>
-              </div>
-            )}
-
-            {/* Away Team */}
-            <div className={`flex justify-between items-center px-2 py-1 rounded transition-all ${
-              isAwayWinner ? 'bg-gold-muted font-bold text-white-alt border-l border-gold' : 'text-text-muted-alt'
-            }`}>
-              <div className="flex items-center gap-2 truncate">
-                {isAwayWinner ? (
-                  <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0 animate-pulse" />
-                ) : (
-                  <span className="w-1 h-1 rounded-full bg-text-dim flex-shrink-0" />
-                )}
-                <TeamFlag teamName={match.away} className="w-4.5 h-3 shadow-sm" />
-                <span className="truncate text-xs font-noto">{match.away}</span>
-              </div>
-              {isAwayWinner && <span className="text-gold font-bebas text-[10px] tracking-wider">WINNER</span>}
-            </div>
-          </div>
-
-          {/* Probability splits */}
-          <div>
-            <ProbBar
-              homeColor={homeColor}
-              awayColor={awayColor}
-              homeProb={match.home_win_prob}
-              drawProb={match.draw_prob || 0}
-              awayProb={match.away_win_prob}
+          {/* Draw Option */}
+          {hasDraw && (
+            <TeamRow 
+              name="Draw"
+              isWinner={isDrawWinner}
+              isDraw={true}
             />
-            <ProbText
-              home={match.home}
-              away={match.away}
-              homeProb={match.home_win_prob}
-              drawProb={match.draw_prob || 0}
-              awayProb={match.away_win_prob}
-            />
-          </div>
+          )}
+
+          {/* Away Team */}
+          <TeamRow 
+            name={match.away}
+            isWinner={isAwayWinner}
+          />
         </div>
-      );
-    } else {
-      // Knockout Stage Card
-      return (
-        <div className="bg-dark-card border border-white/5 border-l-[3px] border-l-white/5 rounded-xl p-3 shadow-lg hover:border-gold-border hover:-translate-y-[2px] transition-all duration-150 w-full max-w-sm space-y-2">
-          <div className="space-y-1">
-            {/* Home Team */}
-            <div className={`flex justify-between items-center px-1.5 py-0.5 rounded ${
-              isHomeWinner ? 'font-bold text-white-alt' : 'text-text-muted-alt font-normal'
-            }`}>
-              <div className="flex items-center gap-2 truncate">
-                <TeamFlag teamName={match.home} className="w-4.5 h-3 shadow-sm" />
-                <span className="truncate text-xs font-noto">{match.home}</span>
-              </div>
-              {isHomeWinner && <span className="text-gold font-bold text-xs">✓</span>}
-            </div>
 
-            {/* Away Team */}
-            <div className={`flex justify-between items-center px-1.5 py-0.5 rounded ${
-              isAwayWinner ? 'font-bold text-white-alt' : 'text-text-muted-alt font-normal'
-            }`}>
-              <div className="flex items-center gap-2 truncate">
-                <TeamFlag teamName={match.away} className="w-4.5 h-3 shadow-sm" />
-                <span className="truncate text-xs font-noto">{match.away}</span>
-              </div>
-              {isAwayWinner && <span className="text-gold font-bold text-xs">✓</span>}
-            </div>
-          </div>
+        {/* Side-by-Side (Kanan-Kiri) Progress Bars with Percentages */}
+        <div className="flex items-center gap-1.5 px-1 pt-1.5 border-t border-white/5 font-noto">
+          {/* Home Win Probability Text */}
+          <span className="text-[10px] font-semibold text-text-muted-alt tabular-nums flex-shrink-0 w-8 text-right">
+            {formatPercent(match.home_win_prob)}
+          </span>
 
-          {/* Probability splits */}
-          <div>
-            <ProbBar
-              homeColor={homeColor}
-              awayColor={awayColor}
-              homeProb={match.home_win_prob}
-              drawProb={0}
-              awayProb={match.away_win_prob}
-            />
-            <ProbText
-              home={match.home}
-              away={match.away}
-              homeProb={match.home_win_prob}
-              drawProb={0}
-              awayProb={match.away_win_prob}
+          {/* Home Bar (Left) */}
+          <div className="flex-1 bg-[#080808]/60 h-1 rounded-full overflow-hidden flex justify-end">
+            <div 
+              className="h-full rounded-full transition-all duration-300"
+              style={{ width: `${match.home_win_prob * 100}%`, backgroundColor: homeColor }}
             />
           </div>
+          
+          {/* Center text / Draw label */}
+          {hasDraw ? (
+            <div className="flex-shrink-0 text-[8px] font-semibold text-text-muted-alt bg-[#080808]/85 border border-white/5 px-1 py-0.5 rounded tabular-nums select-none leading-none">
+              D: {formatPercent(match.draw_prob)}
+            </div>
+          ) : (
+            <div className="flex-shrink-0 text-[9px] font-bebas text-gold/60 tracking-wider select-none leading-none">VS</div>
+          )}
+          
+          {/* Away Bar (Right) */}
+          <div className="flex-1 bg-[#080808]/60 h-1 rounded-full overflow-hidden flex justify-start">
+            <div 
+              className="h-full rounded-full transition-all duration-300"
+              style={{ width: `${match.away_win_prob * 100}%`, backgroundColor: awayColor }}
+            />
+          </div>
+
+          {/* Away Win Probability Text */}
+          <span className="text-[10px] font-semibold text-text-muted-alt tabular-nums flex-shrink-0 w-8 text-left">
+            {formatPercent(match.away_win_prob)}
+          </span>
         </div>
-      );
-    }
+      </div>
+    );
   };
 
   // Organize Knockout bracket paths
@@ -288,156 +226,163 @@ export default function BracketTab({ simulationData }) {
         </div>
 
         {/* Horizontal Scrollable Bracket Workspace */}
-        <div className="overflow-x-auto pb-6 pt-4 scrollbar-thin">
-          <div className="flex items-center gap-8 md:gap-12 min-w-[1000px] px-4">
+        <div className="md:overflow-x-visible pt-2">
+          <div className="w-full px-2">
             
-            {/* Round of 32 Column */}
-            <div className="flex flex-col gap-6 w-60">
-              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
-                ROUND OF 32
-              </div>
-              {activeMatches?.r32.map((match, idx) => (
-                <div key={idx} className="h-[95px] flex items-center">
-                  <MatchCard match={match} />
-                </div>
-              ))}
+            {/* Column Headers */}
+            <div className="flex items-center gap-3 md:gap-5 pb-3 mb-4 border-b border-white/5 text-center font-bebas text-gold text-xs tracking-[0.2em]">
+              <div className="flex-1 min-w-0">ROUND OF 32</div>
+              <div className="w-4 flex-shrink-0"></div> {/* Spacer for R32-R16 lines */}
+              <div className="flex-1 min-w-0">ROUND OF 16</div>
+              <div className="w-4 flex-shrink-0"></div> {/* Spacer for R16-QF lines */}
+              <div className="flex-1 min-w-0">QUARTER FINALS</div>
+              <div className="w-4 flex-shrink-0"></div> {/* Spacer for QF-SF lines */}
+              <div className="flex-1 min-w-0">SEMI FINALS</div>
+              <div className="w-4 flex-shrink-0"></div> {/* Spacer for SF-Final line */}
+              <div className="w-44 flex-shrink-0">GRAND FINAL</div>
             </div>
 
-            {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-text-dim">
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
-            </div>
-
-            {/* Round of 16 Column */}
-            <div className="flex flex-col justify-around h-[900px] w-60">
-              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
-                ROUND OF 16
-              </div>
-              {activeMatches?.r16.map((match, idx) => (
-                <div key={idx} className="h-[210px] flex items-center">
-                  <MatchCard match={match} />
-                </div>
-              ))}
-            </div>
-
-            {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-text-dim">
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
-            </div>
-
-            {/* Quarter Finals Column */}
-            <div className="flex flex-col justify-around h-[900px] w-60">
-              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
-                QUARTER FINALS
-              </div>
-              {activeMatches?.qf.map((match, idx) => (
-                <div key={idx} className="h-[420px] flex items-center">
-                  <MatchCard match={match} />
-                </div>
-              ))}
-            </div>
-
-            {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-text-dim">
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_3px_#C9A84C]" />
-            </div>
-
-            {/* Semi Finals Column */}
-            <div className="flex flex-col justify-around h-[900px] w-60">
-              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2">
-                SEMI FINALS
-              </div>
-              {activeMatches?.sf.map((match, idx) => (
-                <div key={idx} className="h-[840px] flex items-center">
-                  <MatchCard match={match} />
-                </div>
-              ))}
-            </div>
-
-            {/* Connecting Chevron Column */}
-            <div className="flex flex-col justify-around h-[900px] text-text-dim animate-pulse">
-              <ChevronRight className="w-5 h-5 text-gold drop-shadow-[0_0_4px_#C9A84C]" />
-            </div>
-
-            {/* Grand Final Column */}
-            <div className="flex flex-col justify-center h-[900px] w-72">
-              <div className="text-xs text-gold font-bebas tracking-[0.2em] text-center border-b border-gold/15 pb-2 mb-4">
-                GRAND FINAL
-              </div>
+            {/* Brackets Grid Workspace */}
+            <div className="flex items-center gap-3 md:gap-5 h-[780px]">
               
-              <div className="bg-[#101010] border border-gold hover:border-gold-light rounded-2xl p-5 shadow-2xl relative overflow-hidden group transition-all duration-300">
-                <div className="absolute -top-10 -right-10 w-24 h-24 bg-gold/10 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
-                
-                <div className="text-center mb-4">
-                  <span className="bg-gold-muted text-gold border border-gold/30 text-xs px-3 py-1 rounded-full font-bebas tracking-[0.15em] inline-flex items-center gap-1.5">
-                    <Trophy className="w-3.5 h-3.5 text-gold" /> FINAL
-                  </span>
-                </div>
-
-                {bracketData?.final && (
-                  <div className="space-y-4">
-                    {/* Home (Finalist 1) */}
-                    <div className={`p-3 rounded-xl border transition-all ${
-                      bracketData.final.predicted_winner === bracketData.final.home
-                        ? 'bg-gold-muted border-gold text-white-alt font-bold shadow'
-                        : 'bg-dark-card border-white/5 text-text-muted-alt font-normal'
-                    }`}>
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2.5 truncate">
-                          <TeamFlag teamName={bracketData.final.home} className="w-5 h-3.5 shadow-sm" />
-                          <span className="truncate text-xs md:text-sm font-noto">{bracketData.final.home}</span>
-                        </div>
-                        {bracketData.final.predicted_winner === bracketData.final.home && (
-                          <span className="bg-gold/20 text-gold text-[9px] px-2 py-0.5 rounded border border-gold/30 font-bebas tracking-wider uppercase">Winner</span>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="text-center font-bebas text-gold text-sm tracking-widest">VS</div>
-
-                    {/* Away (Finalist 2) */}
-                    <div className={`p-3 rounded-xl border transition-all ${
-                      bracketData.final.predicted_winner === bracketData.final.away
-                        ? 'bg-gold-muted border-gold text-white-alt font-bold shadow'
-                        : 'bg-dark-card border-white/5 text-text-muted-alt font-normal'
-                    }`}>
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2.5 truncate">
-                          <TeamFlag teamName={bracketData.final.away} className="w-5 h-3.5 shadow-sm" />
-                          <span className="truncate text-xs md:text-sm font-noto">{bracketData.final.away}</span>
-                        </div>
-                        {bracketData.final.predicted_winner === bracketData.final.away && (
-                          <span className="bg-gold/20 text-gold text-[9px] px-2 py-0.5 rounded border border-gold/30 font-bebas tracking-wider uppercase">Winner</span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Probabilities split */}
-                    <div className="pt-2.5 border-t border-white/5">
-                      <ProbBar
-                        homeColor={getConfedColor(bracketData.final.home)}
-                        awayColor={getConfedColor(bracketData.final.away)}
-                        homeProb={bracketData.final.home_win_prob}
-                        drawProb={bracketData.final.draw_prob || 0}
-                        awayProb={bracketData.final.away_win_prob}
-                      />
-                      <ProbText
-                        home={bracketData.final.home}
-                        away={bracketData.final.away}
-                        homeProb={bracketData.final.home_win_prob}
-                        drawProb={bracketData.final.draw_prob || 0}
-                        awayProb={bracketData.final.away_win_prob}
-                      />
-                    </div>
+              {/* Round of 32 Column */}
+              <div className="flex flex-col justify-between h-[780px] flex-1 min-w-0">
+                {activeMatches?.r32.map((match, idx) => (
+                  <div key={idx} className="h-[97px] flex items-center">
+                    <MatchCard match={match} isKnockout />
                   </div>
-                )}
+                ))}
               </div>
-            </div>
 
+              {/* Connecting Lines: R32 -> R16 */}
+              <div className="w-4 h-full relative flex-shrink-0">
+                <svg viewBox="0 0 24 780" className="absolute inset-0 w-full h-full text-gold" fill="none" stroke="rgba(201, 168, 76, 0.45)" strokeWidth="2">
+                  <path d="M 0,48.75 L 12,48.75 L 12,146.25 L 0,146.25 M 12,97.5 L 24,97.5" />
+                  <path d="M 0,243.75 L 12,243.75 L 12,341.25 L 0,341.25 M 12,292.5 L 24,292.5" />
+                  <path d="M 0,438.75 L 12,438.75 L 12,536.25 L 0,536.25 M 12,487.5 L 24,487.5" />
+                  <path d="M 0,633.75 L 12,633.75 L 12,731.25 L 0,731.25 M 12,682.5 L 24,682.5" />
+                </svg>
+              </div>
+
+              {/* Round of 16 Column */}
+              <div className="flex flex-col justify-between h-[780px] flex-1 min-w-0">
+                {activeMatches?.r16.map((match, idx) => (
+                  <div key={idx} className="h-[195px] flex items-center">
+                    <MatchCard match={match} isKnockout />
+                  </div>
+                ))}
+              </div>
+
+              {/* Connecting Lines: R16 -> QF */}
+              <div className="w-4 h-full relative flex-shrink-0">
+                <svg viewBox="0 0 24 780" className="absolute inset-0 w-full h-full text-gold" fill="none" stroke="rgba(201, 168, 76, 0.45)" strokeWidth="2">
+                  <path d="M 0,97.5 L 12,97.5 L 12,292.5 L 0,292.5 M 12,195 L 24,195" />
+                  <path d="M 0,487.5 L 12,487.5 L 12,682.5 L 0,682.5 M 12,585 L 24,585" />
+                </svg>
+              </div>
+
+              {/* Quarter Finals Column */}
+              <div className="flex flex-col justify-between h-[780px] flex-1 min-w-0">
+                {activeMatches?.qf.map((match, idx) => (
+                  <div key={idx} className="h-[390px] flex items-center">
+                    <MatchCard match={match} isKnockout />
+                  </div>
+                ))}
+              </div>
+
+              {/* Connecting Lines: QF -> SF */}
+              <div className="w-4 h-full relative flex-shrink-0">
+                <svg viewBox="0 0 24 780" className="absolute inset-0 w-full h-full text-gold" fill="none" stroke="rgba(201, 168, 76, 0.45)" strokeWidth="2">
+                  <path d="M 0,195 L 12,195 L 12,585 L 0,585 M 12,390 L 24,390" />
+                </svg>
+              </div>
+
+              {/* Semi Finals Column */}
+              <div className="flex flex-col justify-between h-[780px] flex-1 min-w-0">
+                {activeMatches?.sf.map((match, idx) => (
+                  <div key={idx} className="h-[780px] flex items-center">
+                    <MatchCard match={match} isKnockout />
+                  </div>
+                ))}
+              </div>
+
+              {/* Connecting Lines: SF -> Grand Final */}
+              <div className="w-4 h-full relative flex-shrink-0">
+                <svg viewBox="0 0 24 780" className="absolute inset-0 w-full h-full text-gold animate-pulse" fill="none" stroke="rgba(201, 168, 76, 0.55)" strokeWidth="2">
+                  <path d="M 0,390 L 24,390" />
+                </svg>
+              </div>
+
+              {/* Grand Final Column */}
+              <div className="flex flex-col justify-center h-auto w-44 flex-shrink-0">
+                <div className="bg-[#101010] border border-gold hover:border-gold-light rounded-2xl p-4 shadow-2xl relative overflow-hidden group transition-all duration-300">
+                  <div className="absolute -top-10 -right-10 w-20 h-20 bg-gold/10 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+                  
+                  <div className="text-center mb-3">
+                    <span className="bg-gold-muted text-gold border border-gold/30 text-[10px] px-2.5 py-0.5 rounded-full font-bebas tracking-[0.15em] inline-flex items-center gap-1">
+                      <Trophy className="w-3 h-3 text-gold" /> FINAL
+                    </span>
+                  </div>
+
+                  {bracketData?.final && (
+                    <div className="space-y-3">
+                      <div className="space-y-2">
+                        {/* Home (Finalist 1) */}
+                        <TeamRow 
+                          name={bracketData.final.home}
+                          isWinner={bracketData.final.predicted_winner === bracketData.final.home}
+                        />
+
+                        {/* Away (Finalist 2) */}
+                        <TeamRow 
+                          name={bracketData.final.away}
+                          isWinner={bracketData.final.predicted_winner === bracketData.final.away}
+                        />
+                      </div>
+
+                      {/* Side-by-Side (Kanan-Kiri) Progress Bars with Percentages */}
+                      <div className="flex items-center gap-1.5 px-1 pt-1.5 border-t border-white/5 font-noto">
+                        {/* Home Win Probability Text */}
+                        <span className="text-[10px] font-semibold text-text-muted-alt tabular-nums flex-shrink-0 w-8 text-right">
+                          {formatPercent(bracketData.final.home_win_prob)}
+                        </span>
+
+                        {/* Home Bar (Left) */}
+                        <div className="flex-1 bg-[#080808]/60 h-1 rounded-full overflow-hidden flex justify-end">
+                          <div 
+                            className="h-full rounded-full transition-all duration-300"
+                            style={{ 
+                              width: `${bracketData.final.home_win_prob * 100}%`, 
+                              backgroundColor: getConfedColor(bracketData.final.home) 
+                            }}
+                          />
+                        </div>
+                        
+                        {/* Center Separator */}
+                        <div className="flex-shrink-0 text-[9px] font-bebas text-gold/60 tracking-wider select-none leading-none">VS</div>
+                        
+                        {/* Away Bar (Right) */}
+                        <div className="flex-1 bg-[#080808]/60 h-1 rounded-full overflow-hidden flex justify-start">
+                          <div 
+                            className="h-full rounded-full transition-all duration-300"
+                            style={{ 
+                              width: `${bracketData.final.away_win_prob * 100}%`, 
+                              backgroundColor: getConfedColor(bracketData.final.away) 
+                            }}
+                          />
+                        </div>
+
+                        {/* Away Win Probability Text */}
+                        <span className="text-[10px] font-semibold text-text-muted-alt tabular-nums flex-shrink-0 w-8 text-left">
+                          {formatPercent(bracketData.final.away_win_prob)}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>

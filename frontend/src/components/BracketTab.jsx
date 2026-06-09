@@ -213,8 +213,8 @@ export default function BracketTab({ simulationData }) {
             <p className="text-xs text-text-muted-alt font-noto">Monte Carlo predicted path to the World Cup trophy</p>
           </div>
 
-          {/* Toggle buttons Upper/Lower Bracket */}
-          <div className="flex bg-[#080808] p-1 rounded-lg border border-white/5">
+          {/* Toggle buttons Left/Right Bracket */}
+          <div className="flex bg-[#080808] p-1 rounded-lg border border-white/5 self-center sm:self-auto">
             <button
               onClick={() => setBracketView('upper')}
               className={`px-4 py-1.5 text-xs font-bold font-noto uppercase tracking-wider rounded-md transition-all duration-150 ${
@@ -223,7 +223,7 @@ export default function BracketTab({ simulationData }) {
                   : 'text-text-muted-alt hover:text-white-alt border border-transparent'
               }`}
             >
-              Upper Bracket
+              Left Bracket
             </button>
             <button
               onClick={() => setBracketView('lower')}
@@ -233,7 +233,7 @@ export default function BracketTab({ simulationData }) {
                   : 'text-text-muted-alt hover:text-white-alt border border-transparent'
               }`}
             >
-              Lower Bracket
+              Right Bracket
             </button>
           </div>
         </div>

@@ -1,6 +1,6 @@
-# ⚽ World Cup 2026 Winner Prediction
+# ⚽ World Cup 2026 Winner Prediction 
 
-An interactive prediction engine to simulate and forecast the winner of the 2026 FIFA World Cup using machine learning and Monte Carlo simulations (10,000+ runs), featuring a premium interactive React dashboard. The data is compiled by scraping Wikipedia and utilizing a Kaggle dataset.
+An interactive prediction engine to simulate and forecast the winner of the 2026 FIFA World Cup using machine learning and Monte Carlo simulations (10,000+ runs), paired with a premium interactive React dashboard. The application features a dedicated, sortable WC-2026 squads browser compiled by scraping Wikipedia and utilizing a Kaggle dataset.
 
 ---
 
@@ -12,20 +12,18 @@ worldcup2026/
 │   ├── raw/
 │   │   ├── wc_historical.csv          # Scraping results from Wikipedia (WC 1930–2022)
 │   │   ├── results.csv                # Kaggle: all international results 1872–2026
-│   │   ├── former_names.csv           # Kaggle: old name → current name mapping
-│   │   ├── all_recent_matches.csv     # Processed results: all matches 2018–2025
-│   │   ├── friendly_matches.csv       # Filtered: friendlies only
-│   │   └── competitive_matches.csv    # Filtered: competitive matches only
+│   │   └── former_names.csv           # Kaggle: old name → current name mapping
 │   ├── processed/
 │   │   ├── team_features.csv          # 48 teams × 26 features
 │   │   └── match_features.csv         # Match-level dataset for training
 │   └── output/
+│       ├── squads.json                # Scraped official squads & rosters for 48 teams
 │       └── simulation_results.json    # Results of 10,000 simulations
 ├── frontend/                          # Interactive React + Vite frontend application
 │   ├── public/                        # Static assets
 │   ├── src/
-│   │   ├── components/                # Dashboard tabs, modals, and running marquee
-│   │   ├── data/                      # Simulation outputs imported in frontend
+│   │   ├── components/                # Dashboard tabs (Overview, Groups, Bracket, Teams, Squads)
+│   │   ├── data/                      # Simulation + squads data imported in frontend
 │   │   └── utils/                     # Helper files (flags, configurations)
 │   ├── package.json
 │   └── vite.config.js
@@ -33,30 +31,38 @@ worldcup2026/
 │   ├── best_model.pkl                 # Selected Logistic Regression model
 │   └── feature_names.pkl              # Feature names used by the model
 ├── scraper/
-│   └── scrape_wikipedia.py            # WC historical scraper from Wikipedia
-├── process_kaggle.py                  # Kaggle dataset processing & mapping
-├── engineer_features.py               # Feature engineering & preprocessing
-├── train_simulate.py                  # Model training & Monte Carlo simulation
-└── split_matches.py                   # Split recent matches per team (helper)
+│   ├── scrape_wikipedia.py            # WC historical scraper from Wikipedia
+│   └── scrape_squads.py               # WC-2026 squads & rosters Wikipedia scraper
+└── scripts/                           # Data processing & modeling pipeline scripts
+    ├── process_kaggle.py              # Kaggle dataset processing & mapping
+    ├── engineer_features.py           # Feature engineering & preprocessing
+    ├── train_simulate.py              # Model training & Monte Carlo simulation
+    ├── split_matches.py               # Split recent matches per team (helper)
+    └── README.md                      # Guide on running script pipeline
 ```
 
 ---
 
 ## 📦 Data Sources
 
-### 1. Wikipedia (Scraped)
+### 1. Wikipedia (Historical Matches Scraped)
 - **Target**: FIFA World Cup match results from 1930 to 2022.
 - **Libraries**: `requests`, `BeautifulSoup4`
 - **Output**: `data/raw/wc_historical.csv`
 - **Columns**: `year`, `stage`, `home_team`, `away_team`, `home_score`, `away_score`
 
-### 2. Kaggle — International Football Results
+### 2. Wikipedia (2026 Squads Scraped)
+- **Target**: Official roster lists, players, shirt numbers, positions, ages, caps, goals, and clubs for all 48 participating World Cup 2026 nations.
+- **Libraries**: `requests`, `BeautifulSoup4`
+- **Output**: `data/output/squads.json`
+
+### 3. Kaggle — International Football Results
 - **Dataset**: [martj42/international-football-results-from-1872-to-2017](https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017)
 - **Note**: This dataset is updated up to 2026 by its maintainer.
 - **Content**: 49,000+ international match results including friendlies, qualifiers, and tournaments.
 - **Used Files**: `results.csv`, `former_names.csv`
 
-### 3. FIFA Ranking (Hardcoded)
+### 4. FIFA Ranking (Hardcoded)
 - **Source**: FIFA.com as of June 10, 2026.
 - **Features**: `fifa_rank`, `fifa_points` for the 48 qualified World Cup 2026 teams.
 
@@ -67,15 +73,21 @@ worldcup2026/
 
 ## 🔧 Pipeline
 
+> ⚠️ **Important:** All scripts inside the `scripts/` directory must be executed from the **project root** (`worldcup2026/`), not from inside the `scripts/` directory itself.
+
 ### Step 1 — Scraping Wikipedia
 ```bash
+# Scrape historical match outcomes (1930–2022)
 python scraper/scrape_wikipedia.py
+
+# Scrape World Cup 2026 official squads and coaching staffs
+python scraper/scrape_squads.py
 ```
-Scrapes the results of all historical World Cup matches from Wikipedia (1930–2022). Employs `time.sleep` between requests and robust error handling for table parsing.
+Scrapes matches and squad configurations from Wikipedia. Employs `time.sleep` between requests and robust error handling for table parsing, normalizing names (e.g., matching Wikipedia's "Czech Republic" to "Czechia").
 
 ### Step 2 — Processing Kaggle Dataset
 ```bash
-python process_kaggle.py
+python scripts/process_kaggle.py
 ```
 - Loads `results.csv` and `former_names.csv`.
 - Standardizes team names (e.g., `"IR Iran"` → `"Iran"`, `"Korea Republic"` → `"South Korea"`).
@@ -87,7 +99,7 @@ python process_kaggle.py
 
 ### Step 3 — Feature Engineering
 ```bash
-python engineer_features.py
+python scripts/engineer_features.py
 ```
 Generates 26 features per team:
 
@@ -105,7 +117,7 @@ The match-level dataset is built by calculating the **feature difference** betwe
 
 ### Step 4 — Model Training & Simulation
 ```bash
-python train_simulate.py
+python scripts/train_simulate.py
 ```
 
 **Evaluated Models** (5-fold cross-validation):
@@ -175,16 +187,20 @@ pip install requests beautifulsoup4 pandas numpy scikit-learn xgboost joblib
 
 # Run the data & simulation pipeline
 python scraper/scrape_wikipedia.py
-python process_kaggle.py
-python engineer_features.py
-python train_simulate.py
+python scraper/scrape_squads.py
+python scripts/process_kaggle.py
+python scripts/engineer_features.py
+python scripts/train_simulate.py
+
+# Sync scraped squads data to frontend
+copy data\output\squads.json frontend\src\data\squads.json
 ```
 
 > **Note**: Make sure to download `results.csv` and `former_names.csv` from [Kaggle](https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017) and place them in the `data/raw/` directory before running the pipeline.
 
 ### ⚛️ Frontend Setup & Run
 
-Once the pipeline generates `simulation_results.json`, the React dashboard displays and interacts with it:
+Once the pipeline generates `simulation_results.json` and `squads.json` is copied, the React dashboard displays it:
 
 ```bash
 # Navigate to the frontend directory
@@ -220,7 +236,7 @@ However, the simulation output remains **fully aligned with football intuition**
 | Data Processing | pandas, numpy |
 | Machine Learning | scikit-learn, XGBoost |
 | Simulation | Monte Carlo (numpy random) |
-| Visualization | React, Recharts, Tailwind CSS (v4), Lucide Icons |
+| Visualization | React, Recharts, Tailwind CSS (v4), Lucide Icons, FlagCDN |
 
 ---
 

@@ -4,12 +4,14 @@ import OverviewTab from './components/OverviewTab';
 import GroupsTab from './components/GroupsTab';
 import BracketTab from './components/BracketTab';
 import TeamsTab from './components/TeamsTab';
+import SquadsTab from './components/SquadsTab';
 import TeamDetailModal from './components/TeamDetailModal';
-import { LayoutDashboard, Grid, Trophy, Shield } from 'lucide-react';
+import { LayoutDashboard, Grid, Trophy, Shield, Users } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const [selectedSquadTeam, setSelectedSquadTeam] = useState('Argentina');
 
   // Tab mapping
   const tabs = [
@@ -17,6 +19,7 @@ export default function App() {
     { id: 'groups', label: 'Groups', num: '02' },
     { id: 'bracket', label: 'Bracket', num: '03' },
     { id: 'teams', label: 'Teams', num: '04' },
+    { id: 'squads', label: 'Squads', num: '05' },
   ];
 
   return (
@@ -88,6 +91,17 @@ export default function App() {
             <TeamsTab 
               simulationData={simulationData} 
               onSelectTeam={setSelectedTeam} 
+              onSelectSquadTeam={(teamName) => {
+                setSelectedSquadTeam(teamName);
+                setActiveTab('squads');
+              }}
+            />
+          )}
+          {activeTab === 'squads' && (
+            <SquadsTab 
+              simulationData={simulationData} 
+              selectedTeam={selectedSquadTeam}
+              setSelectedTeam={setSelectedSquadTeam}
             />
           )}
         </div>
@@ -117,6 +131,7 @@ export default function App() {
           else if (tab.id === 'groups') Icon = Grid;
           else if (tab.id === 'bracket') Icon = Trophy;
           else if (tab.id === 'teams') Icon = Shield;
+          else if (tab.id === 'squads') Icon = Users;
 
           return (
             <button

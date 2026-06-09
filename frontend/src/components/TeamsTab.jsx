@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Filter } from 'lucide-react';
+import { Search, Filter, Users } from 'lucide-react';
 import { getConfedColor, getTeamConfed, formatPercent, CONFED_COLORS } from '../utils/helpers';
 import TeamFlag from './TeamFlag';
 
@@ -63,7 +63,7 @@ function CustomDropdown({ label, value, options, onChange, icon, displayValue })
   );
 }
 
-export default function TeamsTab({ simulationData, onSelectTeam }) {
+export default function TeamsTab({ simulationData, onSelectTeam, onSelectSquadTeam }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGroup, setSelectedGroup] = useState('All');
   const [selectedConfed, setSelectedConfed] = useState('All');
@@ -158,12 +158,25 @@ export default function TeamsTab({ simulationData, onSelectTeam }) {
                   style={{ backgroundColor: team.color }}
                 />
 
-                <div className="space-y-1">
-                  <div className="flex justify-between items-start gap-1">
-                    <h3 className="font-semibold text-white-alt text-[15px] leading-tight truncate group-hover:text-gold transition-colors duration-150 flex items-center gap-2 font-noto w-full">
+                <div className="space-y-1 w-full min-w-0">
+                  <div className="flex justify-between items-start gap-2 w-full">
+                    <h3 className="font-semibold text-white-alt text-[15px] leading-tight truncate group-hover:text-gold transition-colors duration-150 flex items-center gap-2 font-noto flex-1 min-w-0">
                       <TeamFlag teamName={team.name} className="w-6 h-4 shadow-sm" />
                       <span className="truncate">{team.name}</span>
                     </h3>
+                    {onSelectSquadTeam && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelectSquadTeam(team.name);
+                        }}
+                        title={`View ${team.name} Squad`}
+                        aria-label={`View ${team.name} Squad`}
+                        className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-1.5 rounded-lg bg-gold-muted border border-gold-border/80 hover:bg-gold/20 hover:border-gold/60 text-gold transition-all duration-150 shrink-0 -mt-1 cursor-pointer"
+                      >
+                        <Users className="w-3 h-3" />
+                      </button>
+                    )}
                   </div>
                   
                   <p className="text-[11px] text-text-muted-alt font-semibold uppercase tracking-wider font-noto">
